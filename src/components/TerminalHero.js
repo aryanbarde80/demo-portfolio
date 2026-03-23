@@ -17,7 +17,15 @@ export default function TerminalHero() {
         clearInterval(typingInterval);
         setIsReady(true);
       }
-    }, 35); // Fast typing speed
+    }, 35); 
+    
+    // Avatar Entrance Animation
+    import('gsap').then(({ gsap }) => {
+      gsap.fromTo(".avatar-img", 
+        { x: -50, opacity: 0, scale: 0.8 }, 
+        { x: 0, opacity: 1, scale: 1, duration: 1.2, ease: "power4.out", delay: 0.5 }
+      );
+    });
     
     return () => clearInterval(typingInterval);
   }, []);
@@ -40,13 +48,18 @@ export default function TerminalHero() {
         </div>
       </div>
 
-      <div className="p-4 sm:p-6">
-        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
-          <img 
-            src="https://avatars.githubusercontent.com/u/147256003?v=4" 
-            alt="Aryan Barde" 
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#00f0ff]/50 shadow-[0_0_20px_rgba(0,240,255,0.3)] shrink-0"
-          />
+      <div className="p-4 sm:p-6 relative">
+        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6 relative z-10">
+          <div className="relative group/avatar">
+            <img 
+              src="/aryan-avatar-3d.png" 
+              alt="Aryan Barde AI 3D Avatar" 
+              className="avatar-img w-24 h-24 sm:w-32 sm:h-32 rounded-xl border-2 border-[#00f0ff]/50 shadow-[0_0_30px_rgba(0,240,255,0.4)] shrink-0 object-cover transform transition-transform duration-500 hover:scale-105"
+            />
+            {/* Action Highlight Glow */}
+            <div className="absolute top-2 right-4 w-3 h-3 bg-[#00f0ff] rounded-full blur-[6px] animate-pulse opacity-80 pointer-events-none"></div>
+            <div className="absolute -inset-2 bg-[#00f0ff]/5 blur-xl group-hover/avatar:bg-[#00f0ff]/10 transition-colors pointer-events-none"></div>
+          </div>
           <div className="flex-1 min-w-0">
             <div className="mono text-sm sm:text-base md:text-lg neon-text whitespace-pre-line min-h-[100px] sm:min-h-[140px] leading-relaxed relative">
               {text}

@@ -7,7 +7,7 @@ import ProjectsShowcase from "@/components/ProjectsShowcase";
 import ContactNode from "@/components/ContactNode";
 import EducationNode from "@/components/EducationNode";
 import CertificationsNode from "@/components/CertificationsNode";
-import AchievementsNode from "@/components/AchievementsNode";
+import SystemMonitorNode from "@/components/SystemMonitorNode";
 import BioMatrix from "@/components/BioMatrix";
 import LeadershipNode from "@/components/LeadershipNode";
 import AnalyticsDashboard from "@/components/AnalyticsDashboard";
@@ -60,9 +60,10 @@ export default function Home() {
           {/* Animated Stats Banner */}
           <StatsCounter />
           
-          {/* Section: Analytics */}
-          <div id="analytics">
+          {/* Section: Analytics & Agentic Monitor */}
+          <div id="analytics" className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <AnalyticsDashboard />
+            <SystemMonitorNode />
           </div>
 
           {/* Section: GitHub Live & Architecture */}
@@ -82,8 +83,7 @@ export default function Home() {
               <ExperienceList />
               <ImpactMetrics />
               <HackathonWins />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <AchievementsNode />
+              <div className="grid grid-cols-1 gap-4">
                 <LeadershipNode />
               </div>
               <ProjectsShowcase />

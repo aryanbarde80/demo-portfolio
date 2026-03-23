@@ -79,6 +79,20 @@ export default function AnalyticsDashboard() {
             </div>
           ))}
 
+          {/* Neural Traffic Graph */}
+          <div className="mt-8 space-y-2">
+            <div className="flex justify-between items-center text-[9px] mono text-[#00f0ff]/60 uppercase">
+              <span>Neural_Network_Traffic</span>
+              <span className="animate-pulse">Active</span>
+            </div>
+            <div className="h-16 relative bg-black/30 border border-gray-800/50 rounded overflow-hidden">
+              <svg viewBox="0 0 100 40" className="w-full h-full">
+                <path d="M0 20 Q 25 10, 50 20 T 100 20" fill="none" stroke="#00f0ff" strokeWidth="0.5" className="animate-[pulsion_3s_ease-in-out_infinite]" />
+                <path d="M0 25 Q 25 15, 50 25 T 100 25" fill="none" stroke="#ff003c" strokeWidth="0.3" className="opacity-30 animate-[pulsion_4s_ease-in-out_infinite]" />
+              </svg>
+            </div>
+          </div>
+
           <div className="mt-6 p-3 border border-[#00f0ff]/10 bg-[#00f0ff]/5 rounded flex items-center gap-3">
             <Binary size={20} className="text-[#00f0ff] animate-bounce" />
             <div>
