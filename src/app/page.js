@@ -8,6 +8,11 @@ import ContactNode from "@/components/ContactNode";
 import EducationNode from "@/components/EducationNode";
 import CertificationsNode from "@/components/CertificationsNode";
 import AchievementsNode from "@/components/AchievementsNode";
+import BioMatrix from "@/components/BioMatrix";
+import LeadershipNode from "@/components/LeadershipNode";
+import AnalyticsDashboard from "@/components/AnalyticsDashboard";
+import TechnicalWritingNode from "@/components/TechnicalWritingNode";
+import ReferenceVault from "@/components/ReferenceVault";
 import BootSequence from "@/components/BootSequence";
 import SystemHUD from "@/components/SystemHUD";
 import { ShieldAlert, Terminal } from "lucide-react";
@@ -37,18 +42,25 @@ export default function Home() {
           <TerminalHero />
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 w-full max-w-7xl mx-auto">
-            {/* Main Content Column */}
-            <div className="lg:col-span-8 flex flex-col gap-2">
+            {/* Main Content Column (Left/Center) */}
+            <div className="lg:col-span-8 flex flex-col gap-6">
+              <AnalyticsDashboard />
               <ExperienceList />
-              <AchievementsNode />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <LeadershipNode />
+                <TechnicalWritingNode />
+              </div>
               <ProjectsShowcase />
             </div>
             
-            {/* Sidebar Column */}
-            <div className="lg:col-span-4 flex flex-col gap-2">
+            {/* Sidebar Column (Right) */}
+            <div className="lg:col-span-4 flex flex-col gap-6">
+              <BioMatrix />
               <SkillsGrid />
+              <AchievementsNode />
               <CertificationsNode />
               <EducationNode />
+              <ReferenceVault />
               <ContactNode />
             </div>
           </div>

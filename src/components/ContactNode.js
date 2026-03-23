@@ -3,8 +3,8 @@ import { Satellite } from "lucide-react";
 
 export default function ContactNode() {
   const links = [
-    { label: "EMAIL", value: "aryanbarde80@gmail.com", href: "mailto:aryanbarde80@gmail.com" },
-    { label: "PHONE", value: "+91-7477203433", href: "tel:+917477203433" },
+    { label: "EMAIL", value: "[ENCRYPTED_UPLINK]", href: "mailto:aryanbarde80@gmail.com" },
+    { label: "PHONE", value: "+91-XXXXXXXXXX", href: "#" },
     { label: "LINKEDIN", value: "linkedin.com/in/aryanbarde80", href: "https://linkedin.com/in/aryanbarde80" },
     { label: "GITHUB", value: "github.com/aryanbarde80", href: "https://github.com/aryanbarde80" },
     { label: "PORTFOLIO", value: "aryanbarde80.github.io/My-Portfolio", href: "https://aryanbarde80.github.io/My-Portfolio" },

@@ -10,8 +10,8 @@ export default function ExperienceList() {
       details: [
         "Developed Enterprise Supplier Portal using Frappe framework and React Frappe SDK, reducing processing time by 40%.",
         "Built Customer Experience Portal using Frappe REST APIs for streamlined service workflows.",
-        "Implemented real-time WebSocket communication between Frappe backend and React frontend.",
-        "Contributed to MCPServer for ERP automation, deploying Open WebUI on GCP.",
+        "Implemented real-time WebSocket communication between server backend and React frontend.",
+        "Contributed to cross-platform connector for ERP automation, deploying Open WebUI on GCP.",
         "Engineered an AI CV defect detection system using YOLOv8 and OpenCV with 95%+ accuracy."
       ]
     },
