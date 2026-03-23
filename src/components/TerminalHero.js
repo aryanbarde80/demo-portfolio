@@ -6,7 +6,7 @@ export default function TerminalHero() {
   const [text, setText] = useState('');
   const [isReady, setIsReady] = useState(false);
   
-  const fullText = "> INITIALIZING AGENTIC PROFILE...\n> USER: ARYAN BARDE\n> ROLE: FULL-STACK ENGINEER | IOT SPECIALIST | AI DEVELOPER\n> STATUS: ONLINE & READY FOR DEPLOYMENT_";
+  const fullText = "> SYSTEM :: ARYAN BARDE // FULL-STACK ENGINEER\n> DOMAINS: Web Systems | IoT Platforms | Cloud Architecture | AI/CV\n> DEPLOYED: 15+ Projects | 89 Repos | 18+ Certifications\n> STATUS: ONLINE & READY FOR DEPLOYMENT_";
   
   useEffect(() => {
     let currentIndex = 0;
@@ -40,10 +40,25 @@ export default function TerminalHero() {
         </div>
       </div>
 
-      <div className="p-6">
-        <div className="mono text-sm sm:text-base md:text-lg neon-text whitespace-pre-line min-h-[140px] leading-relaxed relative">
-          {text}
-          <span className="inline-block w-2.5 h-[1em] bg-[#00f0ff] animate-pulse ml-0.5 align-middle shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+      <div className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+          <img 
+            src="https://avatars.githubusercontent.com/u/147256003?v=4" 
+            alt="Aryan Barde" 
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-[#00f0ff]/50 shadow-[0_0_20px_rgba(0,240,255,0.3)] shrink-0"
+          />
+          <div className="flex-1 min-w-0">
+            <div className="mono text-sm sm:text-base md:text-lg neon-text whitespace-pre-line min-h-[100px] sm:min-h-[140px] leading-relaxed relative">
+              {text}
+              <span className="inline-block w-2.5 h-[1em] bg-[#00f0ff] animate-pulse ml-0.5 align-middle shadow-[0_0_8px_rgba(0,240,255,0.8)]"></span>
+            </div>
+            <p className="text-gray-500 text-[10px] sm:text-xs mono italic mt-2">&quot;Discipline and Consistency is all what is needed!&quot;</p>
+            <div className="flex flex-wrap gap-2 mt-3">
+              <span className="text-[8px] sm:text-[10px] mono bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] px-1.5 py-0.5 rounded">89 REPOS</span>
+              <span className="text-[8px] sm:text-[10px] mono bg-[#ff003c]/10 border border-[#ff003c]/30 text-[#ff003c] px-1.5 py-0.5 rounded">35 FOLLOWERS</span>
+              <span className="text-[8px] sm:text-[10px] mono bg-[#00f0ff]/10 border border-[#00f0ff]/30 text-[#00f0ff] px-1.5 py-0.5 rounded">HACKTOBERFEST 2024</span>
+            </div>
+          </div>
         </div>
         
         {isReady && (

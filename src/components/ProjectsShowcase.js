@@ -50,6 +50,18 @@ export default function ProjectsShowcase() {
       name: "Smart Network Simulation",
       tech: "Python, Cisco Packet Tracer",
       desc: "Architected smart campus infrastructure with VLAN segmentation, DHCP/DNS configs, and Python-automated IoT lab environments."
+    },
+    {
+      id: "QCN-09",
+      name: "QuickConnect Messenger",
+      tech: "MERN, Socket.io, JWT",
+      desc: "Scalable real-time chat with bidirectional WebSocket communication, typing indicators, media sharing, and end-to-end encryption."
+    },
+    {
+      id: "KRP-10",
+      name: "E-Commerce Analytics Suite",
+      tech: "Next.js, SEO, Analytics",
+      desc: "Marketing agency platform with e-commerce storefronts, SEO automation achieving 30% organic traffic growth, and analytics dashboards."
     }
   ];
 

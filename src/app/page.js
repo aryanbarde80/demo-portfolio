@@ -14,6 +14,9 @@ import AnalyticsDashboard from "@/components/AnalyticsDashboard";
 import TechnicalWritingNode from "@/components/TechnicalWritingNode";
 import ReferenceVault from "@/components/ReferenceVault";
 import GitHubStatsNode from "@/components/GitHubStatsNode";
+import StatsCounter from "@/components/StatsCounter";
+import OpenSourceNode from "@/components/OpenSourceNode";
+import CourseworkGrid from "@/components/CourseworkGrid";
 import BootSequence from "@/components/BootSequence";
 import SystemHUD from "@/components/SystemHUD";
 import { ShieldAlert, Terminal } from "lucide-react";
@@ -41,14 +44,17 @@ export default function Home() {
           </header>
 
           <TerminalHero />
+
+          {/* Animated Stats Banner */}
+          <StatsCounter />
           
           {/* Section: Analytics */}
-          <div id="analytics" className="mt-6">
+          <div id="analytics">
             <AnalyticsDashboard />
           </div>
 
           {/* Section: GitHub Live */}
-          <div id="github" className="mt-6">
+          <div id="github" className="mt-2">
             <GitHubStatsNode />
           </div>
           
@@ -71,7 +77,9 @@ export default function Home() {
             <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-6">
               <BioMatrix />
               <SkillsGrid />
+              <OpenSourceNode />
               <CertificationsNode />
+              <CourseworkGrid />
               <EducationNode />
               <ContactNode />
             </div>
