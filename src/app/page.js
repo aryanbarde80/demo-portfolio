@@ -24,18 +24,29 @@ import PerformanceBenchmarks from "@/components/PerformanceBenchmarks";
 import RecruiterHUD from "@/components/RecruiterHUD";
 import BootSequence from "@/components/BootSequence";
 import SystemHUD from "@/components/SystemHUD";
+import DivineAudio from "@/components/DivineAudio";
+import DivineCanvas from "@/components/DivineCanvas";
+import MantraCLI from "@/components/MantraCLI";
 import { ShieldAlert, Terminal, Cpu, Zap, Activity } from "lucide-react";
 
 export default function Home() {
-  const [booted, setBooted] = useState(false);
+  const handleCLICommand = (cmd) => {
+    if (cmd === 'show_skills') {
+      document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (cmd === 'show_projects') {
+      document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <>
       <BootSequence onComplete={() => setBooted(true)} />
       {booted && <SystemHUD />}
+      {booted && <DivineAudio />}
+      {booted && <DivineCanvas />}
       
-      <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-24 selection:bg-[#00f0ff] selection:text-[#030712] transition-opacity duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'}`}>
-        <div className="max-w-6xl mx-auto w-full">
+      <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 pointer-events-none selection:bg-[#00f0ff] selection:text-[#030712] transition-opacity duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'}`}>
+        <div className="max-w-6xl mx-auto w-full pointer-events-auto">
           {/* Header/Nav */}
           <header className="flex justify-between items-center mb-8 border-b border-[#00f0ff]/20 pb-4 mt-4">
             <div className="text-sm mono text-[#00f0ff] flex items-center gap-2 font-bold tracking-widest uppercase">
@@ -60,61 +71,66 @@ export default function Home() {
           {/* Animated Stats Banner */}
           <StatsCounter />
           
-          {/* Section: Analytics & Agentic Monitor */}
-          <div id="analytics" className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <AnalyticsDashboard />
-            <SystemMonitorNode />
-          </div>
+          {/* Main Content Grid (Structured Mosaic) */}
+          <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12 gap-4 sm:gap-6 w-full mt-6 auto-rows-min">
+            
+            {/* Row 1: Analytics & Monitor */}
+            <div className="md:col-span-3 xl:col-span-6 flex flex-col h-full"><AnalyticsDashboard /></div>
+            <div className="md:col-span-3 xl:col-span-6 flex flex-col"><AnalyticsDashboard /></div>
+            <div className="md:col-span-3 xl:col-span-6 flex flex-col"><SystemMonitorNode /></div>
+            
+            {/* Row 2: Live Stats & Architecture */}
+            <div className="md:col-span-6 xl:col-span-4 flex flex-col"><GitHubStatsNode /></div>
+            <div className="md:col-span-6 xl:col-span-8 flex flex-col"><SystemArchitectureNode /></div>
 
-          {/* Section: GitHub Live & Architecture */}
-          <div id="engineering" className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
-            <GitHubStatsNode />
-            <SystemArchitectureNode />
-          </div>
-          
-          {/* Performance Benchmarks */}
-          <div className="mt-4">
-            <PerformanceBenchmarks />
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 w-full max-w-7xl mx-auto mt-6">
-            {/* Main Content Column (Left/Center) */}
-            <div className="lg:col-span-8 flex flex-col gap-4 sm:gap-6">
+            {/* Row 3: Performance */}
+            <div className="md:col-span-6 xl:col-span-12 flex flex-col"><PerformanceBenchmarks /></div>
+
+            {/* Main Mosaic Area */}
+            {/* Col 1 */}
+            <div className="md:col-span-6 xl:col-span-5 flex flex-col gap-4 sm:gap-6">
               <ExperienceList />
-              <ImpactMetrics />
-              <HackathonWins />
-              <div className="grid grid-cols-1 gap-4">
-                <LeadershipNode />
-              </div>
-              <ProjectsShowcase />
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <TechnicalWritingNode />
-                <ReferenceVault />
-              </div>
             </div>
             
-            {/* Sidebar Column (Right) */}
-            <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-6">
+            {/* Col 2 */}
+            <div className="md:col-span-3 xl:col-span-4 flex flex-col gap-4 sm:gap-6">
+              <ImpactMetrics />
+              <HackathonWins />
               <BioMatrix />
+              <ReferenceVault />
+            </div>
+
+            {/* Col 3 */}
+            <div id="skills-section" className="md:col-span-3 xl:col-span-3 flex flex-col gap-4 sm:gap-6">
               <SkillsGrid />
-              <OpenSourceNode />
               <CertificationsNode />
               <CourseworkGrid />
               <EducationNode />
-              <ContactNode />
+              <TechnicalWritingNode />
+              <LeadershipNode />
             </div>
+            
+            {/* Projects Span */}
+            <div id="projects-section" className="md:col-span-6 xl:col-span-12 flex flex-col mt-4">
+              <ProjectsShowcase />
+            </div>
+            
+            {/* Footer Span */}
+            <div className="md:col-span-6 xl:col-span-12 flex flex-col gap-4 sm:gap-6"><OpenSourceNode /></div>
+            <div className="md:col-span-6 xl:col-span-12 mt-4"><ContactNode /></div>
           </div>
           
           <footer className="mt-16 text-center border-t border-[#00f0ff]/20 pt-8 opacity-70 hover:opacity-100 transition-opacity">
             <p className="text-xs text-[#00f0ff] mono">
               © {new Date().getFullYear()} ARYAN BARDE. All systems operational. 
-              <span className="ml-2 bg-[#ff003c] text-white px-1 py-0.5 rounded-sm">V. 9.2-EXTRAORDINARY</span>
+              <span className="ml-2 bg-[#ff003c] text-white px-1 py-0.5 rounded-sm">V. 9.3-DIVINE</span>
             </p>
           </footer>
         </div>
       </main>
 
       {booted && <RecruiterHUD />}
+      {booted && <MantraCLI onCommand={handleCLICommand} />}
     </>
   );
 }

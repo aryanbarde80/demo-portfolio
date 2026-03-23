@@ -4,8 +4,7 @@ import { Lock, Mail, Phone, ShieldCheck } from "lucide-react";
 export default function ReferenceVault() {
   const references = [
     { name: "CONFIDENTIAL_REF_01", role: "HOD, COMPUTER SCIENCE", org: "GGITS", contact: "SECURE_UPLINK" },
-    { name: "CONFIDENTIAL_REF_02", role: "PROFESSOR", org: "GGITS", contact: "SECURE_UPLINK" },
-    { name: "CONFIDENTIAL_REF_03", role: "HR MANAGER / TALENT ACQ.", org: "OURANOS ROBOTICS", contact: "SECURE_UPLINK" }
+    { name: "CONFIDENTIAL_REF_02", role: "PROFESSOR", org: "GGITS", contact: "SECURE_UPLINK" }
   ];
 
   return (
