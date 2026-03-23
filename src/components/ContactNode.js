@@ -24,11 +24,7 @@ export default function ContactNode() {
           >
             <div className="absolute top-0 left-0 w-[3px] h-full bg-[#00f0ff] shadow-[0_0_15px_rgba(0,240,255,0.9)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <span className="text-[#ff003c] mono text-xs font-bold tracking-widest mb-1 opacity-80 group-hover:opacity-100 flex items-center justify-between group-hover:text-shadow-[0_0_5px_rgba(255,0,60,0.5)]">
-<<<<<<< HEAD
               <span>{link.label} {`//:`}</span>
-=======
-              <span>{link.label} {"//:"}</span>
->>>>>>> 172f262 (fix: resolve deployment crash and hydration issues)
               <span className="text-[#00f0ff] opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-0 transition-all duration-300">{"[ CONNECT ]"}</span>
             </span>
             <span className="text-gray-300 mono text-sm group-hover:text-white transition-colors pl-2 border-l border-gray-700 group-hover:border-[#00f0ff] group-hover:shadow-[-2px_0_10px_rgba(0,240,255,0.2)] mt-1">{link.value}</span>
