@@ -1,6 +1,4 @@
-"use client";
-import React, { useState } from 'react';
-import { Terminal, Activity, Zap } from 'lucide-react';
+import { Terminal, Activity, Zap, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MantraCLI({ onCommand }) {
@@ -10,6 +8,22 @@ export default function MantraCLI({ onCommand }) {
     { type: 'system', text: 'AVAILABLE COMMANDS: show_skills, bless_me, tandava, decrypt_contact, show_projects' }
   ]);
   const [cpuLoad, setCpuLoad] = useState(12);
+  const [lastCommit, setLastCommit] = useState("fetching...");
+
+  // Fetch real GitHub activity
+  useEffect(() => {
+    fetch('https://api.github.com/users/aryanbarde80/events')
+      .then(res => res.json())
+      .then(data => {
+        const pushEvent = data.find(e => e.type === 'PushEvent');
+        if (pushEvent && pushEvent.payload.commits.length > 0) {
+          const msg = pushEvent.payload.commits[0].message;
+          const repo = pushEvent.repo.name.split('/')[1];
+          setLastCommit(`${repo}: ${msg.length > 20 ? msg.substring(0, 17) + '...' : msg}`);
+        }
+      })
+      .catch(() => setLastCommit("upstream_timeout"));
+  }, []);
 
   // Simulate CPU spikes
   const simulateLoad = () => {
@@ -31,11 +45,13 @@ export default function MantraCLI({ onCommand }) {
       response = "EXEC: INITIATING SKILL HIGHLIGHT_";
       onCommand('show_skills');
     } else if (cmd === "bless_me") {
-      response = "ॐ: BLESSING SEQUENCE INITIATED.";
+      response = "ॐ: BLESSING SEQUENCE INITIATED. DIVINE_PROTECTION=1";
       onCommand('bless_me');
     } else if (cmd === "tandava") {
       response = "ॐ: TANDAVA OVERDRIVE ENGAGED. SYSTEM UNSTABLE.";
       onCommand('tandava');
+      // Trigger temporary unstable UI state
+      setTimeout(() => onCommand('reset_stability'), 5000);
     } else if (cmd === "decrypt_contact") {
       response = "DECRYPTING SECURE CHANNELS... \nEMAIL: hi.aryanbarde@gmail.com \nPHONE: +91 79872 90159";
     } else if (cmd === "show_projects") {
@@ -81,7 +97,9 @@ export default function MantraCLI({ onCommand }) {
                 <Zap size={10} className={cpuLoad > 50 ? 'text-[#ff003c]' : 'text-[#ffaa44]'} /> 
                 CPU_LOAD: <span className={cpuLoad > 50 ? 'text-[#ff003c]' : 'text-[#ffaa44]'}>{cpuLoad}%</span>
               </span>
-              <span className="text-[#00f0ff] font-bold">GITHUB: 2m ago (fix: UI)</span>
+              <span className="text-[#00f0ff] font-bold overflow-hidden whitespace-nowrap hidden lg:block">
+                LAST_COMMIT: <span className="opacity-70 text-gray-400 capitalize">{lastCommit}</span>
+              </span>
             </div>
           </div>
 

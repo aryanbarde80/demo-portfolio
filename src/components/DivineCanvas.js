@@ -7,6 +7,7 @@ import * as THREE from 'three';
 // Placeholder or actual Avatar model
 function AvatarModel({ mousePosition, isInteracting, commandState }) {
   const group = useRef();
+  const spriteTexture = THREE.ImageUtils.loadTexture('/aryan-avatar-3d.png');
   
   // ==========================================
   // 🔴 USER ACTION REQUIRED: ADD YOUR 3D AVATAR
@@ -16,42 +17,74 @@ function AvatarModel({ mousePosition, isInteracting, commandState }) {
   // ==========================================
   
   // const { scene } = useGLTF('/models/aryan-avatar.glb');
-  const scene = null; // Remove this line when you uncomment the line above
+  const scene = null; 
 
   useFrame((state) => {
     if (!group.current) return;
     
-    // Smoothly rotate the entire group towards the mouse to simulate "eye tracking"
-    // (A true bone-based eye tracking requires exact bone references like 'Head', 'Neck')
+    const speed = commandState === 'unstable' ? 0.2 : 0.05;
     const targetX = (mousePosition.current.x * Math.PI) / 8;
     const targetY = (mousePosition.current.y * Math.PI) / 8;
     
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetX, 0.05);
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetY, 0.05);
+    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetX, speed);
+    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetY, speed);
 
-    // Idle floating animation
-    group.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1 - 1;
+    if (commandState === 'unstable') {
+      group.current.position.x = Math.sin(state.clock.elapsedTime * 20) * 0.1;
+    } else {
+      group.current.position.y = Math.sin(state.clock.elapsedTime) * 0.1 - 1;
+    }
   });
 
   return (
-    <group ref={group} position={[0, -1, 0]} scale={2}>
+    <group ref={group} position={[0, -1, 0]} scale={2.5}>
       {scene ? (
         <primitive object={scene} />
       ) : (
-        // Fallback placeholder to visualize the 3D space until GLB is provided
-        <mesh>
-          <sphereGeometry args={[0.5, 32, 32]} />
-          <meshStandardMaterial color="#00f0ff" wireframe />
-        </mesh>
+        <group>
+          {/* High-quality Sprite Fallback */}
+          <sprite scale={[1.2, 1.2, 1]}>
+            <spriteMaterial map={spriteTexture} transparent opacity={0.9} />
+          </sprite>
+          {/* Subtle Backglow */}
+          <mesh position={[0, 0, -0.1]}>
+            <circleGeometry args={[0.6, 32]} />
+            <meshStandardMaterial color="#00f0ff" transparent opacity={0.1} />
+          </mesh>
+        </group>
       )}
       
       {/* Third Eye Glow */}
       <pointLight 
-        position={[0, 1.5, 0.5]} 
+        position={[0, 0.4, 0.5]} 
         color="#ffaa44" 
-        intensity={isInteracting ? 5 : 1} 
+        intensity={isInteracting || commandState === 'unstable' ? 8 : 2} 
         distance={2} 
       />
+    </group>
+  );
+}
+
+function SoundWaves({ active }) {
+  const rings = useRef([]);
+
+  useFrame((state) => {
+    rings.current.forEach((ring, i) => {
+      if (!ring) return;
+      const t = (state.clock.elapsedTime + i * 0.5) % 2;
+      ring.scale.set(1 + t * 2, 1 + t * 2, 1);
+      ring.material.opacity = (1 - t / 2) * 0.2;
+    });
+  });
+
+  return (
+    <group position={[0, -0.5, -0.5]}>
+      {[0, 1, 2].map(i => (
+        <mesh key={i} ref={el => rings.current[i] = el}>
+          <ringGeometry args={[1, 1.02, 64]} />
+          <meshBasicMaterial color="#00f0ff" transparent opacity={0} />
+        </mesh>
+      ))}
     </group>
   );
 }
@@ -71,7 +104,7 @@ function CursorLight({ mousePosition }) {
   return <pointLight ref={lightRef} color="#ff44aa" intensity={2} distance={5} />;
 }
 
-export default function DivineCanvas({ commandState = 'idle' }) {
+export default function DivineCanvas({ commandState = 'stable' }) {
   const mousePosition = useRef({ x: 0, y: 0 });
   const [isInteracting, setIsInteracting] = React.useState(false);
 
@@ -104,6 +137,7 @@ export default function DivineCanvas({ commandState = 'idle' }) {
         <ambientLight intensity={0.4} />
         <Environment preset="night" />
         <CursorLight mousePosition={mousePosition} />
+        <SoundWaves active={isInteracting} />
         
         {/* Cosmic Particles */}
         <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1.5} />

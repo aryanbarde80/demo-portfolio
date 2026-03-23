@@ -27,14 +27,21 @@ import SystemHUD from "@/components/SystemHUD";
 import DivineAudio from "@/components/DivineAudio";
 import DivineCanvas from "@/components/DivineCanvas";
 import MantraCLI from "@/components/MantraCLI";
+import MagneticCursor from "@/components/MagneticCursor";
 import { ShieldAlert, Terminal, Cpu, Zap, Activity } from "lucide-react";
 
 export default function Home() {
+  const [stabilityMode, setStabilityMode] = useState('stable');
+
   const handleCLICommand = (cmd) => {
     if (cmd === 'show_skills') {
       document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
     } else if (cmd === 'show_projects') {
       document.getElementById('projects-section')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (cmd === 'tandava') {
+      setStabilityMode('unstable');
+    } else if (cmd === 'reset_stability') {
+      setStabilityMode('stable');
     }
   };
 
@@ -43,10 +50,14 @@ export default function Home() {
       <BootSequence onComplete={() => setBooted(true)} />
       {booted && <SystemHUD />}
       {booted && <DivineAudio />}
-      {booted && <DivineCanvas />}
+      {booted && <DivineCanvas commandState={stabilityMode} />}
+      {booted && <MagneticCursor />}
       
-      <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 pointer-events-none selection:bg-[#00f0ff] selection:text-[#030712] transition-opacity duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'}`}>
+      <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 pointer-events-none selection:bg-[#00f0ff] selection:text-[#030712] transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
         <div className="max-w-6xl mx-auto w-full pointer-events-auto">
+          {/* Floating Sanskrit Decor */}
+          <div className="fixed top-20 left-10 opacity-5 pointer-events-none select-none text-4xl font-serif hidden lg:block text-[#ffaa44]">ॐ नमः शिवाय</div>
+          <div className="fixed bottom-40 right-10 opacity-5 pointer-events-none select-none text-4xl font-serif hidden lg:block text-[#ff44aa]">आत्मन् मोक्षाय</div>
           {/* Header/Nav */}
           <header className="flex justify-between items-center mb-8 border-b border-[#00f0ff]/20 pb-4 mt-4">
             <div className="text-sm mono text-[#00f0ff] flex items-center gap-2 font-bold tracking-widest uppercase">
