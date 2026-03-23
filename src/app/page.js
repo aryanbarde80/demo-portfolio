@@ -28,9 +28,13 @@ import DivineAudio from "@/components/DivineAudio";
 import DivineCanvas from "@/components/DivineCanvas";
 import MantraCLI from "@/components/MantraCLI";
 import MagneticCursor from "@/components/MagneticCursor";
-import { ShieldAlert, Terminal, Cpu, Zap, Activity } from "lucide-react";
+import NeuralMatrix from "@/components/NeuralMatrix";
+import DiagnosticLog from "@/components/DiagnosticLog";
+import KnowledgeGraph from "@/components/KnowledgeGraph";
+import { ShieldAlert, Terminal, Cpu, Zap, Activity, Info, Book } from "lucide-react";
 
 export default function Home() {
+  const [booted, setBooted] = useState(false);
   const [stabilityMode, setStabilityMode] = useState('stable');
 
   const handleCLICommand = (cmd) => {
@@ -52,6 +56,7 @@ export default function Home() {
       {booted && <DivineAudio />}
       {booted && <DivineCanvas commandState={stabilityMode} />}
       {booted && <MagneticCursor />}
+      {booted && <NeuralMatrix />}
       
       <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 pointer-events-none selection:bg-[#00f0ff] selection:text-[#030712] transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
         <div className="max-w-6xl mx-auto w-full pointer-events-auto">
@@ -86,9 +91,20 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12 gap-4 sm:gap-6 w-full mt-6 auto-rows-min">
             
             {/* Row 1: Analytics & Monitor */}
-            <div className="md:col-span-3 xl:col-span-6 flex flex-col h-full"><AnalyticsDashboard /></div>
             <div className="md:col-span-3 xl:col-span-6 flex flex-col"><AnalyticsDashboard /></div>
             <div className="md:col-span-3 xl:col-span-6 flex flex-col"><SystemMonitorNode /></div>
+            
+            {/* New Deep-Think Row: Intelligence & Logs */}
+            <div className="md:col-span-3 xl:col-span-4 transition-all duration-700">
+              <OSWindow title="CORE_BRAIN/KNOWLEDGE_GRAPH.SYS" icon={<Book size={14}/>}>
+                <KnowledgeGraph />
+              </OSWindow>
+            </div>
+            <div className="md:col-span-3 xl:col-span-8">
+              <OSWindow title="SYSTEM_KERNEL/DIAGNOSTIC_REPORTS.LOG" icon={<Terminal size={14}/>}>
+                <DiagnosticLog />
+              </OSWindow>
+            </div>
             
             {/* Row 2: Live Stats & Architecture */}
             <div className="md:col-span-6 xl:col-span-4 flex flex-col"><GitHubStatsNode /></div>

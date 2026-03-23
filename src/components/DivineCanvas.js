@@ -72,8 +72,8 @@ function SoundWaves({ active }) {
     rings.current.forEach((ring, i) => {
       if (!ring) return;
       const t = (state.clock.elapsedTime + i * 0.5) % 2;
-      ring.scale.set(1 + t * 2, 1 + t * 2, 1);
-      ring.material.opacity = (1 - t / 2) * 0.2;
+      ring.scale.set(1 + t * 5, 1 + t * 5, 1);
+      ring.material.opacity = (1 - t / 2) * 0.3;
     });
   });
 
@@ -85,6 +85,45 @@ function SoundWaves({ active }) {
           <meshBasicMaterial color="#00f0ff" transparent opacity={0} />
         </mesh>
       ))}
+    </group>
+  );
+}
+
+function SriYantra() {
+  const meshRef = useRef();
+  
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.z = state.clock.elapsedTime * 0.1;
+      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
+    }
+  });
+
+  return (
+    <group ref={meshRef} position={[0, 0, -2]} scale={3}>
+      {/* Outer Rings */}
+      <mesh>
+        <ringGeometry args={[1, 1.01, 64]} />
+        <meshBasicMaterial color="#00f0ff" transparent opacity={0.1} />
+      </mesh>
+      <mesh scale={0.9}>
+        <ringGeometry args={[1, 1.01, 8]} />
+        <meshBasicMaterial color="#ffaa44" transparent opacity={0.2} />
+      </mesh>
+      
+      {/* Triangle Layers (Simulated Sri Yantra geometry) */}
+      {[0, 1, 2, 3].map(i => (
+        <mesh key={i} rotation={[0, 0, (i * Math.PI) / 2]}>
+          <ringGeometry args={[0.2, 0.8, 3]} />
+          <meshBasicMaterial color="#00f0ff" transparent opacity={0.05} wireframe />
+        </mesh>
+      ))}
+      
+      {/* Central Bindu */}
+      <mesh>
+        <sphereGeometry args={[0.02, 16, 16]} />
+        <meshBasicMaterial color="#ffaa44" />
+      </mesh>
     </group>
   );
 }
@@ -101,7 +140,7 @@ function CursorLight({ mousePosition }) {
     }
   });
 
-  return <pointLight ref={lightRef} color="#ff44aa" intensity={2} distance={5} />;
+  return <pointLight ref={lightRef} color="#ff44aa" intensity={3} distance={6} />;
 }
 
 export default function DivineCanvas({ commandState = 'stable' }) {
@@ -134,13 +173,15 @@ export default function DivineCanvas({ commandState = 'stable' }) {
   return (
     <div className="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-80" aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-        <ambientLight intensity={0.4} />
+        <color attach="background" args={['#030712']} />
+        <ambientLight intensity={0.2} />
         <Environment preset="night" />
         <CursorLight mousePosition={mousePosition} />
         <SoundWaves active={isInteracting} />
+        <SriYantra />
         
         {/* Cosmic Particles */}
-        <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1.5} />
+        <Stars radius={120} depth={60} count={7000} factor={6} saturation={0.5} fade speed={2} />
         
         <Suspense fallback={null}>
           <AvatarModel 
@@ -149,6 +190,12 @@ export default function DivineCanvas({ commandState = 'stable' }) {
             commandState={commandState} 
           />
         </Suspense>
+
+        {/* Cinematic Glitch Overlay for R3F */}
+        <mesh position={[0, 0, 1]}>
+          <planeGeometry args={[20, 20]} />
+          <meshBasicMaterial transparent opacity={0.02} color="#00f0ff" />
+        </mesh>
       </Canvas>
     </div>
   );
