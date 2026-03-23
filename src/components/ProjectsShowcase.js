@@ -1,100 +1,75 @@
+"use client";
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import OSWindow from "./OSWindow";
-import { FolderGit2 } from "lucide-react";
+import { FolderGit2, ExternalLink } from "lucide-react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectsShowcase() {
+  const gridRef = useRef(null);
+
   const projects = [
-    {
-      id: "FWZ-01",
-      name: "IATA Travel Agency Portal",
-      tech: "Next.js, Next-SEO, Tailwind CSS",
-      desc: "Complete digital transformation for an IATA-certified agency. Simplified travel booking with an intuitive UI and enforced mobile-first accessibility across regions."
-    },
-    {
-      id: "CMY-02",
-      name: "Creative Tech Agency UI",
-      tech: "React, Framer Motion, GSAP",
-      desc: "High-performance agency platform highlighting custom 8-step methodology matrices to secure enterprise startup founders."
-    },
-    {
-      id: "TLB-03",
-      name: "Scalable Job Portal Engine",
-      tech: "WordPress, PHP, MySQL",
-      desc: "Developed a comprehensive job recruitment platform featuring complex user role hierarchies and automated candidate application workflows."
-    },
-    {
-      id: "TGS-04",
-      name: "Corporate Global Solutions",
-      tech: "Next.js, Tailwind, SEO",
-      desc: "Engineered a corporate architecture with dynamic CMS integrations, achieving rigorous Google PageSpeed scores of 95+ globally."
-    },
-    {
-      id: "MGF-05",
-      name: "Global Peace NGO Maps",
-      tech: "React, Google Maps API, i18n",
-      desc: "Responsive web presence for a global NGO, integrating fully interactive event maps and multilingual localization layers."
-    },
-    {
-      id: "RMI-06",
-      name: "Real-time P2P Matching Engine",
-      tech: "MERN, Socket.io, Redis",
-      desc: "High-concurrency application matching users in real-time. Reduced matching latency by 40% via optimized DB queries and active caching layers."
-    },
-    {
-      id: "PGD-07",
-      name: "Cloud Database Support Console",
-      tech: "PERN, NeonDB, JWT",
-      desc: "Cloud-native PostgreSQL management interface with strict RBAC, active query optimization, and dynamic API protection protocols."
-    },
-    {
-      id: "CNS-08",
-      name: "Smart Network Simulation",
-      tech: "Python, Cisco Packet Tracer",
-      desc: "Architected smart campus infrastructure with VLAN segmentation, DHCP/DNS configs, and Python-automated IoT lab environments."
-    },
-    {
-      id: "QCN-09",
-      name: "QuickConnect Messenger",
-      tech: "MERN, Socket.io, JWT",
-      desc: "Scalable real-time chat with bidirectional WebSocket communication, typing indicators, media sharing, and end-to-end encryption."
-    },
-    {
-      id: "KRP-10",
-      name: "E-Commerce Analytics Suite",
-      tech: "Next.js, SEO, Analytics",
-      desc: "Marketing agency platform with e-commerce storefronts, SEO automation achieving 30% organic traffic growth, and analytics dashboards."
-    }
+    { id: "FWZ-01", name: "IATA Travel Agency Portal", tech: "Next.js, Next-SEO, Tailwind", desc: "Complete digital transformation for IATA-certified agency. Mobile-first, 95+ PageSpeed score.", github: null },
+    { id: "CMY-02", name: "Creative Tech Agency UI", tech: "React, Framer Motion, GSAP", desc: "Premium agency platform with 8-step methodology matrix. Secured enterprise startup founders.", github: null },
+    { id: "AAI-03", name: "AI Defect Inspector", tech: "YOLOv8, OpenCV, Python, Streamlit", desc: "Enterprise manufacturing QC system achieving 95% defect detection accuracy. Deployed on Render.", github: "https://github.com/aryanbarde80/alfastack-ai-inspector" },
+    { id: "ZRV-04", name: "Zerve ML Challenge", tech: "Python, scikit-learn, Pandas", desc: "100% accuracy user retention model on 409K events. Session depth (17.1%) = top predictor.", github: "https://github.com/aryanbarde80/Zerve-Data-Challenge---User-Success-Prediction" },
+    { id: "SWL-05", name: "SwiftLink C++ URL Shortener", tech: "C++, Crow Framework, HTML", desc: "High-performance URL shortener with real-time redirect engine. Deployed on Render via Replit.", github: "https://github.com/aryanbarde80/SwiftLink-Cpp" },
+    { id: "AGT-06", name: "Agent0 AI Framework", tech: "Python, GPT-4, Claude API", desc: "Minimal modular AI agent with pluggable tools and LLM support (GPT/Claude). MIT licensed.", github: "https://github.com/aryanbarde80/agent0" },
+    { id: "CRM-07", name: "Smart Vehicle CRM", tech: "JavaScript, Node.js, MongoDB", desc: "Automotive CRM with maintenance scheduling, service history tracking, and multi-role dashboards.", github: "https://github.com/aryanbarde80/Smart-Vehicle-Maintenance-CRM" },
+    { id: "PGD-08", name: "Cloud Database Console", tech: "PERN, NeonDB, JWT", desc: "Cloud-native PostgreSQL management with strict RBAC, query optimization, and active API protection.", github: null },
+    { id: "RMI-09", name: "Real-time P2P Matcher", tech: "MERN, Socket.io, Redis", desc: "High-concurrency matching engine. Reduced latency 40% via Redis caching + optimized queries.", github: null },
+    { id: "QCN-10", name: "QuickConnect Messenger", tech: "MERN, Socket.io, JWT", desc: "Scalable real-time chat with WebSocket, typing indicators, media sharing, E2E encryption.", github: null },
+    { id: "TML-11", name: "Tiny ML Hackathon", tech: "TypeScript, Next.js, TinyML", desc: "Edge AI hackathon project deploying lightweight ML models on microcontrollers. Live on Vercel.", github: "https://github.com/aryanbarde80/Tiny-ML-Hackathon" },
+    { id: "VSF-12", name: "VectorShift Pipeline UI", tech: "TypeScript, React, Node.js", desc: "YC S23 startup assignment: visual pipeline builder with DAG validation and real-time node execution.", github: "https://github.com/aryanbarde80/vectorshift-assignment-YC-s23" },
+    { id: "CNS-13", name: "Smart Network Simulation", tech: "Python, Cisco Packet Tracer", desc: "Campus infrastructure with VLAN segmentation, DHCP/DNS configs, Python-automated IoT lab.", github: null },
   ];
+
+  useEffect(() => {
+    if (!gridRef.current) return;
+    const cards = gridRef.current.querySelectorAll('.proj-card');
+    gsap.fromTo(cards,
+      { y: 50, opacity: 0, scale: 0.95 },
+      {
+        y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out',
+        scrollTrigger: { trigger: gridRef.current, start: 'top 85%', once: true }
+      }
+    );
+    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+  }, []);
 
   return (
     <OSWindow title="ARCHIVES/PROJECTS.BIN" icon={<FolderGit2 size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-5xl">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {projects.map((proj, idx) => (
-          <div key={idx} className="group relative flex flex-col justify-between border-l-2 border-[#ff003c]/40 hover:border-[#ff003c] p-4 bg-[#030712]/60 hover:bg-[#ff003c]/5 transition-all overflow-hidden h-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_25px_rgba(255,0,60,0.15)] rounded-r-lg">
+      <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        {projects.map((proj) => (
+          <div key={proj.id} className="proj-card group relative flex flex-col justify-between border-l-2 border-[#ff003c]/40 hover:border-[#ff003c] p-3 sm:p-4 bg-[#030712]/60 hover:bg-[#ff003c]/5 transition-all overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_25px_rgba(255,0,60,0.15)] rounded-r-lg">
             {/* Scanner Line */}
-            <div className="absolute inset-0 w-full h-[200%] bg-gradient-to-b from-transparent via-[#ff003c]/10 to-transparent -translate-y-full group-hover:animate-[scanner_2s_ease-in-out_infinite] pointer-events-none"></div>
-            
-            <div className="relative z-10">
-              <div className="mono text-xs text-[#ff003c] mb-2 opacity-70 flex justify-between">
-                <span>ID: {proj.id}</span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 glitch-anim">SYS.MATCH</span>
-              </div>
-              <h3 className="text-gray-100 font-bold mb-3 font-sans group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,0,60,0.5)] transition-all">{proj.name}</h3>
-              <p className="text-sm text-gray-400 mb-4 line-clamp-4 group-hover:text-gray-300 transition-colors">{proj.desc}</p>
+            <div className="absolute inset-0 overflow-hidden rounded-r-lg">
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ff003c]/40 to-transparent translate-y-[-100%] group-hover:translate-y-[500%] transition-transform duration-1000 ease-linear" />
             </div>
-            
-            <div className="text-xs text-[#00f0ff] mono relative z-10 mt-auto border-t border-[#00f0ff]/20 pt-3 flex flex-wrap gap-1.5">
+            <div>
+              <div className="flex justify-between items-start mb-2">
+                <span className="text-[9px] mono text-[#ff003c]/60 font-bold">[{proj.id}]</span>
+                {proj.github && (
+                  <a href={proj.github} target="_blank" rel="noopener noreferrer" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ExternalLink size={11} className="text-[#00f0ff]" />
+                  </a>
+                )}
+              </div>
+              <h3 className="text-sm font-bold text-gray-200 group-hover:text-white mb-1 leading-snug">{proj.name}</h3>
+              <p className="text-[10px] text-gray-500 leading-relaxed mb-2">{proj.desc}</p>
+            </div>
+            <div className="flex flex-wrap gap-1 mt-auto">
               {proj.tech.split(', ').map((t, i) => (
-                <span key={i} className="bg-[#00f0ff]/10 border border-[#00f0ff]/30 px-1.5 py-0.5 rounded-sm shadow-[0_0_5px_rgba(0,240,255,0.05)] group-hover:border-[#00f0ff]/60 transition-colors">[{t}]</span>
+                <span key={i} className="text-[8px] mono px-1.5 py-0.5 bg-[#ff003c]/10 border border-[#ff003c]/20 text-[#ff003c]/80 rounded-sm">{t}</span>
               ))}
             </div>
           </div>
         ))}
       </div>
-      <div className="mt-8 text-center">
-         <button className="px-6 py-2 border border-gray-600 text-gray-400 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-colors mono text-xs uppercase tracking-widest">
-            Load_More_Records()
-         </button>
-      </div>
     </OSWindow>
   );
 }
+
+

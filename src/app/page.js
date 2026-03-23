@@ -17,6 +17,8 @@ import GitHubStatsNode from "@/components/GitHubStatsNode";
 import StatsCounter from "@/components/StatsCounter";
 import OpenSourceNode from "@/components/OpenSourceNode";
 import CourseworkGrid from "@/components/CourseworkGrid";
+import ImpactMetrics from "@/components/ImpactMetrics";
+import HackathonWins from "@/components/HackathonWins";
 import BootSequence from "@/components/BootSequence";
 import SystemHUD from "@/components/SystemHUD";
 import { ShieldAlert, Terminal } from "lucide-react";
@@ -62,6 +64,8 @@ export default function Home() {
             {/* Main Content Column (Left/Center) */}
             <div className="lg:col-span-8 flex flex-col gap-4 sm:gap-6">
               <ExperienceList />
+              <ImpactMetrics />
+              <HackathonWins />
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <AchievementsNode />
                 <LeadershipNode />
