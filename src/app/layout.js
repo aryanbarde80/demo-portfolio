@@ -2,8 +2,11 @@ import "./globals.css";
 import CursorGlow from "@/components/CursorGlow";
 
 export const metadata = {
-  title: "Aryan Barde | System Initialization",
-  description: "AI & Agentic Portfolio for Aryan Barde - Full-Stack & IoT Systems Engineer",
+  title: "Aryan Barde | High-Impact Systems & AI Engineer",
+  description: "AI & Agentic Portfolio for Aryan Barde - Full-Stack & IoT Systems Engineer with proven performance optimizations.",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({ children }) {
