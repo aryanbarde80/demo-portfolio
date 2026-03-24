@@ -24,15 +24,19 @@ export default function AnalyticsDashboard() {
             ))}
             
             {/* Spider Lines */}
-            {[0, 72, 144, 216, 288].map((angle) => (
-              <line 
-                key={angle} 
-                x1="50" y1="50" 
-                x2={50 + 40 * Math.cos(angle * Math.PI / 180)} 
-                y2={50 + 40 * Math.sin(angle * Math.PI / 180)} 
-                stroke="rgba(0,240,255,0.15)" strokeWidth="0.5" 
-              />
-            ))}
+            {[0, 72, 144, 216, 288].map((angle) => {
+              const x2 = (50 + 40 * Math.cos(angle * Math.PI / 180)).toFixed(4);
+              const y2 = (50 + 40 * Math.sin(angle * Math.PI / 180)).toFixed(4);
+              return (
+                <line 
+                  key={angle} 
+                  x1="50" y1="50" 
+                  x2={x2} 
+                  y2={y2} 
+                  stroke="rgba(0,240,255,0.15)" strokeWidth="0.5" 
+                />
+              );
+            })}
 
             {/* Data Polygon */}
             <polygon 

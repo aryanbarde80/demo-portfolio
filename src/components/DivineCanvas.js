@@ -3,6 +3,8 @@ import React, { useRef, useEffect, Suspense, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Stars, useGLTF, Environment, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
 
 // Placeholder or actual Avatar model
 function AvatarModel({ mousePosition, isInteracting, commandState }) {
@@ -12,7 +14,7 @@ function AvatarModel({ mousePosition, isInteracting, commandState }) {
   const [animationState, setAnimationState] = useState('far'); // far, walking, standing, pointing
 
   const spriteTexture = useTexture('/aryan-avatar.png');
-  const pointTexture = useTexture('/pointing-gesture.png'); // Hypothetical or reuse
+  const pointTexture = useTexture('/aryan-avatar-3d.png'); // Fallback for pointing gesture
 
   useEffect(() => {
     // Sequence: Far -> Walking -> Standing -> Pointing
