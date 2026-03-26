@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import OSWindow from "./OSWindow";
 import { Github, GitFork, Star, Users, BookOpen, ExternalLink, Trophy, Zap, Calendar, Code, Award } from "lucide-react";
 
@@ -95,11 +96,15 @@ export default function GitHubStatsNode() {
 
         {/* Profile Header */}
         <div className="flex flex-col md:flex-row items-center gap-5 p-5 border border-[#00f0ff]/20 bg-gradient-to-r from-[#030712] to-[#0a0f1a] rounded-xl">
-          <img 
-            src={profile.avatar_url} 
-            alt="GitHub Avatar" 
-            className="w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#00f0ff] shadow-[0_0_25px_rgba(0,240,255,0.4)]"
-          />
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#00f0ff] shadow-[0_0_25px_rgba(0,240,255,0.4)] overflow-hidden">
+            <Image 
+              src={profile.avatar_url} 
+              alt="GitHub Avatar" 
+              fill
+              className="object-cover"
+              sizes="(max-width: 640px) 80px, 96px"
+            />
+          </div>
           <div className="flex-1 text-center md:text-left space-y-2">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
               <h3 className="text-xl sm:text-2xl font-bold text-white">{profile.name || profile.login}</h3>

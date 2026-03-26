@@ -89,7 +89,8 @@ export default function SystemAudio() {
       console.warn('Audio initialization failed:', e);
       // isAvailable remains false (initial state)
     }
-  }, [isAvailable]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const toggleMute = () => {
     if (ambientSoundRef.current && isAvailable) {

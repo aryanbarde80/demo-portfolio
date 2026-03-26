@@ -94,6 +94,7 @@ export default function DiagnosticLog() {
     }, 2800);
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Auto-scroll to bottom of logs

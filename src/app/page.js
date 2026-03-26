@@ -41,7 +41,10 @@ export default function Home() {
   const [stabilityMode, setStabilityMode] = useState('stable');
   const [currentDate, setCurrentDate] = useState("");
 
-  useEffect(() => { setCurrentDate(new Date().toISOString().split('T')[0]); }, []);
+  useEffect(() => { 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentDate(new Date().toISOString().split('T')[0]); 
+  }, []);
 
   const handleCLICommand = (cmd) => {
     if (cmd === 'show_skills') {
@@ -84,7 +87,7 @@ export default function Home() {
               </div>
               <div className="text-xs text-gray-400 mono hidden sm:flex items-center gap-2">
                 <Terminal size={14} className="text-[#00f0ff]" />
-                {currentDate} {`// LOC: JABALPUR, IND`}
+                {currentDate} {/* LOC: JABALPUR, IND */} {`// LOC: JABALPUR, IND`}
               </div>
             </div>
           </header>

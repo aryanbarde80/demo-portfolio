@@ -6,7 +6,7 @@ export default function BootSequence({ onComplete }) {
   const [isBooted, setIsBooted] = useState(false);
   const [mounted, setMounted] = useState(false);
 
-  const bootSequence = useRef([
+  const bootSequence = [
     "INIT SYSTEM CORE... [OK]",
     "LOADING NEURAL WEIGHTS... [OK]",
     "ESTABLISHING SECURE CONNECTION...",
@@ -14,7 +14,7 @@ export default function BootSequence({ onComplete }) {
     "BYPASSING FIREWALL... [BYPASSED]",
     "STARTING AGENTIC UI MODULES...",
     "ACCESS GRANTED."
-  ]).current;
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -35,7 +35,8 @@ export default function BootSequence({ onComplete }) {
     }, 250); // Speed of boot logs
 
     return () => clearInterval(interval);
-  }, [onComplete, bootSequence]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onComplete]);
 
   return (
     <div className={`fixed inset-0 z-[99999] bg-[#030712] flex flex-col justify-end p-8 transition-opacity duration-500 ${isBooted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
