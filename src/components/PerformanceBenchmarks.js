@@ -42,7 +42,7 @@ export default function PerformanceBenchmarks() {
   };
 
   return (
-    <OSWindow title="BENCHMARK/PERFORMANCE_METRICS.SYS" icon={<Gauge size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
+    <OSWindow title="BENCHMARK/PERFORMANCE_METRICS.SYS" icon={<Gauge size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-5">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#00f0ff]/20">

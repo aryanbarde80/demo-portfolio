@@ -39,7 +39,7 @@ export default function SystemMonitorNode() {
   };
 
   return (
-    <OSWindow title="MODULES/CAREER_TIMELINE.LOG" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-4xl">
+    <OSWindow title="MODULES/CAREER_TIMELINE.LOG" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-5">
         
         {/* Header */}

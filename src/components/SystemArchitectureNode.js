@@ -36,7 +36,7 @@ export default function SystemArchitectureNode() {
   ];
 
   return (
-    <OSWindow title="ENGINEERING/ARCHITECTURE_01.MD" icon={<Share2 size={16} className="text-[#00f0ff]" />} width="max-w-5xl">
+    <OSWindow title="ENGINEERING/ARCHITECTURE_01.MD" icon={<Share2 size={16} className="text-[#00f0ff]" />}>
       <div className="space-y-6">
         
         {/* Header */}

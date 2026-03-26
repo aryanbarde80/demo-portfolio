@@ -83,7 +83,7 @@ export default function GitHubStatsNode() {
   if (!profile) return null;
 
   return (
-    <OSWindow title="NETWORK/GITHUB.SYS" icon={<Github size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-5xl">
+    <OSWindow title="NETWORK/GITHUB.SYS" icon={<Github size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-6">
         
         {/* Data Source Indicator */}
@@ -107,7 +107,7 @@ export default function GitHubStatsNode() {
           </div>
           <div className="flex-1 text-center md:text-left space-y-2">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-              <h3 className="text-xl sm:text-2xl font-bold text-white">{profile.name || profile.login}</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-white">{profile.name || profile.login}</h3>
               <span className="text-[10px] mono px-2 py-1 bg-[#00f0ff]/10 text-[#00f0ff] rounded-full flex items-center gap-1">
                 <Github size={10} /> @{profile.login}
               </span>
@@ -123,22 +123,22 @@ export default function GitHubStatsNode() {
           {/* Stats Cards */}
           <div className="grid grid-cols-3 gap-2 sm:gap-3">
             <div className="p-2 sm:p-3 border border-[#00f0ff]/20 rounded-lg text-center hover:border-[#00f0ff]/60 transition-all hover:bg-[#00f0ff]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#00f0ff]">{profile.public_repos}</p>
+              <p className="text-lg sm:text-xl font-bold text-[#00f0ff]">{profile.public_repos}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">REPOS</p>
             </div>
             <div className="p-2 sm:p-3 border border-[#00f0ff]/20 rounded-lg text-center hover:border-[#00f0ff]/60 transition-all hover:bg-[#00f0ff]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#00f0ff]">{profile.followers}</p>
+              <p className="text-lg sm:text-xl font-bold text-[#00f0ff]">{profile.followers}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">FOLLOWERS</p>
             </div>
             <div className="p-2 sm:p-3 border border-[#00f0ff]/20 rounded-lg text-center hover:border-[#00f0ff]/60 transition-all hover:bg-[#00f0ff]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#00f0ff]">{profile.following}</p>
+              <p className="text-lg sm:text-xl font-bold text-[#00f0ff]">{profile.following}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">FOLLOWING</p>
             </div>
           </div>
         </div>
 
         {/* Achievements Row */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {achievements.map((ach, idx) => {
             const IconComp = ach.icon;
             return (

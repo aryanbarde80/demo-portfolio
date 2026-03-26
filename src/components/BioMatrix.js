@@ -30,14 +30,14 @@ export default function BioMatrix() {
   ];
 
   return (
-    <OSWindow title="SYS_BIO/PROFILE.DAT" icon={<User size={16} className="text-[#00f0ff]" />} width="max-w-4xl">
+    <OSWindow title="SYS_BIO/PROFILE.DAT" icon={<User size={16} className="text-[#00f0ff]" />}>
       <div className="space-y-6">
         
         {/* Row 1: Main Bio - Responsive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6">
           
-          {/* Left: Bio Summary - Spans 2 columns on desktop */}
-          <div className="lg:col-span-2 space-y-4">
+          {/* Bio Summary */}
+          <div className="space-y-4">
             <div className="space-y-3">
               <h4 className="text-[10px] sm:text-[11px] mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
                 <Brain size={12} className="text-[#00f0ff]" />
@@ -69,7 +69,7 @@ export default function BioMatrix() {
             </div>
 
             {/* Quick Stats Grid - Mobile Responsive */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+            <div className="grid grid-cols-2 gap-3 pt-4">
               {quickStats.map((stat, idx) => {
                 const IconComp = stat.icon;
                 return (
@@ -129,7 +129,7 @@ export default function BioMatrix() {
             LEADERSHIP_&_IMPACT_METRICS
           </h4>
           
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 gap-3">
             {leadershipHighlights.map((item, idx) => {
               const IconComp = item.icon;
               return (

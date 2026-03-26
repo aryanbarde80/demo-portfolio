@@ -80,11 +80,11 @@ export default function StatsCounter() {
                 style={{ color: stat.color }} 
               />
               
-              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-white group-hover:text-[#00f0ff] transition-colors">
+              <p className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:text-[#00f0ff] transition-colors">
                 <AnimatedCounter target={stat.value} />{stat.suffix}
               </p>
               
-              <p className="text-[9px] sm:text-[10px] mono text-gray-500 mt-1 uppercase tracking-wider leading-tight">
+              <p className="text-[10px] sm:text-[11px] mono text-gray-500 mt-1 uppercase tracking-wider leading-tight">
                 {stat.label}
               </p>
               

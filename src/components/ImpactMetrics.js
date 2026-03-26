@@ -98,7 +98,7 @@ export default function ImpactMetrics() {
   }, 0) / metrics.filter(m => !isNaN(parseInt(m.value))).length;
 
   return (
-    <OSWindow title="ANALYTICS/IMPACT_METRICS.SYS" icon={<BarChart3 size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-5xl">
+    <OSWindow title="ANALYTICS/IMPACT_METRICS.SYS" icon={<BarChart3 size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-5">
         
         {/* Header with Stats */}
@@ -114,7 +114,7 @@ export default function ImpactMetrics() {
         </div>
 
         {/* Metrics Grid */}
-        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {metrics.map((m, i) => {
             const Icon = m.icon;
             return (
@@ -142,8 +142,8 @@ export default function ImpactMetrics() {
                   </div>
                   
                   {/* Value */}
-                  <p className="text-3xl sm:text-4xl font-black tabular-nums tracking-tight" style={{ color: m.color, textShadow: `0 0 15px ${m.color}60` }}>
-                    {m.value}{m.unit && <span className="text-base sm:text-lg ml-0.5">{m.unit}</span>}
+                  <p className="text-2xl sm:text-3xl font-black tabular-nums tracking-tight" style={{ color: m.color, textShadow: `0 0 15px ${m.color}60` }}>
+                    {m.value}{m.unit && <span className="text-sm sm:text-base ml-0.5">{m.unit}</span>}
                   </p>
                   
                   {/* Label */}

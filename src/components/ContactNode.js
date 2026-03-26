@@ -51,7 +51,7 @@ export default function ContactNode() {
   const totalConnections = links.length;
 
   return (
-    <OSWindow title="NETWORK/CONTACT.SYS" icon={<Satellite size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-4xl">
+    <OSWindow title="NETWORK/CONTACT.SYS" icon={<Satellite size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-4">
         
         {/* Header with Stats */}

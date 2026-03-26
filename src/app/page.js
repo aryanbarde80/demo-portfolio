@@ -69,7 +69,7 @@ export default function Home() {
       {booted && <NeuralMatrix />}
       
       <main id="main-content" className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 selection:bg-[#00f0ff] selection:text-[#030712] transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
-        <div className="max-w-6xl mx-auto w-full">
+        <div className="max-w-7xl mx-auto w-full">
           {/* Floating Tech Decor */}
           <div className="fixed top-20 left-10 opacity-5 pointer-events-none select-none text-4xl font-mono hidden lg:block text-[#00f0ff]">{'<code>'}</div>
           <div className="fixed bottom-40 right-10 opacity-5 pointer-events-none select-none text-4xl font-mono hidden lg:block text-[#ff44aa]">{'</>'}</div>

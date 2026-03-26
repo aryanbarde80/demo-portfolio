@@ -112,7 +112,7 @@ export default function ProjectsShowcase() {
   }, [activeFilter]);
 
   return (
-    <OSWindow title="EXT_ARCHIVES/PROJECTS.SYS" icon={<Layers size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
+    <OSWindow title="EXT_ARCHIVES/PROJECTS.SYS" icon={<Layers size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-5">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#00f0ff]/20">
@@ -146,7 +146,7 @@ export default function ProjectsShowcase() {
         </div>
 
         {/* Projects Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((project, idx) => {
             const Icon = project.icon;
             return (

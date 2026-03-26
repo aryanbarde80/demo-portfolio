@@ -34,7 +34,7 @@ export default function AnalyticsDashboard() {
   ];
 
   return (
-    <OSWindow title="MODULES/ANALYSIS.STAT" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
+    <OSWindow title="MODULES/ANALYSIS.STAT" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-6">
         
         {/* Row 1: Radar + Domain Stats */}
@@ -127,7 +127,7 @@ export default function AnalyticsDashboard() {
             <span className="text-[8px] bg-[#ff003c]/20 text-[#ff003c] px-1.5 py-0.5 rounded">AGENTIC v1.0</span>
           </h4>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {automationSkills.map((skill, idx) => {
               const IconComp = skill.icon;
               return (
@@ -156,7 +156,7 @@ export default function AnalyticsDashboard() {
             <span className="text-[8px] bg-[#ffaa44]/20 text-[#ffaa44] px-1.5 py-0.5 rounded">IaC Ready</span>
           </h4>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
             {cloudSkills.map((skill, idx) => {
               const IconComp = skill.icon;
               return (

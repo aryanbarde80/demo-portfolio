@@ -77,7 +77,7 @@ export default function HackathonWins() {
   const totalAwards = wins.length;
 
   return (
-    <OSWindow title="RECORDS/HACKATHON_WINS.LOG" icon={<Trophy size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-5xl">
+    <OSWindow title="RECORDS/HACKATHON_WINS.LOG" icon={<Trophy size={16} className="text-[#00f0ff] animate-pulse" />}>
       <div className="space-y-4">
         
         {/* Header with Stats */}
