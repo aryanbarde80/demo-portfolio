@@ -42,7 +42,7 @@ export default function OSWindow({ title, children, width = "max-w-4xl", icon = 
         glass-panel mx-auto w-full ${width} relative group transition-all duration-500 
         hover:shadow-[0_0_40px_rgba(0,240,255,0.25)] mb-4 sm:mb-6 rounded-lg 
         ${!isExpanded ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
-        border border-[#00f0ff]/10 hover:border-[#00f0ff]/60 bg-black/50 backdrop-blur-xl overflow-hidden
+        border border-[#00f0ff]/10 hover:border-[#00f0ff]/60 bg-black/50 backdrop-blur-xl overflow-hidden min-w-0
       `}
     >
       {/* Scanning Laser Effect */}

@@ -103,63 +103,64 @@ export default function Home() {
           <StatsCounter />
           
           {/* Main Content Grid (Structured Mosaic) */}
-          <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12 gap-8 sm:gap-10 w-full mt-10 auto-rows-min">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8 w-full mt-10 auto-rows-min">
             
-            {/* Row 1: Analytics & Monitor */}
-            <div id="analytics" className="md:col-span-3 xl:col-span-6 flex flex-col"><AnalyticsDashboard /></div>
-            <div id="timeline" className="md:col-span-3 xl:col-span-6 flex flex-col"><SystemMonitorNode /></div>
+            {/* Row 1: Analytics & Career Timeline */}
+            <div id="analytics" className="md:col-span-7 flex flex-col"><AnalyticsDashboard /></div>
+            <div id="timeline" className="md:col-span-5 flex flex-col"><SystemMonitorNode /></div>
             
-            {/* New Deep-Think Row: Intelligence & Logs */}
-            <div className="md:col-span-3 xl:col-span-4 transition-all duration-700">
+            {/* Row 2: Knowledge Graph & Diagnostic Logs */}
+            <div className="md:col-span-5 transition-all duration-700">
               <OSWindow title="CORE_BRAIN/KNOWLEDGE_GRAPH.SYS" icon={<Book size={14}/>}>
                 <KnowledgeGraph />
               </OSWindow>
             </div>
-            <div className="md:col-span-3 xl:col-span-8">
+            <div className="md:col-span-7">
               <OSWindow title="SYSTEM_KERNEL/DIAGNOSTIC_REPORTS.LOG" icon={<Terminal size={14}/>}>
                 <DiagnosticLog />
               </OSWindow>
             </div>
             
-            {/* Row 2: GitHub & Architecture */}
-            <div id="github" className="md:col-span-6 xl:col-span-4 flex flex-col"><GitHubStatsNode /></div>
-            <div className="md:col-span-6 xl:col-span-8 flex flex-col"><SystemArchitectureNode /></div>
+            {/* Row 3: GitHub Stats & System Architecture */}
+            <div id="github" className="md:col-span-5 flex flex-col"><GitHubStatsNode /></div>
+            <div className="md:col-span-7 flex flex-col"><SystemArchitectureNode /></div>
 
-            {/* Row 3: Performance */}
-            <div className="md:col-span-6 xl:col-span-12 flex flex-col"><PerformanceBenchmarks /></div>
+            {/* Row 4: Performance Benchmarks (Full Width) */}
+            <div className="md:col-span-12 flex flex-col"><PerformanceBenchmarks /></div>
 
-            {/* Main Mosaic Area */}
-            {/* Col 1 */}
-            <div className="md:col-span-6 xl:col-span-5 flex flex-col gap-4 sm:gap-6">
-              <ExperienceList />
-            </div>
+            {/* Row 5: Experience & Bio Matrix */}
+            <div className="md:col-span-7 flex flex-col"><ExperienceList /></div>
+            <div className="md:col-span-5 flex flex-col"><BioMatrix /></div>
+
+            {/* Row 6: Impact Metrics (Full Width - has 8 metric cards) */}
+            <div className="md:col-span-12 flex flex-col"><ImpactMetrics /></div>
+
+            {/* Row 7: Skills Grid & Education */}
+            <div id="skills-section" className="md:col-span-7 flex flex-col"><SkillsGrid /></div>
+            <div className="md:col-span-5 flex flex-col"><EducationNode /></div>
+
+            {/* Row 8: Hackathon Wins & Reference Vault */}
+            <div className="md:col-span-7 flex flex-col"><HackathonWins /></div>
+            <div className="md:col-span-5 flex flex-col"><ReferenceVault /></div>
+
+            {/* Row 9: Certifications & Coursework */}
+            <div className="md:col-span-6 flex flex-col"><CertificationsNode /></div>
+            <div className="md:col-span-6 flex flex-col"><CourseworkGrid /></div>
+
+            {/* Row 10: Technical Writing & Leadership */}
+            <div className="md:col-span-6 flex flex-col"><TechnicalWritingNode /></div>
+            <div className="md:col-span-6 flex flex-col"><LeadershipNode /></div>
             
-            {/* Col 2 */}
-            <div className="md:col-span-3 xl:col-span-4 flex flex-col gap-4 sm:gap-6">
-              <ImpactMetrics />
-              <HackathonWins />
-              <BioMatrix />
-              <ReferenceVault />
-            </div>
-
-            {/* Col 3 */}
-            <div id="skills-section" className="md:col-span-3 xl:col-span-3 flex flex-col gap-4 sm:gap-6">
-              <SkillsGrid />
-              <CertificationsNode />
-              <CourseworkGrid />
-              <EducationNode />
-              <TechnicalWritingNode />
-              <LeadershipNode />
-            </div>
-            
-            {/* Projects Span */}
-            <div id="projects-section" className="md:col-span-6 xl:col-span-12 flex flex-col mt-4">
+            {/* Row 11: Projects Showcase (Full Width) */}
+            <div id="projects-section" className="md:col-span-12 flex flex-col mt-4">
               <ProjectsShowcase />
             </div>
             
-            {/* Footer Span */}
-            <div className="md:col-span-6 xl:col-span-12 flex flex-col gap-4 sm:gap-6"><OpenSourceNode /></div>
-            <div id="contact" className="md:col-span-6 xl:col-span-12 mt-4"><ContactNode /></div>
+            {/* Row 12: Open Source (Full Width) */}
+            <div className="md:col-span-12 flex flex-col"><OpenSourceNode /></div>
+
+            {/* Row 13: Contact (Full Width) */}
+            <div id="contact" className="md:col-span-12 mt-4"><ContactNode /></div>
           </div>
           
           <footer className="mt-16 text-center border-t border-[#00f0ff]/20 pt-8 opacity-70 hover:opacity-100 transition-opacity">
