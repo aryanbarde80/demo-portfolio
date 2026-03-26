@@ -26,8 +26,8 @@ export default function ContactNode() {
     },
     { 
       label: "PORTFOLIO", 
-      value: "aryanbarde80.github.io/My-Portfolio", 
-      href: "https://aryanbarde80.github.io/My-Portfolio",
+      value: "demo-portfolio-psi-two.vercel.app", 
+      href: "https://demo-portfolio-psi-two.vercel.app",
       icon: Code2,
       color: "#ffaa44"
     },

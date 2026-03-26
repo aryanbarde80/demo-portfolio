@@ -138,7 +138,7 @@ export default function ImpactMetrics() {
                       <Icon size={18} style={{ color: m.color }} className="shrink-0 group-hover:scale-110 transition-transform duration-300" />
                       <span className="text-[8px] sm:text-[9px] mono text-gray-500 uppercase tracking-wider">{m.impact}</span>
                     </div>
-                    <span className="text-[7px] sm:text-[8px] px-1.5 py-0.5 rounded bg-gray-900 text-gray-600">LIVE</span>
+                    <span className="text-[7px] sm:text-[8px] px-1.5 py-0.5 rounded bg-gray-900 text-gray-600">VERIFIED</span>
                   </div>
                   
                   {/* Value */}

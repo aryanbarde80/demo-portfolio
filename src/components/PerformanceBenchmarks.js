@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import OSWindow from './OSWindow';
-import { Activity, Cpu, Zap, Clock, Server, Database, Globe, TrendingUp, BarChart3, Gauge } from 'lucide-react';
+import { Activity, Zap, Database, Globe, TrendingUp, BarChart3, Gauge } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,13 +33,6 @@ export default function PerformanceBenchmarks() {
     return () => ScrollTrigger.getAll().forEach(t => t.kill());
   }, []);
 
-  const getPerformanceGrade = (value, max) => {
-    const pct = (value / max) * 100;
-    if (pct >= 90) return { grade: "A+", color: "#00f0ff" };
-    if (pct >= 80) return { grade: "A", color: "#00f0ff" };
-    if (pct >= 70) return { grade: "B", color: "#ffaa44" };
-    return { grade: "C", color: "#ff003c" };
-  };
 
   return (
     <OSWindow title="BENCHMARK/PERFORMANCE_METRICS.SYS" icon={<Gauge size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
@@ -61,12 +54,7 @@ export default function PerformanceBenchmarks() {
           {benchmarks.map((b, idx) => {
             const Icon = b.icon;
             const pct = Math.min((b.value / b.max) * 100, 100);
-            const isLowerBetter = b.unit === 's' || b.unit === 'ms' || b.unit === 'KB';
-            const displayPct = isLowerBetter ? Math.max(100 - pct, 10) : pct;
-            const { grade, color: gradeColor } = getPerformanceGrade(
-              isLowerBetter ? (b.max - b.value) : b.value,
-              b.max
-            );
+            const displayPct = pct;
 
             return (
               <div key={idx} className="group p-3 border border-gray-800 hover:border-[#00f0ff]/40 rounded-lg bg-gradient-to-r from-[#030712] to-transparent hover:bg-[#00f0ff]/5 transition-all duration-300">

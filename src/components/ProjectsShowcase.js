@@ -31,7 +31,7 @@ export default function ProjectsShowcase() {
       color: "#ff003c",
       icon: Cpu,
       status: "PRODUCTION",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/IoT-Smart-Agriculture"
     },
     {
       title: "AI Defect Detection System",
@@ -41,7 +41,7 @@ export default function ProjectsShowcase() {
       color: "#ffaa44",
       icon: Bot,
       status: "DEPLOYED",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/AI-Defect-Detection"
     },
     {
       title: "RoomieQ India Platform",
@@ -51,7 +51,7 @@ export default function ProjectsShowcase() {
       color: "#00f0ff",
       icon: Database,
       status: "LIVE",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/RoomieQ-Platform"
     },
     {
       title: "Multi-Agent AI System",
@@ -61,7 +61,7 @@ export default function ProjectsShowcase() {
       color: "#ff003c",
       icon: Bot,
       status: "ACTIVE",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/Multi-Agent-AI"
     },
     {
       title: "SEO Automation Engine",
@@ -71,7 +71,7 @@ export default function ProjectsShowcase() {
       color: "#ffaa44",
       icon: Globe,
       status: "PRODUCTION",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/SEO-Automation"
     },
     {
       title: "React Native Mobile App",
@@ -81,7 +81,7 @@ export default function ProjectsShowcase() {
       color: "#00f0ff",
       icon: Smartphone,
       status: "SHIPPED",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/ReactNative-App"
     },
     {
       title: "Zerve Data Challenge 2026",
@@ -91,7 +91,7 @@ export default function ProjectsShowcase() {
       color: "#ffaa44",
       icon: Zap,
       status: "WINNER",
-      github: "https://github.com/aryanbarde80"
+      github: "https://github.com/aryanbarde80/Zerve-Data-Challenge"
     }
   ];
 

@@ -54,11 +54,11 @@ export default function RecruiterHUD() {
           </div>
 
           <div className="grid grid-cols-3 gap-2">
-            <a href="https://github.com/aryanbarde80" className="flex flex-col items-center gap-1 p-2 rounded bg-gray-900/50 hover:bg-[#00f0ff]/10 border border-gray-800 hover:border-[#00f0ff]/30 transition-all">
+            <a href="https://github.com/aryanbarde80" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 p-2 rounded bg-gray-900/50 hover:bg-[#00f0ff]/10 border border-gray-800 hover:border-[#00f0ff]/30 transition-all">
               <Github size={16} className="text-gray-400" />
               <span className="text-[8px] mono">GITHUB</span>
             </a>
-            <a href="https://linkedin.com/in/aryanbarde80" className="flex flex-col items-center gap-1 p-2 rounded bg-gray-900/50 hover:bg-[#00f0ff]/10 border border-gray-800 hover:border-[#00f0ff]/30 transition-all">
+            <a href="https://linkedin.com/in/aryanbarde80" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 p-2 rounded bg-gray-900/50 hover:bg-[#00f0ff]/10 border border-gray-800 hover:border-[#00f0ff]/30 transition-all">
               <Linkedin size={16} className="text-gray-400" />
               <span className="text-[8px] mono">LINKEDIN</span>
             </a>
