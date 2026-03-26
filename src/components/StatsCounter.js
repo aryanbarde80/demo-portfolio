@@ -5,28 +5,39 @@ import { Rocket, Code2, Globe, Trophy, Briefcase, GitPullRequest, Users, Zap, Aw
 function AnimatedCounter({ target, duration = 2000 }) {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const [started, setStarted] = useState(false);
+  const startedRef = useRef(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !started) setStarted(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [started]);
+    const el = ref.current;
+    if (!el) return;
 
-  useEffect(() => {
-    if (!started) return;
-    let startTime;
-    const animate = (timestamp) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(animate);
+    const startAnimation = () => {
+      if (startedRef.current) return;
+      startedRef.current = true;
+      let startTime;
+      const animate = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        setCount(Math.floor(progress * target));
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
     };
-    requestAnimationFrame(animate);
-  }, [started, target, duration]);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) startAnimation(); },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+
+    // Fallback: if already visible on mount, start after a short delay
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setTimeout(startAnimation, 300);
+    }
+
+    return () => observer.disconnect();
+  }, [target, duration]);
 
   return <span ref={ref} className="tabular-nums">{count.toLocaleString()}</span>;
 }

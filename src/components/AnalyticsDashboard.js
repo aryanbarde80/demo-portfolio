@@ -3,34 +3,34 @@ import { Activity, BarChart3, Binary, Radar, Bot, Zap, GitBranch, Workflow, Cpu,
 
 export default function AnalyticsDashboard() {
   const domainStats = [
-    { label: "FRONTEND", val: 92, icon: Layout },
-    { label: "BACKEND", val: 88, icon: Server },
-    { label: "IOT/EMBEDDED", val: 95, icon: Cpu },
-    { label: "CLOUD/DEVOPS", val: 85, icon: Cloud },
-    { label: "AI/ML/CV", val: 90, icon: Brain },
-    { label: "AUTOMATION/AI_AGENTS", val: 87, icon: Bot },
-    { label: "DATABASES", val: 86, icon: Database },
-    { label: "CYBERSECURITY", val: 82, icon: Shield }
+    { label: "FRONTEND", icon: Layout, tags: ["React", "Next.js", "Three.js", "Tailwind"] },
+    { label: "BACKEND", icon: Server, tags: ["Node.js", "Express", "Flask", "FastAPI"] },
+    { label: "IOT/EMBEDDED", icon: Cpu, tags: ["ESP32", "MQTT", "C++", "Sensors"] },
+    { label: "CLOUD/DEVOPS", icon: Cloud, tags: ["AWS", "Docker", "CI/CD", "GCP"] },
+    { label: "AI/ML/CV", icon: Brain, tags: ["YOLOv8", "OpenCV", "RAG", "LangChain"] },
+    { label: "AUTOMATION/AI_AGENTS", icon: Bot, tags: ["CrewAI", "AutoGen", "LlamaIndex"] },
+    { label: "DATABASES", icon: Database, tags: ["MySQL", "MongoDB", "Redis", "PostgreSQL"] },
+    { label: "CYBERSECURITY", icon: Shield, tags: ["JWT", "OAuth", "Linux Admin"] }
   ];
 
   const automationSkills = [
-    { name: "LangChain", level: 85, icon: Bot, desc: "LLM Orchestration" },
-    { name: "CrewAI", level: 82, icon: GitBranch, desc: "Multi-Agent Systems" },
-    { name: "AutoGen", level: 78, icon: Zap, desc: "Conversational Agents" },
-    { name: "RAG Pipelines", level: 88, icon: Workflow, desc: "Vector DB + LLM" },
-    { name: "Agentic Workflows", level: 86, icon: Cpu, desc: "Autonomous Agents" },
-    { name: "LlamaIndex", level: 84, icon: Brain, desc: "Data Frameworks" },
-    { name: "LangSmith", level: 80, icon: Activity, desc: "LLM Observability" },
-    { name: "Flowise", level: 79, icon: GitBranch, desc: "Low-Code Agents" }
+    { name: "LangChain", icon: Bot, desc: "LLM Orchestration" },
+    { name: "CrewAI", icon: GitBranch, desc: "Multi-Agent Systems" },
+    { name: "AutoGen", icon: Zap, desc: "Conversational Agents" },
+    { name: "RAG Pipelines", icon: Workflow, desc: "Vector DB + LLM" },
+    { name: "Agentic Workflows", icon: Cpu, desc: "Autonomous Agents" },
+    { name: "LlamaIndex", icon: Brain, desc: "Data Frameworks" },
+    { name: "LangSmith", icon: Activity, desc: "LLM Observability" },
+    { name: "Flowise", icon: GitBranch, desc: "Low-Code Agents" }
   ];
 
   const cloudSkills = [
-    { name: "AWS", level: 88, icon: Cloud },
-    { name: "GCP", level: 85, icon: Cloud },
-    { name: "Docker", level: 92, icon: Server },
-    { name: "Kubernetes", level: 78, icon: Server },
-    { name: "CI/CD", level: 86, icon: GitBranch },
-    { name: "Terraform", level: 75, icon: Code }
+    { name: "AWS", icon: Cloud },
+    { name: "GCP", icon: Cloud },
+    { name: "Docker", icon: Server },
+    { name: "Kubernetes", icon: Server },
+    { name: "CI/CD", icon: GitBranch },
+    { name: "Terraform", icon: Code }
   ];
 
   return (
@@ -102,20 +102,16 @@ export default function AnalyticsDashboard() {
               const IconComp = stat.icon;
               return (
                 <div key={i} className="group">
-                  <div className="flex justify-between items-center text-[10px] mono text-gray-400 mb-1">
-                    <div className="flex items-center gap-1.5">
-                      <IconComp size={10} className="text-[#00f0ff]/60" />
-                      <span className="truncate">{stat.label}</span>
-                    </div>
-                    <span className="text-[#ff003c]/80 group-hover:text-[#ff003c] flex-shrink-0 ml-2">{stat.val}%</span>
+                  <div className="flex items-center gap-1.5 text-[10px] mono text-gray-400 mb-1.5">
+                    <IconComp size={10} className="text-[#00f0ff]/60" />
+                    <span className="truncate font-bold">{stat.label}</span>
                   </div>
-                  <div className="relative h-1.5 w-full bg-gray-900 border border-gray-800 rounded-sm overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-[#ff003c] to-[#ff6a3c] transition-all duration-1000 shadow-[0_0_8px_rgba(255,0,60,0.5)]" 
-                      style={{ width: `${stat.val}%`, transitionDelay: `${i * 50}ms` }}
-                    >
-                      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.2)_50%,transparent_100%)] animate-[shimmer_2s_infinite]"></div>
-                    </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {stat.tags.map((tag, j) => (
+                      <span key={j} className="text-[9px] mono px-2 py-0.5 bg-[#030712] border border-gray-800 hover:border-[#00f0ff]/40 text-gray-400 hover:text-[#00f0ff] rounded transition-all duration-200 cursor-default">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               );
@@ -145,10 +141,6 @@ export default function AnalyticsDashboard() {
                       <p className="text-[11px] font-mono text-gray-200 font-bold truncate">{skill.name}</p>
                       <p className="text-[8px] text-gray-500 truncate">{skill.desc}</p>
                     </div>
-                    <span className="text-[9px] text-[#ff003c] font-mono">{skill.level}%</span>
-                  </div>
-                  <div className="mt-1.5 h-0.5 bg-gray-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-[#00f0ff] to-[#ff003c] rounded-full" style={{ width: `${skill.level}%` }}></div>
                   </div>
                 </div>
               );
@@ -174,10 +166,6 @@ export default function AnalyticsDashboard() {
                 >
                   <IconComp size={18} className="text-[#ffaa44] mx-auto mb-1 group-hover:scale-110 transition-transform" />
                   <p className="text-[11px] font-mono text-gray-300">{skill.name}</p>
-                  <div className="mt-1 h-1 bg-gray-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-[#ffaa44] rounded-full" style={{ width: `${skill.level}%` }}></div>
-                  </div>
-                  <span className="text-[8px] text-gray-500">{skill.level}%</span>
                 </div>
               );
             })}
