@@ -1,49 +1,209 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { Terminal as TerminalIcon, ShieldCheck, Activity } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Terminal as TerminalIcon, ShieldCheck, Activity, Cpu, Zap, Network, Database, Cloud, GitBranch } from 'lucide-react';
 
 export default function DiagnosticLog() {
   const [logs, setLogs] = useState([
-    "INITIALIZING_UPLINK...",
-    "HANDSHAKE_COMPLETE: 0x982F",
-    "CORE_STABILITY: 99.9%"
+    "> SYSTEM_INITIALIZATION_COMPLETE",
+    "> CORE_ENGINES: ONLINE",
+    "> PERFORMANCE_METRICS: OPTIMAL",
+    "> READY_FOR_OPERATIONS"
   ]);
+  
+  const [connectionStatus, setConnectionStatus] = useState("ACTIVE");
+  const [performanceScore, setPerformanceScore] = useState(99.9);
+  const logContainerRef = useRef(null);
 
+  // Dynamic system messages based on CV achievements
+  const systemMessages = [
+    // System Status
+    "API_LATENCY: OPTIMIZED_40%",
+    "DATABASE_INDEXING: ACTIVE",
+    "REDIS_CACHE: HIT_RATE_92%",
+    "WEBSOCKET_CONNECTION: STABLE",
+    "MQTT_BROKER: PUBLISHING",
+    "ESP32_FIRMWARE: SYNCED",
+    
+    // Performance Metrics
+    "THROUGHPUT: 2.4k_REQ/SEC",
+    "RESPONSE_TIME: 124ms",
+    "CPU_UTILIZATION: 34%",
+    "MEMORY_USAGE: 287MB",
+    "NETWORK_IO: 45MB/S",
+    
+    // Security
+    "FIREWALL: ACTIVE",
+    "ENCRYPTION: AES-256",
+    "JWT_TOKENS: VALIDATED",
+    "RATE_LIMITING: ENABLED",
+    
+    // AI/ML
+    "YOLOv8_MODEL: LOADED",
+    "DEFECT_DETECTION: 95%_ACCURACY",
+    "ML_PIPELINE: TRAINING",
+    "INFERENCE_TIME: 23ms",
+    
+    // Cloud & DevOps
+    "AWS_S3: SYNCED",
+    "GCP_DEPLOY: SUCCESS",
+    "DOCKER_CONTAINERS: 4_RUNNING",
+    "CI/CD_PIPELINE: PASSED",
+    
+    // IoT
+    "SENSOR_DATA: COLLECTING",
+    "TELEMETRY_STREAM: ACTIVE",
+    "MQTT_QOS: LEVEL_2",
+    "FIRMWARE_VERSION: v2.1.0",
+    
+    // Achievements
+    "TCS_CODEVITA: RANK_4905",
+    "HACKTOBERFEST: 4_PRS_MERGED",
+    "INTERN_OF_MONTH: AWARDED",
+    "TECH_SYNERGY: 2ND_PLACE"
+  ];
+
+  // Dynamic status updates
   useEffect(() => {
-    const messages = [
-      "SYNAPS_TICK: CACHE_SYNC",
-      "QUERY_ML_MODEL: OPTIMIZING...",
-      "DATA_LEAK_PREVENTED: 0.00ms",
-      "DIVINE_CHANNEL: ACTIVE",
-      "GARBAGE_COLLECTION: RUNNING",
-      "UPLINK_STRENGTH: 5/5",
-      "OM_NAMAH_SHIVAYA: BROADCASTING",
-      "NEURAL_LINK_ESTABLISHED"
-    ];
-
     const interval = setInterval(() => {
+      // Add random system log
+      const randomMessage = systemMessages[Math.floor(Math.random() * systemMessages.length)];
+      const timestamp = new Date().toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+      });
+      
       setLogs(prev => [
-        `[${new Date().toLocaleTimeString()}] ${messages[Math.floor(Math.random() * messages.length)]}`,
-        ...prev.slice(0, 15)
+        `[${timestamp}] > ${randomMessage}`,
+        ...prev.slice(0, 19) // Keep last 20 logs
       ]);
-    }, 3000);
+      
+      // Update performance score with slight variation
+      setPerformanceScore(prev => {
+        const variation = (Math.random() - 0.5) * 0.2;
+        return Math.min(99.99, Math.max(98.5, prev + variation));
+      });
+      
+      // Random connection status updates
+      const statuses = ["ACTIVE", "OPTIMAL", "STABLE", "SYNCED"];
+      if (Math.random() > 0.7) {
+        setConnectionStatus(statuses[Math.floor(Math.random() * statuses.length)]);
+      }
+      
+    }, 2800);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Auto-scroll to bottom of logs
+  useEffect(() => {
+    if (logContainerRef.current) {
+      logContainerRef.current.scrollTop = 0;
+    }
+  }, [logs]);
+
+  // System stats
+  const systemStats = [
+    { label: "UPTIME", value: "99.98%", icon: Activity, color: "#00f0ff" },
+    { label: "PERFORMANCE", value: `${performanceScore.toFixed(1)}%`, icon: Zap, color: "#ffaa44" },
+    { label: "CONNECTION", value: connectionStatus, icon: Network, color: "#00f0ff" },
+    { label: "AGENTS", value: "8 ACTIVE", icon: Cpu, color: "#ff003c" }
+  ];
+
   return (
-    <div className="flex flex-col gap-2 h-full">
-      <div className="flex items-center gap-2 mb-2 p-2 border-b border-[#00f0ff]/20">
-        <Activity size={12} className="text-[#00f0ff]" />
-        <span className="text-[10px] mono font-bold text-[#00f0ff] uppercase tracking-tighter">System Diagnostic Log</span>
+    <div className="flex flex-col h-full bg-gradient-to-b from-[#030712] to-transparent rounded-lg border border-[#00f0ff]/10 overflow-hidden">
+      
+      {/* Header with System Stats */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 p-3 border-b border-[#00f0ff]/20 bg-black/30">
+        <div className="flex items-center gap-2">
+          <Activity size={14} className="text-[#00f0ff] animate-pulse" />
+          <span className="text-[10px] sm:text-[11px] mono font-bold text-[#00f0ff] uppercase tracking-wider">
+            SYSTEM_DIAGNOSTIC_LOG
+          </span>
+          <div className="h-4 w-px bg-[#00f0ff]/30 mx-1"></div>
+          <span className="text-[8px] sm:text-[9px] mono text-green-500 flex items-center gap-1">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+            LIVE
+          </span>
+        </div>
+        
+        {/* Quick Stats */}
+        <div className="flex gap-3 text-[8px] sm:text-[9px] mono">
+          {systemStats.map((stat, idx) => {
+            const IconComp = stat.icon;
+            return (
+              <div key={idx} className="flex items-center gap-1.5">
+                <IconComp size={10} style={{ color: stat.color }} />
+                <span className="text-gray-400">{stat.label}:</span>
+                <span className="text-white font-bold">{stat.value}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
-      <div className="space-y-1 overflow-hidden h-full">
-        {logs.map((log, i) => (
-          <div key={i} className={`text-[9px] mono truncate ${i === 0 ? 'text-[#00f0ff] font-bold' : 'text-gray-500 opacity-60'}`}>
-            {log}
-          </div>
-        ))}
+      
+      {/* Logs Container */}
+      <div 
+        ref={logContainerRef}
+        className="flex-1 p-3 space-y-1 overflow-y-auto max-h-[300px] min-h-[200px] custom-scrollbar"
+      >
+        {logs.map((log, i) => {
+          const isLatest = i === 0;
+          const hasError = log.includes("ERROR") || log.includes("FAIL");
+          const hasSuccess = log.includes("SUCCESS") || log.includes("COMPLETE") || log.includes("PASSED");
+          const hasMetric = log.includes("%") || log.includes("ms") || log.includes("MB");
+          
+          return (
+            <div 
+              key={i} 
+              className={`
+                text-[9px] sm:text-[10px] font-mono 
+                ${isLatest ? 'text-[#00f0ff] font-bold animate-pulse' : ''}
+                ${hasError ? 'text-[#ff003c]' : ''}
+                ${hasSuccess && !isLatest ? 'text-green-500' : ''}
+                ${hasMetric && !isLatest && !hasError ? 'text-[#ffaa44]' : ''}
+                ${!isLatest && !hasError && !hasSuccess && !hasMetric ? 'text-gray-500' : ''}
+                transition-all duration-300
+              `}
+            >
+              {log}
+              {isLatest && (
+                <span className="inline-block ml-2 w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping"></span>
+              )}
+            </div>
+          );
+        })}
       </div>
+      
+      {/* Footer - System Info */}
+      <div className="p-2 border-t border-[#00f0ff]/10 bg-black/20 flex justify-between items-center text-[7px] sm:text-[8px] mono text-gray-600">
+        <div className="flex items-center gap-2">
+          <span>📊 LOG_COUNT: {logs.length}</span>
+          <span>🔧 SYS_VER: 9.1.4</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span>⚡ {new Date().toLocaleDateString()}</span>
+        </div>
+      </div>
+
+      {/* Custom Scrollbar Styles */}
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(0, 240, 255, 0.05);
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(0, 240, 255, 0.3);
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(0, 240, 255, 0.5);
+        }
+      `}</style>
     </div>
   );
 }

@@ -1,104 +1,177 @@
 "use client";
-import React, { useState, useEffect, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Activity, Cpu, Database, Hash } from 'lucide-react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
-export default function OSWindow({ title, children, width = "max-w-4xl", icon = "📁" }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const [load, setLoad] = useState(12);
-  const [mounted, setMounted] = useState(false);
-  const reactId = React.useId();
-  
-  const windowId = useMemo(() => {
-    if (!mounted) return "0x000000";
-    // Generate a stable hex-like ID from the reactId
-    return `0x${reactId.replace(/:/g, '').padEnd(6, '0').slice(0, 6).toUpperCase()}`;
-  }, [reactId, mounted]);
-  
-  useEffect(() => {
-    setMounted(true);
+export default function NeuralMatrix() {
+  const [connections, setConnections] = useState([]);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const containerRef = useRef(null);
+  const animationRef = useRef();
+
+  const updateConnections = useCallback(() => {
+    const windows = document.querySelectorAll('.glass-panel');
+    const newConnections = [];
+    
+    for (let i = 0; i < windows.length; i++) {
+      for (let j = i + 1; j < Math.min(i + 3, windows.length); j++) {
+        const rectA = windows[i].getBoundingClientRect();
+        const rectB = windows[j].getBoundingClientRect();
+        
+        // Only connect if elements are visible
+        if (rectA.width > 0 && rectA.height > 0 && rectB.width > 0 && rectB.height > 0) {
+          newConnections.push({
+            x1: rectA.left + rectA.width / 2,
+            y1: rectA.top + rectA.height / 2,
+            x2: rectB.left + rectB.width / 2,
+            y2: rectB.top + rectB.height / 2,
+            id: `${i}-${j}-${Date.now()}-${Math.random()}`
+          });
+        }
+      }
+    }
+    
+    setConnections(newConnections);
   }, []);
 
+  // Debounced resize handler
   useEffect(() => {
-    if (isHovered) {
-      const interval = setInterval(() => {
-        setLoad(prev => Math.min(Math.max(prev + (Math.random() * 10 - 5), 5), 95));
-      }, 800);
-      return () => clearInterval(interval);
-    }
-  }, [isHovered]);
+    let timeoutId;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+        updateConnections();
+      }, 100);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, [updateConnections]);
+
+  // Initial connections and mutation observer
+  useEffect(() => {
+    updateConnections();
+
+    // Watch for DOM changes
+    const observer = new MutationObserver(() => {
+      updateConnections();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['class', 'style']
+    });
+
+    // Animated update loop
+    const animateConnections = () => {
+      updateConnections();
+      animationRef.current = requestAnimationFrame(animateConnections);
+    };
+    
+    animationRef.current = requestAnimationFrame(animateConnections);
+
+    return () => {
+      observer.disconnect();
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [updateConnections]);
 
   return (
-    <motion.div 
-      drag 
-      dragMomentum={false}
-      dragElastic={0.1}
-      whileDrag={{ scale: 1.02, zIndex: 100 }}
-      layout
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className={`glass-panel mx-auto w-full ${width} relative group transition-all duration-500 hover:shadow-[0_0_40px_rgba(0,240,255,0.25)] mb-4 sm:mb-6 rounded-lg cursor-grab active:cursor-grabbing border border-[#00f0ff]/10 hover:border-[#00f0ff]/60 bg-black/50 backdrop-blur-xl overflow-hidden`}
+    <svg 
+      ref={containerRef}
+      className="fixed inset-0 w-full h-full pointer-events-none z-[5] opacity-20"
+      aria-hidden="true"
     >
-      {/* Scanning Laser Effect */}
-      <AnimatePresence>
-        {isHovered && (
-          <motion.div 
-            initial={{ top: '-10%' }}
-            animate={{ top: '110%' }}
-            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-            className="absolute left-0 right-0 h-[2px] bg-[#00f0ff] opacity-40 blur-[2px] z-20 pointer-events-none"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Cyber Noise: Tiny Hex IDs in corners */}
-      <div className="absolute top-1 right-12 text-[7px] mono text-[#00f0ff]/30 pointer-events-none select-none hidden sm:block">
-        <span className="mr-2">HASH: {windowId}</span>
-        <span>STBL: 0.9997</span>
-      </div>
-
-      {/* Top bar */}
-      <div className="flex border-b border-[#00f0ff]/30 p-2 sm:p-3 px-3 sm:px-4 items-center justify-between bg-[#030712]/95 rounded-t-[7px] relative z-30">
-        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80 shadow-[0_0_8px_rgba(234,179,8,0.6)]"></div>
-          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
-        </div>
+      <defs>
+        <linearGradient id="neural-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#00f0ff" stopOpacity="0.1">
+            <animate attributeName="stopOpacity" values="0.1;0.6;0.1" dur="3s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="50%" stopColor="#ff44aa" stopOpacity="0.4">
+            <animate attributeName="stopOpacity" values="0.4;0.8;0.4" dur="3s" repeatCount="indefinite" />
+          </stop>
+          <stop offset="100%" stopColor="#00f0ff" stopOpacity="0.1">
+            <animate attributeName="stopOpacity" values="0.1;0.6;0.1" dur="3s" repeatCount="indefinite" />
+          </stop>
+        </linearGradient>
         
-        <div className="flex flex-col items-center gap-1 text-[#00f0ff]/90 mono text-[11px] sm:text-xs tracking-widest uppercase font-bold truncate max-w-[70%] select-none header-font">
-          <div className="flex items-center gap-2">
-            <span className="shrink-0 scale-110">{icon}</span> <span className="truncate">{title}</span>
-          </div>
-          {/* Header Diagnostic Bar */}
-          <div className="w-24 sm:w-32 h-1 bg-white/5 rounded-full overflow-hidden hidden md:block">
-            <motion.div 
-              animate={{ width: `${load}%` }}
-              className={`h-full ${load > 80 ? 'bg-[#ff003c]' : 'bg-[#00f0ff]'} shadow-[0_0_10px_currentColor]`}
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        
+        <marker
+          id="arrowhead"
+          markerWidth="6"
+          markerHeight="6"
+          refX="5"
+          refY="3"
+          orient="auto"
+        >
+          <polygon points="0 0, 6 3, 0 6" fill="#ff44aa" fillOpacity="0.6" />
+        </marker>
+      </defs>
+      
+      {connections.map((conn, idx) => (
+        <g key={conn.id}>
+          <line 
+            x1={conn.x1}
+            y1={conn.y1}
+            x2={conn.x2}
+            y2={conn.y2}
+            stroke="url(#neural-gradient)"
+            strokeWidth="0.8"
+            strokeDasharray="4,4"
+            filter="url(#glow)"
+            className="neural-line"
+          />
+          {/* Animated pulse at midpoint */}
+          <circle
+            cx={(conn.x1 + conn.x2) / 2}
+            cy={(conn.y1 + conn.y2) / 2}
+            r="2"
+            fill="#ff44aa"
+            fillOpacity="0.4"
+          >
+            <animate 
+              attributeName="r" 
+              values="2;4;2" 
+              dur={`${2 + (idx % 3)}s`} 
+              repeatCount="indefinite" 
             />
-          </div>
-        </div>
-
-        {/* Tail Diagnostic Stats */}
-        <div className="flex items-center gap-4 text-[10px] mono text-gray-400 hidden lg:flex">
-          <div className="flex items-center gap-1.5 hover:text-[#ffaa44] transition-colors">
-            <Cpu size={12} className="text-[#ffaa44]" /> {load.toFixed(0)}%
-          </div>
-          <div className="flex items-center gap-1.5 hover:text-[#00f0ff] transition-colors">
-            <Database size={12} className="text-[#00f0ff]" /> {windowId.substring(0, 6)}
-          </div>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="p-5 sm:p-8 md:p-10 cursor-text relative z-10 leading-relaxed font-sans text-sm sm:text-base selection:bg-[#00f0ff]/30">
-        {/* Subtle background code leak noise */}
-        <div className="absolute inset-0 opacity-[0.015] pointer-events-none select-none font-mono text-[9px] p-4 leading-normal overflow-hidden">
-          {Array(15).fill(`// sys.init("${windowId}"); await uplink.verify();`).join(' ')}
-        </div>
-        <div className="relative z-20">
-          {children}
-        </div>
-      </div>
-    </motion.div>
+            <animate 
+              attributeName="fillOpacity" 
+              values="0.4;0.8;0.4" 
+              dur={`${2 + (idx % 3)}s`} 
+              repeatCount="indefinite" 
+            />
+          </circle>
+        </g>
+      ))}
+      
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            stroke-dashoffset: 0;
+          }
+          100% {
+            stroke-dashoffset: 20;
+          }
+        }
+        
+        .neural-line {
+          animation: shimmer 8s linear infinite;
+        }
+      `}</style>
+    </svg>
   );
 }

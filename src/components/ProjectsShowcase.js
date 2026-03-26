@@ -1,75 +1,149 @@
 "use client";
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import OSWindow from "./OSWindow";
-import { FolderGit2, ExternalLink } from "lucide-react";
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Activity, Cpu, Database, Hash, Maximize2, Minimize2, X } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-export default function ProjectsShowcase() {
-  const gridRef = useRef(null);
-
-  const projects = [
-    { id: "FWZ-01", name: "IATA Travel Agency Portal", tech: "Next.js, Next-SEO, Tailwind", desc: "Complete digital transformation for IATA-certified agency. Mobile-first, 95+ PageSpeed score.", github: null },
-    { id: "CMY-02", name: "Creative Tech Agency UI", tech: "React, Framer Motion, GSAP", desc: "Premium agency platform with 8-step methodology matrix. Secured enterprise startup founders.", github: null },
-    { id: "AAI-03", name: "AI Defect Inspector", tech: "YOLOv8, OpenCV, Python, Streamlit", desc: "Enterprise manufacturing QC system achieving 95% defect detection accuracy. Deployed on Render.", github: "https://github.com/aryanbarde80/alfastack-ai-inspector" },
-    { id: "ZRV-04", name: "Zerve ML Challenge", tech: "Python, scikit-learn, Pandas", desc: "100% accuracy user retention model on 409K events. Session depth (17.1%) = top predictor.", github: "https://github.com/aryanbarde80/Zerve-Data-Challenge---User-Success-Prediction" },
-    { id: "SWL-05", name: "SwiftLink C++ URL Shortener", tech: "C++, Crow Framework, HTML", desc: "High-performance URL shortener with real-time redirect engine. Deployed on Render via Replit.", github: "https://github.com/aryanbarde80/SwiftLink-Cpp" },
-    { id: "AGT-06", name: "Agent0 AI Framework", tech: "Python, GPT-4, Claude API", desc: "Minimal modular AI agent with pluggable tools and LLM support (GPT/Claude). MIT licensed.", github: "https://github.com/aryanbarde80/agent0" },
-    { id: "CRM-07", name: "Smart Vehicle CRM", tech: "JavaScript, Node.js, MongoDB", desc: "Automotive CRM with maintenance scheduling, service history tracking, and multi-role dashboards.", github: "https://github.com/aryanbarde80/Smart-Vehicle-Maintenance-CRM" },
-    { id: "PGD-08", name: "Cloud Database Console", tech: "PERN, NeonDB, JWT", desc: "Cloud-native PostgreSQL management with strict RBAC, query optimization, and active API protection.", github: null },
-    { id: "RMI-09", name: "Real-time P2P Matcher", tech: "MERN, Socket.io, Redis", desc: "High-concurrency matching engine. Reduced latency 40% via Redis caching + optimized queries.", github: null },
-    { id: "QCN-10", name: "QuickConnect Messenger", tech: "MERN, Socket.io, JWT", desc: "Scalable real-time chat with WebSocket, typing indicators, media sharing, E2E encryption.", github: null },
-    { id: "TML-11", name: "Tiny ML Hackathon", tech: "TypeScript, Next.js, TinyML", desc: "Edge AI hackathon project deploying lightweight ML models on microcontrollers. Live on Vercel.", github: "https://github.com/aryanbarde80/Tiny-ML-Hackathon" },
-    { id: "VSF-12", name: "VectorShift Pipeline UI", tech: "TypeScript, React, Node.js", desc: "YC S23 startup assignment: visual pipeline builder with DAG validation and real-time node execution.", github: "https://github.com/aryanbarde80/vectorshift-assignment-YC-s23" },
-    { id: "CNS-13", name: "Smart Network Simulation", tech: "Python, Cisco Packet Tracer", desc: "Campus infrastructure with VLAN segmentation, DHCP/DNS configs, Python-automated IoT lab.", github: null },
-  ];
+export default function OSWindow({ title, children, width = "max-w-4xl", icon = "📁", defaultExpanded = false }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [load, setLoad] = useState(12);
+  const [mounted, setMounted] = useState(false);
+  const reactId = React.useId();
+  
+  const windowId = useMemo(() => {
+    if (!mounted) return "0x000000";
+    // Generate a stable hex-like ID from the reactId
+    return `0x${reactId.replace(/:/g, '').padEnd(6, '0').slice(0, 6).toUpperCase()}`;
+  }, [reactId, mounted]);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
-    if (!gridRef.current) return;
-    const cards = gridRef.current.querySelectorAll('.proj-card');
-    gsap.fromTo(cards,
-      { y: 50, opacity: 0, scale: 0.95 },
-      {
-        y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out',
-        scrollTrigger: { trigger: gridRef.current, start: 'top 85%', once: true }
-      }
-    );
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    if (isHovered) {
+      const interval = setInterval(() => {
+        setLoad(prev => Math.min(Math.max(prev + (Math.random() * 10 - 5), 5), 95));
+      }, 800);
+      return () => clearInterval(interval);
+    }
+  }, [isHovered]);
+
+  const toggleExpand = useCallback((e) => {
+    e.stopPropagation();
+    setIsExpanded(prev => !prev);
   }, []);
 
   return (
-    <OSWindow title="ARCHIVES/PROJECTS.BIN" icon={<FolderGit2 size={18} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
-      <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-        {projects.map((proj) => (
-          <div key={proj.id} className="proj-card group relative flex flex-col justify-between border-l-4 border-[#ff003c]/20 hover:border-[#ff003c] p-5 sm:p-6 bg-[#030712]/70 hover:bg-[#ff003c]/5 transition-all duration-500 overflow-hidden shadow-[0_12px_45px_rgba(0,0,0,0.7)] hover:shadow-[0_12px_45px_rgba(255,0,60,0.2)] rounded-r-3xl">
-            {/* Scanner Line */}
-            <div className="absolute inset-0 overflow-hidden rounded-r-3xl">
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#ff003c]/80 to-transparent translate-y-[-100%] group-hover:translate-y-[800%] transition-transform duration-1000 ease-linear shadow-[0_0_10px_#ff003c]" />
+    <motion.div 
+      drag={!isExpanded}
+      dragMomentum={false}
+      dragElastic={0.1}
+      whileDrag={!isExpanded ? { scale: 1.02, zIndex: 100 } : {}}
+      layout
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`
+        glass-panel mx-auto w-full ${width} relative group transition-all duration-500 
+        hover:shadow-[0_0_40px_rgba(0,240,255,0.25)] mb-4 sm:mb-6 rounded-lg 
+        ${!isExpanded ? 'cursor-grab active:cursor-grabbing' : 'cursor-default'}
+        border border-[#00f0ff]/10 hover:border-[#00f0ff]/60 bg-black/50 backdrop-blur-xl overflow-hidden
+      `}
+    >
+      {/* Scanning Laser Effect */}
+      <AnimatePresence>
+        {isHovered && !isExpanded && (
+          <motion.div 
+            initial={{ top: '-10%' }}
+            animate={{ top: '110%' }}
+            transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+            className="absolute left-0 right-0 h-[2px] bg-[#00f0ff] opacity-40 blur-[2px] z-20 pointer-events-none"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Cyber Noise: Tiny Hex IDs in corners */}
+      <div className="absolute top-1 right-12 text-[6px] sm:text-[7px] mono text-[#00f0ff]/20 pointer-events-none select-none hidden md:block">
+        <span className="mr-2">HASH: {windowId}</span>
+        <span>STBL: 0.9997</span>
+      </div>
+
+      {/* Top bar */}
+      <div className="flex border-b border-[#00f0ff]/30 p-2 sm:p-3 px-3 sm:px-4 items-center justify-between bg-[#030712]/95 rounded-t-[7px] relative z-30">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80 shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80 shadow-[0_0_8px_rgba(234,179,8,0.6)]"></div>
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+        </div>
+        
+        <div className="flex flex-col items-center gap-1 text-[#00f0ff]/90 mono text-[10px] sm:text-xs tracking-widest uppercase font-bold truncate max-w-[60%] sm:max-w-[70%] select-none header-font">
+          <div className="flex items-center gap-1.5 sm:gap-2">
+            <span className="shrink-0 scale-110 text-sm sm:text-base">{icon}</span> 
+            <span className="truncate">{title}</span>
+          </div>
+          {/* Header Diagnostic Bar */}
+          <div className="w-20 sm:w-32 h-0.5 bg-white/5 rounded-full overflow-hidden hidden md:block">
+            <motion.div 
+              animate={{ width: `${load}%` }}
+              transition={{ duration: 0.3 }}
+              className={`h-full ${load > 80 ? 'bg-[#ff003c]' : 'bg-[#00f0ff]'} shadow-[0_0_8px_currentColor]`}
+            />
+          </div>
+        </div>
+
+        {/* Window Controls */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Expand/Collapse Button */}
+          <button
+            onClick={toggleExpand}
+            className="text-gray-500 hover:text-[#00f0ff] transition-colors p-1 rounded hover:bg-[#00f0ff]/10"
+            aria-label={isExpanded ? "Collapse" : "Expand"}
+          >
+            {isExpanded ? <Minimize2 size={12} /> : <Maximize2 size={12} />}
+          </button>
+          
+          {/* Diagnostic Stats */}
+          <div className="hidden lg:flex items-center gap-2 sm:gap-3 text-[8px] sm:text-[9px] mono text-gray-500">
+            <div className="flex items-center gap-1 hover:text-[#ffaa44] transition-colors">
+              <Cpu size={10} className="text-[#ffaa44]" /> 
+              <span className="hidden sm:inline">{load.toFixed(0)}%</span>
             </div>
-            <div>
-              <div className="flex justify-between items-start mb-4">
-                <span className="text-[11px] mono text-[#ff003c] font-black tracking-widest uppercase bg-[#ff003c]/10 px-2 py-0.5 rounded-sm">[{proj.id}]</span>
-                {proj.github && (
-                  <a href={proj.github} target="_blank" rel="noopener noreferrer" className="p-2 rounded-xl bg-[#00f0ff]/10 border border-[#00f0ff]/20 opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#00f0ff]/40 transform hover:scale-110">
-                    <ExternalLink size={14} className="text-[#00f0ff]" />
-                  </a>
-                )}
-              </div>
-              <h3 className="text-lg sm:text-xl font-black text-gray-50 group-hover:text-white mb-3 leading-tight font-header tracking-tight">{proj.name}</h3>
-              <p className="text-sm sm:text-base text-gray-400 group-hover:text-gray-200 leading-relaxed mb-6 font-sans font-medium line-clamp-3">{proj.desc}</p>
-            </div>
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {proj.tech.split(', ').map((t, i) => (
-                <span key={i} className="text-[10px] sm:text-xs mono px-3 py-1 bg-[#ff003c]/10 border border-[#ff003c]/30 text-[#ff003c] rounded-full font-bold uppercase tracking-wider">{t}</span>
-              ))}
+            <div className="flex items-center gap-1 hover:text-[#00f0ff] transition-colors">
+              <Database size={10} className="text-[#00f0ff]" /> 
+              <span className="hidden md:inline">{windowId.substring(0, 6)}</span>
             </div>
           </div>
-        ))}
+        </div>
       </div>
-    </OSWindow>
+
+      {/* Body */}
+      <motion.div 
+        animate={{ 
+          height: isExpanded ? 'auto' : 'auto',
+          opacity: 1
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="relative z-10"
+      >
+        <div className="p-4 sm:p-6 md:p-8 cursor-text relative leading-relaxed font-sans text-xs sm:text-sm selection:bg-[#00f0ff]/30">
+          {/* Subtle background code leak noise */}
+          <div className="absolute inset-0 opacity-[0.008] pointer-events-none select-none font-mono text-[7px] sm:text-[8px] p-3 leading-normal overflow-hidden hidden sm:block">
+            {Array(10).fill(`// sys.init("${windowId}"); await uplink.verify();`).join(' ')}
+          </div>
+          <div className="relative z-20">
+            {children}
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Responsive styles for mobile */}
+      <style jsx>{`
+        @media (max-width: 640px) {
+          .glass-panel {
+            backdrop-filter: blur(8px);
+          }
+        }
+      `}</style>
+    </motion.div>
   );
 }
-
-

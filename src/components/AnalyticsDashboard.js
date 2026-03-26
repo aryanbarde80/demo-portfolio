@@ -1,110 +1,228 @@
 import OSWindow from "./OSWindow";
-import { Activity, BarChart3, Binary, Radar } from "lucide-react";
+import { Activity, BarChart3, Binary, Radar, Bot, Zap, GitBranch, Workflow, Cpu, Cloud, Database, Globe, Shield, Server, Layout, Code, Brain, Sparkles } from "lucide-react";
 
 export default function AnalyticsDashboard() {
-  const stats = [
-    { label: "FRONTEND", val: 92 },
-    { label: "BACKEND", val: 88 },
-    { label: "IOT/EMB", val: 95 },
-    { label: "CLOUD/OPS", val: 85 },
-    { label: "AI/CV", val: 90 }
+  const domainStats = [
+    { label: "FRONTEND", val: 92, icon: Layout },
+    { label: "BACKEND", val: 88, icon: Server },
+    { label: "IOT/EMBEDDED", val: 95, icon: Cpu },
+    { label: "CLOUD/DEVOPS", val: 85, icon: Cloud },
+    { label: "AI/ML/CV", val: 90, icon: Brain },
+    { label: "AUTOMATION/AI_AGENTS", val: 87, icon: Bot },
+    { label: "DATABASES", val: 86, icon: Database },
+    { label: "CYBERSECURITY", val: 82, icon: Shield }
+  ];
+
+  const automationSkills = [
+    { name: "LangChain", level: 85, icon: Bot, desc: "LLM Orchestration" },
+    { name: "CrewAI", level: 82, icon: GitBranch, desc: "Multi-Agent Systems" },
+    { name: "AutoGen", level: 78, icon: Zap, desc: "Conversational Agents" },
+    { name: "RAG Pipelines", level: 88, icon: Workflow, desc: "Vector DB + LLM" },
+    { name: "Agentic Workflows", level: 86, icon: Cpu, desc: "Autonomous Agents" },
+    { name: "LlamaIndex", level: 84, icon: Brain, desc: "Data Frameworks" },
+    { name: "LangSmith", level: 80, icon: Activity, desc: "LLM Observability" },
+    { name: "Flowise", level: 79, icon: GitBranch, desc: "Low-Code Agents" }
+  ];
+
+  const cloudSkills = [
+    { name: "AWS", level: 88, icon: Cloud },
+    { name: "GCP", level: 85, icon: Cloud },
+    { name: "Docker", level: 92, icon: Server },
+    { name: "Kubernetes", level: 78, icon: Server },
+    { name: "CI/CD", level: 86, icon: GitBranch },
+    { name: "Terraform", level: 75, icon: Code }
   ];
 
   return (
-    <OSWindow title="MODULES/ANALYSIS.STAT" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-4xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Radar Map (SVG) */}
-        <div className="relative group flex items-center justify-center p-4 border border-[#00f0ff]/10 bg-[#030712]/50 rounded overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.05)_0%,transparent_70%)]"></div>
+    <OSWindow title="MODULES/ANALYSIS.STAT" icon={<Activity size={16} className="text-[#00f0ff] animate-pulse" />} width="max-w-6xl">
+      <div className="space-y-6">
+        
+        {/* Row 1: Radar + Domain Stats */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
-          <svg viewBox="0 0 100 100" className="w-full max-w-[250px] drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
-            {/* Hexagon Background Rings */}
-            {[20, 40, 60, 80].map((r) => (
-              <circle key={r} cx="50" cy="50" r={r/2} fill="none" stroke="rgba(0,240,255,0.1)" strokeWidth="0.5" />
-            ))}
+          {/* Radar Map (SVG) */}
+          <div className="relative group flex items-center justify-center p-4 border border-[#00f0ff]/10 bg-[#030712]/50 rounded overflow-hidden min-h-[280px]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.05)_0%,transparent_70%)]"></div>
             
-            {/* Spider Lines */}
-            {[0, 72, 144, 216, 288].map((angle) => {
-              const x2 = (50 + 40 * Math.cos(angle * Math.PI / 180)).toFixed(4);
-              const y2 = (50 + 40 * Math.sin(angle * Math.PI / 180)).toFixed(4);
+            <svg viewBox="0 0 100 100" className="w-full max-w-[220px] drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
+              {/* Background Rings */}
+              {[20, 40, 60, 80].map((r) => (
+                <circle key={r} cx="50" cy="50" r={r/2} fill="none" stroke="rgba(0,240,255,0.1)" strokeWidth="0.5" />
+              ))}
+              
+              {/* Spider Lines - 8 directions */}
+              {[0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
+                const x2 = (50 + 40 * Math.cos(angle * Math.PI / 180)).toFixed(4);
+                const y2 = (50 + 40 * Math.sin(angle * Math.PI / 180)).toFixed(4);
+                return (
+                  <line 
+                    key={angle} 
+                    x1="50" y1="50" 
+                    x2={x2} y2={y2} 
+                    stroke="rgba(0,240,255,0.15)" strokeWidth="0.5" 
+                  />
+                );
+              })}
+
+              {/* Data Polygon */}
+              <polygon 
+                points="
+                  50,15 
+                  70,25 
+                  85,45 
+                  78,70 
+                  50,85 
+                  22,70 
+                  15,45 
+                  30,25
+                "
+                fill="rgba(0,240,255,0.2)"
+                stroke="#00f0ff"
+                strokeWidth="1.2"
+                className="animate-pulse"
+              />
+              
+              {/* Center Glow */}
+              <circle cx="50" cy="50" r="3" fill="#00f0ff" className="animate-ping opacity-50" />
+            </svg>
+
+            <div className="absolute bottom-2 left-2 flex items-center gap-2">
+              <Radar size={12} className="text-[#00f0ff]" />
+              <span className="text-[8px] sm:text-[9px] mono text-[#00f0ff]/60 uppercase tracking-widest">8D Competency Mapping</span>
+            </div>
+          </div>
+
+          {/* Domain Stats Bars */}
+          <div className="space-y-3">
+            <h4 className="text-[#ff003c] mono text-[11px] font-bold flex items-center gap-2 mb-3">
+              <BarChart3 size={14} /> DOMAIN_MASTERY.VAL
+            </h4>
+            
+            {domainStats.map((stat, i) => {
+              const IconComp = stat.icon;
               return (
-                <line 
-                  key={angle} 
-                  x1="50" y1="50" 
-                  x2={x2} 
-                  y2={y2} 
-                  stroke="rgba(0,240,255,0.15)" strokeWidth="0.5" 
-                />
+                <div key={i} className="group">
+                  <div className="flex justify-between items-center text-[10px] mono text-gray-400 mb-1">
+                    <div className="flex items-center gap-1.5">
+                      <IconComp size={10} className="text-[#00f0ff]/60" />
+                      <span className="truncate">{stat.label}</span>
+                    </div>
+                    <span className="text-[#ff003c]/80 group-hover:text-[#ff003c] flex-shrink-0 ml-2">{stat.val}%</span>
+                  </div>
+                  <div className="relative h-1.5 w-full bg-gray-900 border border-gray-800 rounded-sm overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-[#ff003c] to-[#ff6a3c] transition-all duration-1000 shadow-[0_0_8px_rgba(255,0,60,0.5)]" 
+                      style={{ width: `${stat.val}%`, transitionDelay: `${i * 50}ms` }}
+                    >
+                      <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.2)_50%,transparent_100%)] animate-[shimmer_2s_infinite]"></div>
+                    </div>
+                  </div>
+                </div>
               );
             })}
-
-            {/* Data Polygon */}
-            <polygon 
-              points="
-                50,15 
-                88,40 
-                75,80 
-                25,80 
-                12,40
-              "
-              fill="rgba(0,240,255,0.2)"
-              stroke="#00f0ff"
-              strokeWidth="1.5"
-              className="animate-pulse"
-            />
-          </svg>
-
-          <div className="absolute bottom-2 left-2 flex items-center gap-2">
-            <Radar size={12} className="text-[#00f0ff]" />
-            <span className="text-[9px] mono text-[#00f0ff]/60 uppercase tracking-widest">Neural Domain Mapping</span>
           </div>
         </div>
 
-        {/* Skill Entropy (Bar Charts) */}
-        <div className="space-y-4">
-          <h4 className="text-[#ff003c] mono text-[11px] font-bold flex items-center gap-2 mb-4">
-            <BarChart3 size={14} /> DOMAIN_ENTROPY.VAL
+        {/* Row 2: AI AGENTS & AUTOMATION SECTION */}
+        <div className="border-t border-[#00f0ff]/20 pt-4">
+          <h4 className="text-[#00f0ff] mono text-[11px] sm:text-[12px] font-bold flex items-center gap-2 mb-4">
+            <Bot size={14} className="animate-pulse" /> 
+            AI_AGENTS_&_AUTOMATION_STACK
+            <span className="text-[8px] bg-[#ff003c]/20 text-[#ff003c] px-1.5 py-0.5 rounded">AGENTIC v1.0</span>
           </h4>
           
-          {stats.map((stat, i) => (
-            <div key={i} className="group">
-              <div className="flex justify-between text-[10px] mono text-gray-400 mb-1.5">
-                <span>{stat.label}</span>
-                <span className="text-[#ff003c]/80 group-hover:text-[#ff003c]">{stat.val}% EFFICIENCY</span>
-              </div>
-              <div className="relative h-2 w-full bg-gray-900 border border-gray-800 rounded-sm overflow-hidden p-[1px]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {automationSkills.map((skill, idx) => {
+              const IconComp = skill.icon;
+              return (
                 <div 
-                  className="h-full bg-[#ff003c] transition-all duration-1000 shadow-[0_0_10px_rgba(255,0,60,0.5)]" 
-                  style={{ width: `${stat.val}%`, transitionDelay: `${i * 100}ms` }}
+                  key={idx} 
+                  className="group relative p-2.5 border border-[#00f0ff]/10 rounded bg-[#030712]/30 hover:border-[#00f0ff]/40 hover:bg-[#00f0ff]/5 transition-all duration-300"
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.2)_50%,transparent_100%)] animate-[shimmer_2s_infinite]"></div>
+                  <div className="flex items-center gap-2">
+                    <IconComp size={14} className="text-[#00f0ff] group-hover:scale-110 transition-transform" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[11px] font-mono text-gray-200 font-bold truncate">{skill.name}</p>
+                      <p className="text-[8px] text-gray-500 truncate">{skill.desc}</p>
+                    </div>
+                    <span className="text-[9px] text-[#ff003c] font-mono">{skill.level}%</span>
+                  </div>
+                  <div className="mt-1.5 h-0.5 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#00f0ff] to-[#ff003c] rounded-full" style={{ width: `${skill.level}%` }}></div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              );
+            })}
+          </div>
+        </div>
 
-          {/* Neural Traffic Graph */}
-          <div className="mt-8 space-y-2">
-            <div className="flex justify-between items-center text-[9px] mono text-[#00f0ff]/60 uppercase">
-              <span>Neural_Network_Traffic</span>
-              <span className="animate-pulse">Active</span>
-            </div>
-            <div className="h-16 relative bg-black/30 border border-gray-800/50 rounded overflow-hidden">
-              <svg viewBox="0 0 100 40" className="w-full h-full">
-                <path d="M0 20 Q 25 10, 50 20 T 100 20" fill="none" stroke="#00f0ff" strokeWidth="0.5" className="animate-[pulsion_3s_ease-in-out_infinite]" />
-                <path d="M0 25 Q 25 15, 50 25 T 100 25" fill="none" stroke="#ff003c" strokeWidth="0.3" className="opacity-30 animate-[pulsion_4s_ease-in-out_infinite]" />
-              </svg>
+        {/* Row 3: CLOUD & DEVOPS SKILLS */}
+        <div className="border-t border-[#00f0ff]/20 pt-4">
+          <h4 className="text-[#ffaa44] mono text-[11px] sm:text-[12px] font-bold flex items-center gap-2 mb-4">
+            <Cloud size={14} /> 
+            CLOUD_&_DEVOPS_INFRA
+            <span className="text-[8px] bg-[#ffaa44]/20 text-[#ffaa44] px-1.5 py-0.5 rounded">IaC Ready</span>
+          </h4>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {cloudSkills.map((skill, idx) => {
+              const IconComp = skill.icon;
+              return (
+                <div 
+                  key={idx} 
+                  className="group p-2 border border-[#ffaa44]/10 rounded bg-[#030712]/30 hover:border-[#ffaa44]/40 transition-all duration-300 text-center"
+                >
+                  <IconComp size={18} className="text-[#ffaa44] mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                  <p className="text-[11px] font-mono text-gray-300">{skill.name}</p>
+                  <div className="mt-1 h-1 bg-gray-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-[#ffaa44] rounded-full" style={{ width: `${skill.level}%` }}></div>
+                  </div>
+                  <span className="text-[8px] text-gray-500">{skill.level}%</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Row 4: System IQ + Neural Traffic */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          {/* System IQ Card */}
+          <div className="p-3 border border-[#00f0ff]/10 bg-[#00f0ff]/5 rounded flex items-center gap-3">
+            <Binary size={20} className="text-[#00f0ff] animate-bounce" />
+            <div className="flex-1">
+              <p className="text-[10px] mono text-gray-300">SYSTEM_IQ: <span className="text-[#00f0ff]">OPTIMIZED</span></p>
+              <div className="h-1.5 w-full bg-gray-800 rounded-full mt-1 overflow-hidden">
+                <div className="h-full bg-[#00f0ff] animate-[loading_3s_linear_infinite]" style={{ width: '87%' }}></div>
+              </div>
+              <p className="text-[8px] text-gray-500 mt-1">Performance Score: 94.2%</p>
             </div>
           </div>
 
-          <div className="mt-6 p-3 border border-[#00f0ff]/10 bg-[#00f0ff]/5 rounded flex items-center gap-3">
-            <Binary size={20} className="text-[#00f0ff] animate-bounce" />
-            <div>
-              <p className="text-[10px] mono text-gray-300">SYSTEM_IQ: <span className="text-[#00f0ff]">OPTIMIZED</span></p>
-              <div className="h-1 w-24 bg-gray-800 rounded-full mt-1 overflow-hidden">
-                <div className="h-full bg-[#00f0ff] animate-[loading_3s_linear_infinite]" style={{ width: '60%' }}></div>
-              </div>
+          {/* Neural Traffic Graph */}
+          <div className="space-y-1">
+            <div className="flex justify-between items-center text-[9px] mono text-[#00f0ff]/60 uppercase">
+              <span>Neural_Network_Traffic</span>
+              <span className="animate-pulse flex items-center gap-1"><Sparkles size={8} /> Active</span>
             </div>
+            <div className="h-12 relative bg-black/30 border border-gray-800/50 rounded overflow-hidden">
+              <svg viewBox="0 0 100 30" className="w-full h-full">
+                <path d="M0 15 Q 20 5, 40 15 T 80 15 T 100 20" fill="none" stroke="#00f0ff" strokeWidth="1" className="animate-[pulsion_3s_ease-in-out_infinite]" />
+                <path d="M0 20 Q 25 12, 50 20 T 100 22" fill="none" stroke="#ff003c" strokeWidth="0.6" className="opacity-50 animate-[pulsion_4s_ease-in-out_infinite]" />
+                <circle cx="100" cy="20" r="1.5" fill="#ff003c" className="animate-pulse" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Stats */}
+        <div className="flex flex-wrap justify-between gap-3 pt-3 border-t border-[#00f0ff]/10 text-[8px] mono text-gray-500">
+          <div className="flex items-center gap-3">
+            <span>⚡ TOTAL_SKILLS: {domainStats.length + automationSkills.length + cloudSkills.length}</span>
+            <span>🔧 AGENTIC_READY: TRUE</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+            <span>SYSTEM_STATUS: ONLINE</span>
           </div>
         </div>
       </div>

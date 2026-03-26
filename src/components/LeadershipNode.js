@@ -1,51 +1,162 @@
 import OSWindow from "./OSWindow";
-import { Flag, Users, Globe } from "lucide-react";
+import { Flag, Users, Globe, Calendar, Award, Paintbrush, Mic, UsersRound, Star, Sparkles } from "lucide-react";
 
 export default function LeadershipNode() {
   const leadership = [
     {
       role: "Core Team Lead",
       org: "Hunar Canvas Art Club, GGITS",
-      period: "Sep 2024 - Sep 2025",
-      desc: "Coordinated 50+ artists for exhibitions and workshops, leading strategic club growth."
+      period: "September 2024 - September 2025",
+      desc: "Led core team of creative members, coordinated multiple art exhibitions and workshops on campus, managed logistics and promotion. Successfully organized an art gallery exhibition with participation from 50+ artists.",
+      icon: Paintbrush,
+      achievements: ["50+ artists", "Art Gallery Exhibition", "Workshops organized"]
     },
     {
-      role: "Graphic Designer",
-      org: "Udyam (E-Cell), GGITS",
-      period: "Oct 2023 - Sep 2024",
-      desc: "Architected visual identity and promotional mechanics for campus entrepreneurship events."
+      role: "Graphic Designer & Visual Identity Creator",
+      org: "Udyam (Entrepreneurship Cell), GGITS",
+      period: "October 2023 - September 2024",
+      desc: "Created promotional graphics, posters, banners, and digital content for entrepreneurship events and competitions. Developed visual identity elements, logos, and branding materials for E-Cell initiatives. Designed engaging social media content for platform promotion.",
+      icon: UsersRound,
+      achievements: ["Branding materials", "Social media content", "Event promotion"]
     },
     {
       role: "Launch Crew Member",
       org: "Give My Certificate",
-      period: "Dec 2025 - Present",
-      desc: "Community driver providing product-market feedback and user experience research."
+      period: "December 2025 - Present",
+      desc: "Selected as a Launch Crew community member after a profile-based review process. Contributing by sharing structured product feedback and user experience insights through platforms like G2. Actively participating in community initiatives and collaborative activities.",
+      icon: Star,
+      achievements: ["Product feedback", "Community engagement", "UX insights"]
+    }
+  ];
+
+  const affiliations = [
+    {
+      name: "International Association of Engineers (IAENG)",
+      id: "MARCH2026_ACTIVE",
+      period: "March 2026 - Present",
+      desc: "Member of the International Association of Engineers, engaging with international engineering communities and participating in technical discussions."
     }
   ];
 
   return (
     <OSWindow title="COMMAND_DECK/LEADERSHIP.LOG" icon={<Flag size={16} className="text-[#00f0ff] animate-pulse" />}>
-      <div className="space-y-5">
-        {leadership.map((item, idx) => (
-          <div key={idx} className="relative pl-6 border-l border-[#ff003c]/20 hover:border-[#ff003c] transition-colors group">
-            <div className="absolute -left-1.5 top-0 w-3 h-3 bg-[#030712] border border-[#ff003c] rotate-45 group-hover:bg-[#ff003c] transition-colors"></div>
-            <h4 className="text-sm font-bold text-gray-100 mb-0.5 group-hover:text-white transition-colors">{item.role}</h4>
-            <p className="text-[#ff003c] mono text-[11px] mb-1 font-semibold">{item.org}</p>
-            <p className="text-gray-400 text-xs leading-relaxed italic">{item.desc}</p>
-            <span className="text-[10px] mono text-gray-500 mt-2 block">{item.period}</span>
+      <div className="space-y-6">
+        
+        {/* Header */}
+        <div className="flex justify-between items-center pb-2 border-b border-[#00f0ff]/20">
+          <div className="flex items-center gap-2">
+            <Users size={12} className="text-[#ffaa44]" />
+            <span className="text-[9px] sm:text-[10px] mono text-gray-500">LEADERSHIP_TIMELINE</span>
           </div>
-        ))}
+          <div className="text-[9px] sm:text-[10px] mono text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-0.5 rounded">
+            {leadership.length} POSITIONS
+          </div>
+        </div>
 
-        <div className="mt-6 pt-4 border-t border-[#00f0ff]/10">
-          <h4 className="flex items-center gap-2 text-[#00f0ff] mono text-xs mb-3 font-bold">
-            <Globe size={14} /> INT_AFFILIATIONS.DAT
+        {/* Leadership Roles */}
+        <div className="space-y-5">
+          {leadership.map((item, idx) => {
+            const IconComponent = item.icon;
+            return (
+              <div key={idx} className="group relative">
+                {/* Timeline Line */}
+                <div className="absolute left-[7px] top-0 bottom-0 w-px bg-gradient-to-b from-[#ff003c] via-[#ff003c]/40 to-transparent group-hover:from-[#00f0ff] group-hover:via-[#00f0ff]/60 transition-all"></div>
+                
+                {/* Timeline Dot */}
+                <div className="absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full bg-[#030712] border-2 border-[#ff003c] group-hover:border-[#00f0ff] group-hover:scale-110 transition-all duration-300 z-10"></div>
+                
+                {/* Content */}
+                <div className="pl-7 pb-4">
+                  <div className="flex flex-wrap items-start justify-between gap-2 mb-2">
+                    <div className="flex items-center gap-2">
+                      <IconComponent size={14} className="text-[#ffaa44] group-hover:text-[#00f0ff] transition-colors" />
+                      <h4 className="text-sm sm:text-base font-bold text-gray-100 group-hover:text-white transition-colors">
+                        {item.role}
+                      </h4>
+                    </div>
+                    <span className="text-[8px] sm:text-[9px] mono text-gray-500 flex items-center gap-1">
+                      <Calendar size={10} />
+                      {item.period}
+                    </span>
+                  </div>
+                  
+                  <p className="text-[#ff003c] mono text-[10px] sm:text-[11px] mb-2 font-semibold flex items-center gap-1">
+                    <span>{item.org}</span>
+                  </p>
+                  
+                  <p className="text-gray-400 text-[11px] sm:text-xs leading-relaxed mb-2">
+                    {item.desc}
+                  </p>
+                  
+                  {/* Achievement Tags */}
+                  {item.achievements && (
+                    <div className="flex flex-wrap gap-1.5 mt-2">
+                      {item.achievements.map((ach, i) => (
+                        <span key={i} className="text-[7px] sm:text-[8px] mono px-1.5 py-0.5 bg-gray-900/80 border border-gray-800 rounded text-gray-500 group-hover:border-[#00f0ff]/30 transition-all">
+                          🏆 {ach}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Professional Affiliations Section */}
+        <div className="mt-6 pt-4 border-t border-[#00f0ff]/20">
+          <h4 className="flex items-center gap-2 text-[#00f0ff] mono text-[10px] sm:text-[11px] mb-4 font-bold uppercase tracking-wider">
+            <Globe size={14} /> PROFESSIONAL_AFFILIATIONS
           </h4>
-          <div className="bg-[#00f0ff]/5 border border-[#00f0ff]/20 p-3 rounded group hover:bg-[#00f0ff]/10 transition-colors">
-            <p className="text-gray-300 text-[11px] mono">
-              <span className="text-[#00f0ff] mr-2">[MEMBER]</span> 
-              International Association of Engineers (IAENG)
-            </p>
-            <p className="text-gray-500 text-[9px] mono mt-1">ID: #MARCH2026_ACTIVE</p>
+          
+          <div className="space-y-3">
+            {affiliations.map((aff, idx) => (
+              <div 
+                key={idx} 
+                className="group relative p-3 bg-gradient-to-r from-[#00f0ff]/5 to-transparent border border-[#00f0ff]/20 rounded-lg hover:border-[#00f0ff]/60 hover:bg-[#00f0ff]/10 transition-all duration-300"
+              >
+                <div className="flex flex-wrap justify-between items-start gap-2">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Award size={12} className="text-[#ffaa44]" />
+                      <p className="text-gray-300 text-[11px] sm:text-xs font-mono font-semibold">
+                        {aff.name}
+                      </p>
+                    </div>
+                    <p className="text-gray-500 text-[9px] sm:text-[10px] leading-relaxed">
+                      {aff.desc}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[8px] sm:text-[9px] mono text-[#00f0ff] bg-[#00f0ff]/10 px-2 py-0.5 rounded">
+                      {aff.id}
+                    </span>
+                    <p className="text-[7px] sm:text-[8px] text-gray-600 mt-1 flex items-center gap-1">
+                      <Calendar size={8} /> {aff.period}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Footer - Summary Stats */}
+        <div className="mt-4 pt-3 border-t border-[#00f0ff]/20 flex flex-wrap justify-between items-center gap-2 text-[8px] sm:text-[9px] mono">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1">
+              <Users size={10} className="text-[#00f0ff]" />
+              <span className="text-gray-500">TOTAL_ROLES: {leadership.length}</span>
+            </span>
+            <span className="flex items-center gap-1">
+              <Sparkles size={10} className="text-[#ffaa44]" />
+              <span className="text-gray-500">ACTIVE_SINCE: 2023</span>
+            </span>
+          </div>
+          <div className="text-gray-600 flex items-center gap-1">
+            <Mic size={8} />
+            <span>MENTORSHIP_ACTIVE</span>
           </div>
         </div>
       </div>

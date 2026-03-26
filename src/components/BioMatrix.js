@@ -1,75 +1,158 @@
 "use client";
 import OSWindow from './OSWindow';
-import { User, Languages, Brain, CheckCircle2 } from 'lucide-react';
+import { User, Languages, Brain, CheckCircle2, MapPin, Calendar, Award, Zap, Users, Code, Cpu, Cloud, GitBranch } from 'lucide-react';
 
 export default function BioMatrix() {
   const languages = [
-    { name: "English", level: "Fluent", progress: 95, color: "#00f0ff" },
-    { name: "Hindi", level: "Native", progress: 100, color: "#ff003c" },
-    { name: "Marathi", level: "Conversational", progress: 70, color: "#00f0ff" },
+    { name: "English", level: "Fluent (Professional)", progress: 95, color: "#00f0ff", desc: "Reading, Writing, Speaking" },
+    { name: "Hindi", level: "Native", progress: 100, color: "#ff003c", desc: "Fluent reading, writing, speaking" },
+    { name: "Marathi", level: "Conversational", progress: 70, color: "#ffaa44", desc: "Basic speaking and understanding" },
   ];
 
-  const attributes = ["Full-Stack Architecture", "IoT Ecosystems", "ML Pipeline Design", "Cloud Infrastructure", "API Optimization", "Team Mentorship"];
+  const coreCompetencies = [
+    "Full-Stack Architecture", "IoT Ecosystems", "ML Pipeline Design", 
+    "Cloud Infrastructure", "API Optimization", "Team Mentorship",
+    "ERP/CRM Solutions", "Real-Time Systems", "Performance Optimization"
+  ];
+
+  const leadershipHighlights = [
+    { label: "Team Lead", value: "5+ Members", icon: Users },
+    { label: "Agile Implementation", value: "Scrum/Kanban", icon: GitBranch },
+    { label: "Code Review", value: "200+ PRs Reviewed", icon: Code },
+    { label: "Performance Gains", value: "40% Latency Reduction", icon: Zap }
+  ];
+
+  const quickStats = [
+    { label: "Location", value: "Jabalpur, Madhya Pradesh, India", icon: MapPin },
+    { label: "Experience", value: "2+ Years", icon: Calendar },
+    { label: "Projects Delivered", value: "12+ Production", icon: Award },
+    { label: "Tech Stack", value: "25+ Technologies", icon: Cpu }
+  ];
 
   return (
     <OSWindow title="SYS_BIO/PROFILE.DAT" icon={<User size={16} className="text-[#00f0ff]" />} width="max-w-4xl">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Left: Bio Summary */}
-        <div className="md:col-span-2 space-y-4">
-          <div className="space-y-2">
-            <h4 className="text-[10px] mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
-              <Brain size={12} className="text-[#00f0ff]" />
-              Professional_Neuro_Summary
-            </h4>
-            <p className="text-[13px] text-gray-300 leading-relaxed font-medium">
-              Motivated Computer Science Engineer specializing in <span className="text-[#00f0ff]">High-Concurrency Full-Stack Development</span>, <span className="text-[#ff003c]">IoT Systems</span>, and <span className="text-[#00f0ff]">Cloud Computing</span>. 
-            </p>
-            <p className="text-[12px] text-gray-400 leading-relaxed italic">
-              Experienced in leading cross-functional teams to deliver scalable ERP, CRM, and real-time monitoring solutions with a focus on extreme latency optimization and data accuracy.
-            </p>
-          </div>
+      <div className="space-y-6">
+        
+        {/* Row 1: Main Bio - Responsive Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           
-          <div className="flex flex-wrap gap-2 pt-2">
-            {attributes.map((attr, i) => (
-              <span key={i} className="text-[9px] mono px-2 py-1 bg-gray-900 border border-gray-800 text-gray-400 rounded-sm flex items-center gap-1.5 hover:border-[#00f0ff] hover:text-[#00f0ff] transition-colors cursor-default">
-                <CheckCircle2 size={10} />
-                {attr}
-              </span>
-            ))}
+          {/* Left: Bio Summary - Spans 2 columns on desktop */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="space-y-3">
+              <h4 className="text-[10px] sm:text-[11px] mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                <Brain size={12} className="text-[#00f0ff]" />
+                PROFESSIONAL_NEURO_SUMMARY
+              </h4>
+              <p className="text-[13px] sm:text-[14px] text-gray-300 leading-relaxed font-medium">
+                A motivated Computer Science student skilled in <span className="text-[#00f0ff]">full-stack development</span>, 
+                <span className="text-[#ff003c]"> IoT systems</span>, and <span className="text-[#ffaa44]"> cloud computing</span>. 
+                Experienced in leading development teams and delivering scalable solutions across ERP, CRM, and IoT domains.
+              </p>
+              <p className="text-[12px] sm:text-[13px] text-gray-400 leading-relaxed">
+                Strong technical proficiency combined with problem-solving and leadership abilities. 
+                Proven track record in reducing API latency by <span className="text-[#00f0ff]">40%</span> through database indexing and Redis caching,
+                and developing computer vision defect detection systems with <span className="text-[#ff003c]">95% accuracy</span>.
+              </p>
+            </div>
+            
+            {/* Core Competencies Tags - Responsive Wrap */}
+            <div className="flex flex-wrap gap-2 pt-3">
+              {coreCompetencies.map((attr, i) => (
+                <span 
+                  key={i} 
+                  className="text-[9px] sm:text-[10px] mono px-2 py-1 bg-gray-900/80 border border-gray-800 text-gray-400 rounded-sm flex items-center gap-1.5 hover:border-[#00f0ff] hover:text-[#00f0ff] hover:bg-[#00f0ff]/5 transition-all duration-300 cursor-default"
+                >
+                  <CheckCircle2 size={10} className="text-[#ff003c]" />
+                  {attr}
+                </span>
+              ))}
+            </div>
+
+            {/* Quick Stats Grid - Mobile Responsive */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+              {quickStats.map((stat, idx) => {
+                const IconComp = stat.icon;
+                return (
+                  <div key={idx} className="p-2 bg-[#00f0ff]/5 border border-[#00f0ff]/10 rounded-lg text-center group hover:border-[#00f0ff]/40 transition-all">
+                    <IconComp size={14} className="text-[#00f0ff] mx-auto mb-1 group-hover:scale-110 transition-transform" />
+                    <p className="text-[9px] sm:text-[10px] text-gray-500">{stat.label}</p>
+                    <p className="text-[10px] sm:text-[11px] font-mono text-gray-300 font-bold">{stat.value}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Languages & Specs */}
+          <div className="space-y-5">
+            <div className="space-y-4">
+              <h4 className="text-[10px] sm:text-[11px] mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
+                <Languages size={12} className="text-[#ff003c]" />
+                LINGUISTIC_STACK
+              </h4>
+              <div className="space-y-4">
+                {languages.map((l, i) => (
+                  <div key={i} className="space-y-1 group">
+                    <div className="flex justify-between items-center text-[10px] sm:text-[11px] mono">
+                      <span className="text-gray-200 font-medium">{l.name}</span>
+                      <span style={{ color: l.color }} className="text-[9px] sm:text-[10px]">{l.level}</span>
+                    </div>
+                    <div className="h-1.5 bg-gray-900 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full rounded-full transition-all duration-700 group-hover:opacity-80" 
+                        style={{ width: `${l.progress}%`, backgroundColor: l.color, boxShadow: `0 0 8px ${l.color}80` }}
+                      />
+                    </div>
+                    <p className="text-[8px] text-gray-600">{l.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Status Card */}
+            <div className="p-3 bg-gradient-to-r from-[#ff003c]/10 to-transparent border-l-2 border-[#ff003c] rounded-r-lg">
+              <p className="text-[10px] mono text-[#ff003c] font-black uppercase mb-1 flex items-center gap-2">
+                <Zap size={10} className="animate-pulse" />
+                STATUS: ACTIVE_AGENT
+              </p>
+              <p className="text-[9px] sm:text-[10px] text-gray-400 leading-tight">
+                Currently optimizing mission-critical IoT telemetry and leading full-stack development initiatives.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Right: Languages & Specs */}
-        <div className="space-y-5 border-l border-gray-800 pl-6">
-           <div className="space-y-4">
-             <h4 className="text-[10px] mono text-gray-500 uppercase tracking-widest flex items-center gap-2">
-               <Languages size={12} className="text-[#ff003c]" />
-               Linguistic_Stack
-             </h4>
-             <div className="space-y-3">
-               {languages.map((l, i) => (
-                 <div key={i} className="space-y-1">
-                   <div className="flex justify-between text-[10px] mono">
-                     <span className="text-gray-200">{l.name}</span>
-                     <span style={{ color: l.color }}>{l.level}</span>
-                   </div>
-                   <div className="h-1 bg-gray-900 rounded-full overflow-hidden">
-                     <div 
-                       className="h-full rounded-full animate-pulse-slow" 
-                       style={{ width: `${l.progress}%`, backgroundColor: l.color, boxShadow: `0 0 8px ${l.color}40` }}
-                     />
-                   </div>
-                 </div>
-               ))}
-             </div>
-           </div>
+        {/* Row 2: Leadership Highlights - New Section from CV */}
+        <div className="border-t border-[#00f0ff]/20 pt-4 mt-2">
+          <h4 className="text-[10px] sm:text-[11px] mono text-[#ffaa44] uppercase tracking-widest flex items-center gap-2 mb-4">
+            <Users size={12} />
+            LEADERSHIP_&_IMPACT_METRICS
+          </h4>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {leadershipHighlights.map((item, idx) => {
+              const IconComp = item.icon;
+              return (
+                <div 
+                  key={idx} 
+                  className="group p-3 bg-[#030712] border border-gray-800 rounded-lg text-center hover:border-[#ffaa44] hover:bg-[#ffaa44]/5 transition-all duration-300"
+                >
+                  <IconComp size={18} className="text-[#ffaa44] mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                  <p className="text-[10px] sm:text-[11px] font-mono text-gray-300 font-bold">{item.value}</p>
+                  <p className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-wider">{item.label}</p>
+                </div>
+              );
+            })}
+          </div>
 
-           <div className="pt-2">
-             <div className="p-3 bg-[#ff003c]/5 border border-[#ff003c]/20 rounded-lg">
-               <p className="text-[10px] mono text-[#ff003c] font-black uppercase mb-1">Status: ACTIVE_AGENT</p>
-               <p className="text-[9px] text-gray-500 leading-tight">Currently optimizing mission-critical IoT telemetry for robotics enterprise.</p>
-             </div>
-           </div>
+          {/* Additional Achievement Badge */}
+          <div className="flex flex-wrap justify-between items-center gap-3 mt-4 pt-2 text-[9px] mono text-gray-600">
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1"><Award size={10} className="text-[#ffaa44]" /> TCS CodeVita AIR 4905</span>
+              <span className="flex items-center gap-1"><Zap size={10} className="text-[#00f0ff]" /> 3x College Topper</span>
+            </div>
+            <span className="text-[8px] text-gray-700">PROFILE_LAST_SYNC: 2026</span>
+          </div>
         </div>
       </div>
     </OSWindow>

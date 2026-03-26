@@ -32,7 +32,7 @@ import NeuralMatrix from "@/components/NeuralMatrix";
 import DiagnosticLog from "@/components/DiagnosticLog";
 import KnowledgeGraph from "@/components/KnowledgeGraph";
 import OSWindow from "@/components/OSWindow";
-import { ShieldAlert, Terminal, Cpu, Zap, Activity, Info, Book } from "lucide-react";
+import { ShieldAlert, Terminal, Cpu, Zap, Activity, Info, Book, Sparkles, Code } from "lucide-react";
 
 export default function Home() {
   const [booted, setBooted] = useState(false);
@@ -66,9 +66,9 @@ export default function Home() {
       
       <main className={`min-h-screen p-4 md:p-8 flex flex-col font-sans relative z-10 pb-40 pointer-events-none selection:bg-[#00f0ff] selection:text-[#030712] transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
         <div className="max-w-6xl mx-auto w-full pointer-events-auto">
-          {/* Floating Sanskrit Decor */}
-          <div className="fixed top-20 left-10 opacity-5 pointer-events-none select-none text-4xl font-serif hidden lg:block text-[#ffaa44]">ॐ नमः शिवाय</div>
-          <div className="fixed bottom-40 right-10 opacity-5 pointer-events-none select-none text-4xl font-serif hidden lg:block text-[#ff44aa]">आत्मन् मोक्षाय</div>
+          {/* Floating Tech Decor */}
+          <div className="fixed top-20 left-10 opacity-5 pointer-events-none select-none text-4xl font-mono hidden lg:block text-[#00f0ff]">{'<code>'}</div>
+          <div className="fixed bottom-40 right-10 opacity-5 pointer-events-none select-none text-4xl font-mono hidden lg:block text-[#ff44aa]">{'</>'}</div>
           {/* Header/Nav */}
           <header className="flex justify-between items-center mb-8 border-b border-[#00f0ff]/20 pb-4 mt-4">
             <div className="text-sm mono text-[#00f0ff] flex items-center gap-2 font-bold tracking-widest uppercase">
@@ -156,7 +156,7 @@ export default function Home() {
           <footer className="mt-16 text-center border-t border-[#00f0ff]/20 pt-8 opacity-70 hover:opacity-100 transition-opacity">
             <p className="text-xs text-[#00f0ff] mono">
               © 2026 ARYAN BARDE. All systems operational. 
-              <span className="ml-2 bg-[#ff003c] text-white px-1 py-0.5 rounded-sm">V. 9.3-DIVINE</span>
+              <span className="ml-2 bg-[#ff003c] text-white px-1 py-0.5 rounded-sm">V. 9.3-CORE</span>
             </p>
           </footer>
         </div>
