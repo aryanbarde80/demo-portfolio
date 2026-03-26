@@ -32,6 +32,8 @@ import NeuralMatrix from "@/components/NeuralMatrix";
 import DiagnosticLog from "@/components/DiagnosticLog";
 import KnowledgeGraph from "@/components/KnowledgeGraph";
 import OSWindow from "@/components/OSWindow";
+import StickyNav from "@/components/StickyNav";
+import CinematicQuote from "@/components/CinematicQuote";
 import { ShieldAlert, Terminal, Cpu, Zap, Activity, Info, Book, Sparkles, Code } from "lucide-react";
 
 export default function Home() {
@@ -57,6 +59,7 @@ export default function Home() {
     <>
       <BootSequence onComplete={() => setBooted(true)} />
       {booted && <SystemHUD />}
+      {booted && <StickyNav />}
       {booted && <DivineAudio />}
       {booted && <DivineCanvas commandState={stabilityMode} />}
       {booted && <MagneticCursor />}
@@ -86,7 +89,12 @@ export default function Home() {
             </div>
           </header>
 
-          <TerminalHero />
+          <div id="hero">
+            <TerminalHero />
+          </div>
+
+          {/* Cinematic Quote Animation */}
+          <CinematicQuote />
 
           {/* Animated Stats Banner */}
           <StatsCounter />
@@ -95,8 +103,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-6 xl:grid-cols-12 gap-8 sm:gap-10 w-full mt-10 auto-rows-min">
             
             {/* Row 1: Analytics & Monitor */}
-            <div className="md:col-span-3 xl:col-span-6 flex flex-col"><AnalyticsDashboard /></div>
-            <div className="md:col-span-3 xl:col-span-6 flex flex-col"><SystemMonitorNode /></div>
+            <div id="analytics" className="md:col-span-3 xl:col-span-6 flex flex-col"><AnalyticsDashboard /></div>
+            <div id="timeline" className="md:col-span-3 xl:col-span-6 flex flex-col"><SystemMonitorNode /></div>
             
             {/* New Deep-Think Row: Intelligence & Logs */}
             <div className="md:col-span-3 xl:col-span-4 transition-all duration-700">
@@ -110,8 +118,8 @@ export default function Home() {
               </OSWindow>
             </div>
             
-            {/* Row 2: Live Stats & Architecture */}
-            <div className="md:col-span-6 xl:col-span-4 flex flex-col"><GitHubStatsNode /></div>
+            {/* Row 2: GitHub & Architecture */}
+            <div id="github" className="md:col-span-6 xl:col-span-4 flex flex-col"><GitHubStatsNode /></div>
             <div className="md:col-span-6 xl:col-span-8 flex flex-col"><SystemArchitectureNode /></div>
 
             {/* Row 3: Performance */}
@@ -148,7 +156,7 @@ export default function Home() {
             
             {/* Footer Span */}
             <div className="md:col-span-6 xl:col-span-12 flex flex-col gap-4 sm:gap-6"><OpenSourceNode /></div>
-            <div className="md:col-span-6 xl:col-span-12 mt-4"><ContactNode /></div>
+            <div id="contact" className="md:col-span-6 xl:col-span-12 mt-4"><ContactNode /></div>
           </div>
           
           <footer className="mt-16 text-center border-t border-[#00f0ff]/20 pt-8 opacity-70 hover:opacity-100 transition-opacity">

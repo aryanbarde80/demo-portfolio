@@ -12,18 +12,12 @@ export default function PerformanceBenchmarks() {
   const [animatedValues, setAnimatedValues] = useState({});
 
   const benchmarks = [
-    { label: "PageSpeed Score", value: 95, max: 100, unit: "/100", color: "#00f0ff", icon: Globe, category: "Web" },
-    { label: "First Contentful Paint", value: 0.8, max: 3, unit: "s", color: "#00f0ff", icon: Clock, category: "Web" },
-    { label: "Largest Contentful Paint", value: 1.2, max: 4, unit: "s", color: "#ffaa44", icon: Clock, category: "Web" },
-    { label: "Time to Interactive", value: 1.5, max: 5, unit: "s", color: "#00f0ff", icon: Zap, category: "Web" },
-    { label: "API Response Time", value: 45, max: 200, unit: "ms", color: "#ff003c", icon: Server, category: "Backend" },
-    { label: "Database Query Avg", value: 12, max: 100, unit: "ms", color: "#ffaa44", icon: Database, category: "Backend" },
-    { label: "Concurrent Users", value: 10, max: 10, unit: "K", color: "#00f0ff", icon: Activity, category: "Scale" },
-    { label: "Uptime SLA", value: 99.9, max: 100, unit: "%", color: "#00f0ff", icon: TrendingUp, category: "Reliability" },
-    { label: "Cache Hit Rate", value: 94, max: 100, unit: "%", color: "#ffaa44", icon: Zap, category: "Backend" },
-    { label: "Bundle Size (Gzipped)", value: 142, max: 500, unit: "KB", color: "#ff003c", icon: Cpu, category: "Web" },
-    { label: "Lighthouse Accessibility", value: 98, max: 100, unit: "/100", color: "#00f0ff", icon: Globe, category: "Web" },
-    { label: "Test Coverage", value: 87, max: 100, unit: "%", color: "#ffaa44", icon: BarChart3, category: "Quality" },
+    { label: "API Latency Reduction", value: 40, max: 100, unit: "%", color: "#00f0ff", icon: Zap, category: "Ouranos Robotics", desc: "Redis caching + query optimization" },
+    { label: "YOLOv8 Defect Detection", value: 95, max: 100, unit: "%", color: "#ff003c", icon: Activity, category: "Alfastack Solutions", desc: "Manufacturing QC pipeline accuracy" },
+    { label: "Organic Traffic Growth", value: 30, max: 100, unit: "%", color: "#ffaa44", icon: TrendingUp, category: "Krapto Technologies", desc: "SEO + Next.js optimization" },
+    { label: "DB Query Optimization", value: 40, max: 100, unit: "%", color: "#00f0ff", icon: Database, category: "RoomieQ India", desc: "Indexing & query restructuring" },
+    { label: "Search Ranking Boost", value: 40, max: 100, unit: "pos", color: "#ff003c", icon: Globe, category: "MGGP Foundation", desc: "SEO optimization for NGO site" },
+    { label: "ML Prediction (Zerve)", value: 100, max: 100, unit: "%", color: "#ffaa44", icon: BarChart3, category: "Data Challenge 2026", desc: "409K event user success prediction" },
   ];
 
   useEffect(() => {
@@ -83,14 +77,9 @@ export default function PerformanceBenchmarks() {
                       {b.label}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[8px] mono px-1 py-0.5 rounded" style={{ backgroundColor: `${gradeColor}20`, color: gradeColor }}>
-                      {grade}
-                    </span>
-                    <span className="text-xs font-bold font-mono" style={{ color: b.color }}>
-                      {b.value}{b.unit}
-                    </span>
-                  </div>
+                  <span className="text-sm font-bold font-mono" style={{ color: b.color }}>
+                    {b.value}{b.unit}
+                  </span>
                 </div>
                 <div className="w-full h-1.5 bg-gray-900 rounded-full overflow-hidden">
                   <div
@@ -102,10 +91,10 @@ export default function PerformanceBenchmarks() {
                     }}
                   />
                 </div>
-                <div className="flex justify-between mt-1">
-                  <span className="text-[7px] text-gray-700 mono">{b.category}</span>
-                  <span className="text-[7px] text-gray-700 mono">{displayPct.toFixed(0)}%</span>
+                <div className="flex justify-between mt-1.5">
+                  <span className="text-[8px] text-gray-600 mono">{b.category}</span>
                 </div>
+                {b.desc && <p className="text-[8px] text-gray-500 mt-1 italic">{b.desc}</p>}
               </div>
             );
           })}

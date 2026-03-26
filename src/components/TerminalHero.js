@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Terminal, Fingerprint, Orbit } from 'lucide-react';
+import { Terminal, Fingerprint, Orbit, Download } from 'lucide-react';
 
 export default function TerminalHero() {
   const [text, setText] = useState('');
@@ -75,6 +75,11 @@ export default function TerminalHero() {
                 <span className="absolute inset-0 w-full h-[300%] bg-gradient-to-b from-transparent via-[#ff003c]/30 to-transparent -translate-y-full group-hover:animate-[scanner_2s_ease-in-out_infinite]"></span>
                 <span className="relative z-10">[ CONTACT_ME ]</span>
               </button>
+              <a href="/Aryan_Barde_Resume.pdf" download className="flex-1 sm:flex-none relative overflow-hidden px-8 py-3 border-2 border-[#ffaa44] text-[#ffaa44] hover:bg-[#ffaa44]/20 transition-all duration-500 mono text-sm sm:text-base font-black flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(255,170,68,0.2)] hover:shadow-[0_0_40px_rgba(255,170,68,0.5)] group uppercase tracking-widest">
+                <span className="absolute inset-0 w-full h-[300%] bg-gradient-to-b from-transparent via-[#ffaa44]/30 to-transparent -translate-y-full group-hover:animate-[scanner_2s_ease-in-out_infinite]"></span>
+                <Download size={16} className="relative z-10" />
+                <span className="relative z-10">[ RESUME ]</span>
+              </a>
             </div>
             <div className="hidden lg:flex opacity-30 hover:opacity-80 transition-opacity duration-1000 items-center justify-center scale-150 mr-8">
               <Orbit size={60} className="text-[#00f0ff] animate-[spin-slow_15s_linear_infinite]" />

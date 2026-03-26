@@ -117,9 +117,6 @@ export default function OSWindow({ title, children, width = "max-w-4xl", icon = 
         className="relative z-10"
       >
         <div className="p-4 sm:p-6 md:p-8 cursor-text relative leading-relaxed font-sans text-xs sm:text-sm selection:bg-[#00f0ff]/30">
-          <div className="absolute inset-0 opacity-[0.008] pointer-events-none select-none font-mono text-[7px] sm:text-[8px] p-3 leading-normal overflow-hidden hidden sm:block">
-            {Array(10).fill(`// sys.init("${windowId}"); await uplink.verify();`).join(' ')}
-          </div>
           <div className="relative z-20">
             {children}
           </div>
