@@ -37,7 +37,9 @@ import { ShieldAlert, Terminal, Cpu, Zap, Activity, Info, Book, Sparkles, Code }
 export default function Home() {
   const [booted, setBooted] = useState(false);
   const [stabilityMode, setStabilityMode] = useState('stable');
-  const currentDate = typeof window !== 'undefined' ? new Date().toISOString().split('T')[0] : "";
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => { setCurrentDate(new Date().toISOString().split('T')[0]); }, []);
 
   const handleCLICommand = (cmd) => {
     if (cmd === 'show_skills') {
