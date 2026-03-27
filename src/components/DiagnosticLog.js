@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
-import { Terminal as TerminalIcon, ShieldCheck, Activity, Cpu, Zap, Network, Database, Cloud, GitBranch } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Activity, Cpu, Zap, Network } from 'lucide-react';
 
 export default function DiagnosticLog() {
   const [logs, setLogs] = useState([
