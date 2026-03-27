@@ -4,23 +4,28 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 export default function NeuralMatrix() {
   const [connections, setConnections] = useState([]);
   const containerRef = useRef(null);
-  const animationRef = useRef();
+  const rafRef = useRef(null);
   const lastUpdateRef = useRef(0);
 
   const updateConnections = useCallback(() => {
     const now = Date.now();
-    if (now - lastUpdateRef.current < 200) return;
+    if (now - lastUpdateRef.current < 300) return;
     lastUpdateRef.current = now;
 
     const windows = document.querySelectorAll('.glass-panel');
     const newConnections = [];
+    const viewportHeight = window.innerHeight;
     
     for (let i = 0; i < windows.length; i++) {
       for (let j = i + 1; j < Math.min(i + 3, windows.length); j++) {
         const rectA = windows[i].getBoundingClientRect();
         const rectB = windows[j].getBoundingClientRect();
         
-        if (rectA.width > 0 && rectA.height > 0 && rectB.width > 0 && rectB.height > 0) {
+        // Only render connections for panels visible in viewport
+        const aVisible = rectA.bottom > 0 && rectA.top < viewportHeight;
+        const bVisible = rectB.bottom > 0 && rectB.top < viewportHeight;
+        
+        if ((aVisible || bVisible) && rectA.width > 0 && rectA.height > 0 && rectB.width > 0 && rectB.height > 0) {
           newConnections.push({
             x1: rectA.left + rectA.width / 2,
             y1: rectA.top + rectA.height / 2,
@@ -36,16 +41,18 @@ export default function NeuralMatrix() {
   }, []);
 
   useEffect(() => {
-    let timeoutId;
+    let resizeTimeout;
     const handleResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => {
-        updateConnections();
-      }, 100);
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateConnections, 150);
     };
 
     const handleScroll = () => {
-      updateConnections();
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        updateConnections();
+        rafRef.current = null;
+      });
     };
 
     window.addEventListener('resize', handleResize);
@@ -53,28 +60,30 @@ export default function NeuralMatrix() {
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timeoutId);
+      clearTimeout(resizeTimeout);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [updateConnections]);
 
   useEffect(() => {
-    // Initial update deferred to animation frame to avoid direct setState in effect
-    const initialFrame = requestAnimationFrame(() => updateConnections());
+    const initialTimeout = setTimeout(() => updateConnections(), 500);
 
+    // Only observe childList changes, not attribute changes (much less noisy)
+    const mainContent = document.getElementById('main-content');
     const observer = new MutationObserver(() => {
       updateConnections();
     });
 
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['class', 'style']
-    });
+    if (mainContent) {
+      observer.observe(mainContent, {
+        childList: true,
+        subtree: true
+      });
+    }
 
     return () => {
       observer.disconnect();
-      cancelAnimationFrame(initialFrame);
+      clearTimeout(initialTimeout);
     };
   }, [updateConnections]);
 

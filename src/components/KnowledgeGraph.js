@@ -95,7 +95,7 @@ export default function KnowledgeGraph() {
       </div>
 
       {/* Skills Grid - Categorized */}
-      <div className="space-y-4 max-h-[400px] overflow-y-auto pr-1 custom-scrollbar">
+      <div className="space-y-4">
         {categories.map((category, idx) => (
           <div key={idx} className="space-y-2">
             {/* Category Header */}

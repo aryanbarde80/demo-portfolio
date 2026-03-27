@@ -34,6 +34,8 @@ export default function MagneticCursor() {
   }, []);
 
   useEffect(() => {
+    const stateRef = { isPointer: false, isHovering: false, isClicking: false };
+    
     const handleMouseMove = (e) => {
       let x = e.clientX;
       let y = e.clientY;
@@ -41,7 +43,11 @@ export default function MagneticCursor() {
       const target = e.target;
       const clickableElement = target.closest('button, a, .cursor-pointer, [role="button"]');
       const isClickable = !!clickableElement;
-      setIsPointer(isClickable);
+      
+      if (stateRef.isPointer !== isClickable) {
+        stateRef.isPointer = isClickable;
+        setIsPointer(isClickable);
+      }
       
       if (isClickable && clickableElement) {
         const rect = clickableElement.getBoundingClientRect();
@@ -56,11 +62,16 @@ export default function MagneticCursor() {
           const strength = 1 - (dist / maxDist) * 0.5;
           x = centerX + distX * (1 - strength);
           y = centerY + distY * (1 - strength);
-          setIsHovering(true);
-        } else {
+          if (!stateRef.isHovering) {
+            stateRef.isHovering = true;
+            setIsHovering(true);
+          }
+        } else if (stateRef.isHovering) {
+          stateRef.isHovering = false;
           setIsHovering(false);
         }
-      } else {
+      } else if (stateRef.isHovering) {
+        stateRef.isHovering = false;
         setIsHovering(false);
       }
       
@@ -78,7 +89,7 @@ export default function MagneticCursor() {
     `;
     document.head.appendChild(style);
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     

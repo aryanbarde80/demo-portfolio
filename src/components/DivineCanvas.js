@@ -217,25 +217,21 @@ export default function TechCanvas({ commandState = 'stable' }) {
   const [isInteracting, setIsInteracting] = useState(false);
 
   useEffect(() => {
+    let timeout;
     const handleMouseMove = (e) => {
       mousePosition.current = {
         x: (e.clientX / window.innerWidth) * 2 - 1,
         y: -(e.clientY / window.innerHeight) * 2 + 1,
       };
       setIsInteracting(true);
-    };
-
-    let timeout;
-    const handleStop = () => {
       clearTimeout(timeout);
       timeout = setTimeout(() => setIsInteracting(false), 2000);
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mousemove', handleStop);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mousemove', handleStop);
+      clearTimeout(timeout);
     };
   }, []);
 
@@ -248,11 +244,11 @@ export default function TechCanvas({ commandState = 'stable' }) {
         <Stars 
           radius={100} 
           depth={50} 
-          count={typeof window !== 'undefined' && window.innerWidth < 768 ? 3000 : 5000} 
+          count={typeof window !== 'undefined' && window.innerWidth < 768 ? 1500 : 2500} 
           factor={4} 
           saturation={0.4} 
           fade 
-          speed={1.2} 
+          speed={0.8} 
         />
         
         <Suspense fallback={null}>
