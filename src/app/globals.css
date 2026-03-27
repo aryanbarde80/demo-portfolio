@@ -272,9 +272,26 @@ a:focus-visible {
   margin: 2rem 0;
 }
 
+/* Mobile-first responsive overrides */
 @media (max-width: 640px) {
   body { font-size: 14px; }
   .glass-panel { backdrop-filter: blur(12px); border-radius: var(--radius-md); }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 13px; }
+  .glass-panel {
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-sm);
+  }
+  .bg-orb {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 360px) {
+  body { font-size: 12px; }
 }
 
 /* Reduced motion preferences */

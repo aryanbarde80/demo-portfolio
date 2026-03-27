@@ -53,8 +53,8 @@ export default function StickyNav() {
   return (
     <>
       <nav aria-label="Main navigation" className={`fixed top-0 left-0 right-0 z-[80] transition-all duration-500 ${isScrolled ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="flex items-center justify-between py-2 px-4 mt-2.5 bg-[#0a0a0f]/85 backdrop-blur-2xl border border-[#818cf8]/12 rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+        <div className="max-w-6xl mx-auto px-2 sm:px-4">
+          <div className="flex items-center justify-between py-2 px-2 sm:px-4 mt-2.5 bg-[#0a0a0f]/85 backdrop-blur-2xl border border-[#818cf8]/12 rounded-xl sm:rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
             <button onClick={scrollToTop} className="flex items-center gap-2 text-white hover:text-[#a5b4fc] transition-colors">
               <Terminal size={14} className="text-[#818cf8]" />
               <span className="text-[11px] mono font-semibold tracking-wide hidden sm:inline">aryanOS</span>
@@ -69,7 +69,7 @@ export default function StickyNav() {
                     key={item.id}
                     onClick={() => scrollTo(item.id)}
                     aria-current={isActive ? 'true' : undefined}
-                    className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-[10px] sm:text-[11px] mono transition-all duration-300 ${
+                    className={`flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 md:px-3 py-1.5 rounded-lg text-[9px] sm:text-[10px] md:text-[11px] mono transition-all duration-300 ${
                       isActive 
                         ? 'bg-[#818cf8]/15 text-[#a5b4fc]' 
                         : 'text-[#6b6b80] hover:text-[#a1a1b5] hover:bg-white/5'

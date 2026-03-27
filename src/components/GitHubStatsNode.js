@@ -95,7 +95,7 @@ export default function GitHubStatsNode() {
         )}
 
         {/* Profile Header */}
-        <div className="flex flex-col md:flex-row items-center gap-5 p-5 border border-[#818cf8]/20 bg-gradient-to-r from-[#030712] to-[#0a0f1a] rounded-xl">
+        <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-5 p-3 sm:p-5 border border-[#818cf8]/20 bg-gradient-to-r from-[#030712] to-[#0a0f1a] rounded-xl">
           <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full border-2 border-[#818cf8] shadow-[0_0_15px_rgba(129,140,248,0.3)] overflow-hidden">
             <Image 
               src={profile.avatar_url} 
@@ -107,7 +107,7 @@ export default function GitHubStatsNode() {
           </div>
           <div className="flex-1 text-center md:text-left space-y-2">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-              <h3 className="text-xl sm:text-2xl font-bold text-white">{profile.name || profile.login}</h3>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white">{profile.name || profile.login}</h3>
               <span className="text-[10px] mono px-2 py-1 bg-[#818cf8]/10 text-[#818cf8] rounded-full flex items-center gap-1">
                 <Github size={10} /> @{profile.login}
               </span>
@@ -121,17 +121,17 @@ export default function GitHubStatsNode() {
           </div>
           
           {/* Stats Cards */}
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="grid grid-cols-3 gap-1.5 sm:gap-2 md:gap-3">
             <div className="p-2 sm:p-3 border border-[#818cf8]/20 rounded-lg text-center hover:border-[#818cf8]/60 transition-all hover:bg-[#818cf8]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#818cf8]">{profile.public_repos}</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-[#818cf8]">{profile.public_repos}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">REPOS</p>
             </div>
             <div className="p-2 sm:p-3 border border-[#818cf8]/20 rounded-lg text-center hover:border-[#818cf8]/60 transition-all hover:bg-[#818cf8]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#818cf8]">{profile.followers}</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-[#818cf8]">{profile.followers}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">FOLLOWERS</p>
             </div>
             <div className="p-2 sm:p-3 border border-[#818cf8]/20 rounded-lg text-center hover:border-[#818cf8]/60 transition-all hover:bg-[#818cf8]/5">
-              <p className="text-xl sm:text-2xl font-bold text-[#818cf8]">{profile.following}</p>
+              <p className="text-lg sm:text-xl md:text-2xl font-bold text-[#818cf8]">{profile.following}</p>
               <p className="text-[8px] sm:text-[9px] mono text-gray-500">FOLLOWING</p>
             </div>
           </div>
@@ -164,7 +164,7 @@ export default function GitHubStatsNode() {
                 href={repo.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block p-4 border border-gray-800 hover:border-[#818cf8]/50 rounded-lg bg-[#030712]/40 group transition-all hover:bg-[#818cf8]/5"
+                className="block p-3 sm:p-4 border border-gray-800 hover:border-[#818cf8]/50 rounded-lg bg-[#030712]/40 group transition-all hover:bg-[#818cf8]/5"
               >
                 <div className="flex justify-between items-start mb-2">
                   <h5 className="text-sm font-bold text-gray-200 group-hover:text-[#818cf8] transition-colors truncate pr-2">
@@ -175,7 +175,7 @@ export default function GitHubStatsNode() {
                 {repo.description && (
                   <p className="text-xs text-gray-500 line-clamp-2 mb-2">{repo.description}</p>
                 )}
-                <div className="flex flex-wrap items-center gap-4 text-xs mono text-gray-500">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[10px] sm:text-xs mono text-gray-500">
                   {repo.language && (
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full" style={{ 

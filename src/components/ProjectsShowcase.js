@@ -216,13 +216,13 @@ export default function ProjectsShowcase() {
         </div>
 
         {/* Projects Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
           {filtered.map((project, idx) => {
             const Icon = project.icon;
             return (
               <div
                 key={idx}
-                className="project-card group relative p-4 border border-[#818cf8]/10 hover:border-[#818cf8]/25 rounded-xl bg-[#12121a]/60 transition-all duration-300 overflow-hidden cursor-default flex flex-col"
+                className="project-card group relative p-3 sm:p-4 border border-[#818cf8]/10 hover:border-[#818cf8]/25 rounded-lg sm:rounded-xl bg-[#12121a]/60 transition-all duration-300 overflow-hidden cursor-default flex flex-col"
               >
                 <div className="flex flex-col flex-1">
                   {/* Header */}

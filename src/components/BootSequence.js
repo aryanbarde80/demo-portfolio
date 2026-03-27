@@ -40,9 +40,9 @@ export default function BootSequence({ onComplete }) {
 
   return (
     <div className={`fixed inset-0 z-[99999] bg-[#0a0a0f] flex flex-col items-center justify-center transition-opacity duration-700 ${isBooted ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-      <div className="max-w-lg w-full px-8">
+      <div className="max-w-lg w-full px-4 sm:px-8">
         {/* Logo */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6 sm:mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold mono text-white tracking-tight">
             aryan<span className="text-[#818cf8]">OS</span>
           </h1>
@@ -50,9 +50,9 @@ export default function BootSequence({ onComplete }) {
         </div>
 
         {/* Log lines */}
-        <div className="space-y-2 mb-8 min-h-[180px]">
+        <div className="space-y-2 mb-6 sm:mb-8 min-h-[140px] sm:min-h-[180px]">
           {logs.map((log, i) => (
-            <div key={i} className="flex items-center gap-3 mono text-sm animate-fade-in-up">
+            <div key={i} className="flex items-center gap-2 sm:gap-3 mono text-xs sm:text-sm animate-fade-in-up">
               <span className="text-[#6b6b80] text-xs shrink-0">{log.time}</span>
               <span className="text-[#a1a1b5] flex-1">{log.text}</span>
               <span className={`text-xs font-medium shrink-0 ${log.status === 'DONE' ? 'text-[#34d399]' : 'text-[#818cf8]'}`}>

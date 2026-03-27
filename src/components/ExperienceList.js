@@ -77,7 +77,7 @@ export default function ExperienceList() {
           {experiences.map((exp, idx) => (
             <div
               key={idx}
-              className="group relative p-6 sm:p-8 border border-gray-800 hover:border-[#818cf8]/30 rounded-2xl bg-gradient-to-r from-[#12121a]/80 to-[#030712]/40 transition-all duration-300 overflow-hidden"
+              className="group relative p-4 sm:p-6 md:p-8 border border-gray-800 hover:border-[#818cf8]/30 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#12121a]/80 to-[#030712]/40 transition-all duration-300 overflow-hidden"
             >
               {/* Accent Line */}
               <div
@@ -85,11 +85,11 @@ export default function ExperienceList() {
                 style={{ backgroundColor: exp.color }}
               ></div>
 
-              <div className="pl-4">
+              <div className="pl-2 sm:pl-4">
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-white leading-tight group-hover:text-[#818cf8] transition-colors">
+                    <h3 className="text-base sm:text-xl font-bold text-white leading-tight group-hover:text-[#818cf8] transition-colors">
                       {exp.role}
                     </h3>
                     <h4 className="text-sm font-medium mt-1 flex items-center gap-2" style={{ color: exp.color }}>
@@ -97,22 +97,22 @@ export default function ExperienceList() {
                       {exp.company}
                     </h4>
                   </div>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-xs mono px-3 py-1 bg-[#818cf8]/10 text-[#818cf8] rounded-lg flex items-center gap-1.5">
-                      <Calendar size={12} />
-                      {exp.period}
-                    </span>
-                    <span className="text-[10px] mono px-2 py-0.5 border border-gray-700 text-gray-400 rounded flex items-center gap-1">
-                      <MapPin size={10} />
-                      {exp.location}
-                    </span>
-                  </div>
+                                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+                                      <span className="text-[10px] sm:text-xs mono px-2 sm:px-3 py-1 bg-[#818cf8]/10 text-[#818cf8] rounded-lg flex items-center gap-1.5">
+                                        <Calendar size={12} />
+                                        {exp.period}
+                                      </span>
+                                      <span className="text-[9px] sm:text-[10px] mono px-2 py-0.5 border border-gray-700 text-gray-400 rounded flex items-center gap-1">
+                                        <MapPin size={10} />
+                                        {exp.location}
+                                      </span>
+                                    </div>
                 </div>
 
                 {/* Details */}
                 <ul className="list-none space-y-2.5 mt-4">
                   {exp.details.map((detail, i) => (
-                    <li key={i} className="text-sm text-[#a1a1b5] font-sans leading-relaxed flex gap-3">
+                    <li key={i} className="text-xs sm:text-sm text-[#a1a1b5] font-sans leading-relaxed flex gap-2 sm:gap-3">
                       <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: exp.color, opacity: 0.5 }}></span>
                       <span className="group-hover:text-gray-300 transition-colors">{detail}</span>
                     </li>

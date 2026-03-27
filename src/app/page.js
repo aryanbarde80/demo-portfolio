@@ -64,11 +64,11 @@ export default function Home() {
       {booted && <MagneticCursor />}
       {booted && <NeuralMatrix />}
       
-      <main id="main-content" className={`min-h-screen px-4 md:px-8 py-6 flex flex-col font-sans relative z-10 pb-40 transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
+      <main id="main-content" className={`min-h-screen px-3 sm:px-4 md:px-8 py-4 sm:py-6 flex flex-col font-sans relative z-10 pb-24 sm:pb-40 transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
         <div className="max-w-7xl mx-auto w-full">
 
           {/* Hero */}
-          <div id="hero" className="mt-12">
+          <div id="hero" className="mt-6 sm:mt-12">
             <TerminalHero />
           </div>
 
@@ -79,7 +79,7 @@ export default function Home() {
           <StatsCounter />
           
           {/* Content - Stacked Vertical Layout */}
-          <div className="flex flex-col gap-6 w-full mt-8">
+          <div className="flex flex-col gap-4 sm:gap-6 w-full mt-4 sm:mt-8">
             
             {/* Analytics & Timeline - Side by Side */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -178,7 +178,7 @@ export default function Home() {
           </div>
           
           {/* Footer */}
-          <footer className="mt-20 text-center border-t border-[#818cf8]/10 pt-8 pb-4 space-y-3">
+          <footer className="mt-10 sm:mt-20 text-center border-t border-[#818cf8]/10 pt-6 sm:pt-8 pb-4 space-y-3">
             <div className="flex justify-center items-center gap-3 text-xs mono text-[#6b6b80]">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>

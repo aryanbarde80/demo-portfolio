@@ -23,9 +23,9 @@ export default function RecruiterHUD() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3">
       {isOpen && (
-        <div className="hud-content w-72 sm:w-80 glass-panel p-4 border-[#818cf8]/30 shadow-[0_0_30px_rgba(0,240,255,0.2)] mb-2 relative overflow-hidden group">
+        <div className="hud-content w-[calc(100vw-2rem)] sm:w-72 md:w-80 glass-panel p-3 sm:p-4 border-[#818cf8]/30 shadow-[0_0_30px_rgba(0,240,255,0.2)] mb-2 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#818cf8] to-transparent animate-scanner"></div>
           
           <div className="flex justify-between items-center mb-4 border-b border-gray-800 pb-2">
@@ -72,13 +72,13 @@ export default function RecruiterHUD() {
 
       <button 
         onClick={toggleHUD}
-        className={`group flex items-center gap-3 px-5 py-3 rounded-full bg-black/80 border transition-all duration-300 ${isOpen ? 'border-[#818cf8] scale-95 shadow-[0_0_20px_rgba(0,240,255,0.4)]' : 'border-gray-800 hover:border-[#818cf8] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]'}`}
+        className={`group flex items-center gap-2 sm:gap-3 px-3 sm:px-5 py-2.5 sm:py-3 rounded-full bg-black/80 border transition-all duration-300 ${isOpen ? 'border-[#818cf8] scale-95 shadow-[0_0_20px_rgba(0,240,255,0.4)]' : 'border-gray-800 hover:border-[#818cf8] hover:shadow-[0_0_15px_rgba(0,240,255,0.2)]'}`}
       >
         <div className="relative">
           <Briefcase size={20} className={`transition-colors duration-300 ${isOpen ? 'text-[#818cf8]' : 'text-gray-400 group-hover:text-[#818cf8]'}`} />
           {!isOpen && <div className="absolute -top-1 -right-1 w-2 h-2 bg-[#f472b6] rounded-full animate-ping"></div>}
         </div>
-        <span className="text-xs font-bold mono tracking-widest text-gray-200">RECRUITER_PANEL</span>
+        <span className="text-[10px] sm:text-xs font-bold mono tracking-widest text-gray-200">RECRUITER_PANEL</span>
         <ChevronRight size={14} className={`transition-transform duration-300 ${isOpen ? 'rotate-90 text-[#818cf8]' : 'text-gray-600 group-hover:translate-x-1'}`} />
       </button>
     </div>

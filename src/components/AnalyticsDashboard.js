@@ -41,7 +41,7 @@ export default function AnalyticsDashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           
           {/* Radar Map (SVG) */}
-          <div className="relative group flex items-center justify-center p-4 border border-[#818cf8]/10 bg-[#030712]/50 rounded overflow-hidden min-h-[280px]">
+          <div className="relative group flex items-center justify-center p-3 sm:p-4 border border-[#818cf8]/10 bg-[#030712]/50 rounded overflow-hidden min-h-[220px] sm:min-h-[280px]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,240,255,0.05)_0%,transparent_70%)]"></div>
             
             <svg viewBox="0 0 100 100" className="w-full max-w-[220px] drop-shadow-[0_0_10px_rgba(0,240,255,0.3)]">
@@ -127,7 +127,7 @@ export default function AnalyticsDashboard() {
             <span className="text-[8px] bg-[#f472b6]/20 text-[#f472b6] px-1.5 py-0.5 rounded">Agentic</span>
           </h4>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3">
             {automationSkills.map((skill, idx) => {
               const IconComp = skill.icon;
               return (
@@ -156,7 +156,7 @@ export default function AnalyticsDashboard() {
             <span className="text-[8px] bg-[#fb923c]/20 text-[#fb923c] px-1.5 py-0.5 rounded">IaC Ready</span>
           </h4>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="grid grid-cols-3 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-3">
             {cloudSkills.map((skill, idx) => {
               const IconComp = skill.icon;
               return (

@@ -59,14 +59,14 @@ export default function StatsCounter() {
   ];
 
   return (
-    <div className="w-full max-w-7xl mx-auto mb-8">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+    <div className="w-full max-w-7xl mx-auto mb-4 sm:mb-8">
+      <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
         {stats.map((stat, idx) => {
           const Icon = stat.icon;
           return (
             <div 
               key={idx} 
-              className="group relative p-3 sm:p-4 text-center border border-[#818cf8]/10 rounded-xl bg-[#12121a]/60 hover:border-[#818cf8]/25 hover:bg-[#12121a]/80 transition-all duration-300 cursor-default overflow-hidden"
+              className="group relative p-2 sm:p-3 md:p-4 text-center border border-[#818cf8]/10 rounded-lg sm:rounded-xl bg-[#12121a]/60 hover:border-[#818cf8]/25 hover:bg-[#12121a]/80 transition-all duration-300 cursor-default overflow-hidden"
             >
               <Icon 
                 size={18} 
@@ -74,11 +74,11 @@ export default function StatsCounter() {
                 style={{ color: stat.color }} 
               />
               
-              <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-white transition-colors">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-white transition-colors">
                 <AnimatedCounter target={stat.value} />{stat.suffix}
               </p>
               
-              <p className="text-xs mono text-[#6b6b80] mt-1 tracking-wide leading-tight">
+              <p className="text-[10px] sm:text-xs mono text-[#6b6b80] mt-1 tracking-wide leading-tight">
                 {stat.label}
               </p>
             </div>

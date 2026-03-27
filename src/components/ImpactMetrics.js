@@ -74,21 +74,21 @@ export default function ImpactMetrics() {
       <div className="space-y-5">
         
         {/* Header with Stats */}
-        <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
-          <div className="flex items-center gap-2">
-            <TrendingUp size={14} className="text-[#fb923c]" />
-            <span className="text-xs mono text-gray-400">PERFORMANCE_DASHBOARD</span>
-          </div>
-          <div className="flex gap-2 text-xs mono">
+                <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp size={14} className="text-[#fb923c]" />
+                    <span className="text-[10px] sm:text-xs mono text-gray-400">PERFORMANCE_DASHBOARD</span>
+                  </div>
+                  <div className="flex gap-2 text-[10px] sm:text-xs mono">
             <span className="text-[#818cf8] bg-[#818cf8]/10 px-2 py-0.5 rounded">{totalMetrics} METRICS</span>
             <span className="text-[#fb923c] bg-[#fb923c]/10 px-2 py-0.5 rounded">+{Math.round(avgImprovement)}% AVG</span>
           </div>
         </div>
 
         {/* Visualization Row: Radial Gauge + Bar Chart */}
-        <div ref={chartRef} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div ref={chartRef} className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {/* Radial Gauge */}
-          <div className="relative p-5 border border-[#818cf8]/15 bg-[#030712]/60 rounded-xl overflow-hidden flex flex-col items-center justify-center">
+          <div className="relative p-3 sm:p-5 border border-[#818cf8]/15 bg-[#030712]/60 rounded-xl overflow-hidden flex flex-col items-center justify-center">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(129,140,248,0.04)_0%,transparent_70%)]"></div>
             <div className="flex items-center gap-2 mb-3 relative z-10">
               <Gauge size={14} className="text-[#818cf8]" />
@@ -117,7 +117,7 @@ export default function ImpactMetrics() {
           </div>
 
           {/* Horizontal Bar Chart */}
-          <div className="relative p-5 border border-[#818cf8]/15 bg-[#030712]/60 rounded-xl overflow-hidden">
+          <div className="relative p-3 sm:p-5 border border-[#818cf8]/15 bg-[#030712]/60 rounded-xl overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(244,114,182,0.03)_0%,transparent_70%)]"></div>
             <div className="flex items-center gap-2 mb-4 relative z-10">
               <BarChart3 size={14} className="text-[#f472b6]" />
@@ -147,13 +147,13 @@ export default function ImpactMetrics() {
         </div>
 
         {/* Metrics Grid */}
-        <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div ref={containerRef} className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
           {metrics.map((m, i) => {
             const Icon = m.icon;
             return (
               <div 
                 key={i} 
-                className="metric-card group relative p-4 border border-gray-800 hover:border-[#818cf8]/50 rounded-xl bg-gradient-to-br from-[#030712] to-[#0a0f1a] hover:bg-[#818cf8]/5 transition-all duration-300 overflow-hidden cursor-default"
+                className="metric-card group relative p-3 sm:p-4 border border-gray-800 hover:border-[#818cf8]/50 rounded-lg sm:rounded-xl bg-gradient-to-br from-[#030712] to-[#0a0f1a] hover:bg-[#818cf8]/5 transition-all duration-300 overflow-hidden cursor-default"
               >
                 {/* Animated Background Glow */}
                 <div 
@@ -175,7 +175,7 @@ export default function ImpactMetrics() {
                   </div>
                   
                   {/* Value */}
-                  <p className="text-3xl sm:text-4xl font-black tabular-nums tracking-tight" style={{ color: m.color, textShadow: `0 0 15px ${m.color}60` }}>
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-black tabular-nums tracking-tight" style={{ color: m.color, textShadow: `0 0 15px ${m.color}60` }}>
                     {m.value}{m.unit && <span className="text-base sm:text-lg ml-0.5">{m.unit}</span>}
                   </p>
                   

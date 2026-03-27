@@ -127,7 +127,7 @@ export default function MantraCLI({ onCommand }) {
             exit={{ scale: 0, opacity: 0 }}
             transition={{ delay: 2, duration: 0.4, type: "spring" }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 left-6 z-50 w-14 h-14 rounded-full bg-[#818cf8] hover:bg-[#6366f1] text-white flex items-center justify-center shadow-[0_0_30px_rgba(129,140,248,0.4)] hover:shadow-[0_0_40px_rgba(129,140,248,0.6)] transition-all duration-300 group"
+            className="fixed bottom-6 left-4 sm:left-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#818cf8] hover:bg-[#6366f1] text-white flex items-center justify-center shadow-[0_0_30px_rgba(129,140,248,0.4)] hover:shadow-[0_0_40px_rgba(129,140,248,0.6)] transition-all duration-300 group"
             aria-label="Open Mantra CLI"
           >
             <MessageCircle size={24} className="group-hover:scale-110 transition-transform" />
@@ -144,7 +144,7 @@ export default function MantraCLI({ onCommand }) {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 300, opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.4, type: "spring", bounce: 0.2 }}
-            className="fixed bottom-6 left-6 z-50 w-[380px] sm:w-[440px] max-h-[500px] flex flex-col"
+            className="fixed bottom-6 left-3 right-3 sm:left-6 sm:right-auto z-50 w-auto sm:w-[380px] md:w-[440px] max-h-[70vh] sm:max-h-[500px] flex flex-col"
           >
             <div className="glass-panel border border-[#818cf8]/30 bg-black/90 backdrop-blur-xl rounded-2xl overflow-hidden shadow-[0_0_40px_rgba(129,140,248,0.2)] flex flex-col max-h-[500px]">
               

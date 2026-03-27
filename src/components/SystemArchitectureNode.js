@@ -52,13 +52,13 @@ export default function SystemArchitectureNode() {
         <div className="space-y-8">
           
           {/* Diagram - Full Width */}
-          <div className="relative border border-gray-800 bg-gradient-to-br from-[#030712] to-[#0a0f1a] rounded-xl p-6 sm:p-8 overflow-hidden">
+          <div className="relative border border-gray-800 bg-gradient-to-br from-[#030712] to-[#0a0f1a] rounded-xl p-3 sm:p-6 md:p-8 overflow-hidden">
             <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
               <span className="text-[10px] mono text-gray-400">Live Synced</span>
             </div>
             
-            <svg ref={svgRef} viewBox="0 0 500 260" className="w-full h-auto max-h-[400px]">
+            <svg ref={svgRef} viewBox="0 0 500 260" className="w-full h-auto max-h-[300px] sm:max-h-[400px]">
               {/* Client Layer */}
               <rect x="10" y="30" width="90" height="80" rx="8" className="fill-[#818cf8]/10 stroke-[#818cf8] stroke-[1.5]" />
               <text x="55" y="60" textAnchor="middle" className="fill-[#818cf8]" style={{fontSize: '11px', fontFamily: 'monospace', fontWeight: 'bold'}}>WEB_UI</text>
@@ -116,23 +116,23 @@ export default function SystemArchitectureNode() {
             </svg>
             
             {/* Legend */}
-            <div className="flex flex-wrap justify-center gap-4 mt-4 pt-3 border-t border-gray-800">
-              <span className="flex items-center gap-2 text-xs mono text-gray-400"><div className="w-2.5 h-2.5 rounded-full bg-[#818cf8]"></div>Presentation</span>
-              <span className="flex items-center gap-2 text-xs mono text-gray-400"><div className="w-2.5 h-2.5 rounded-full bg-[#f472b6]"></div>Gateway</span>
-              <span className="flex items-center gap-2 text-xs mono text-gray-400"><div className="w-2.5 h-2.5 rounded-full bg-[#fb923c]"></div>Services</span>
-              <span className="flex items-center gap-2 text-xs mono text-gray-400"><div className="w-2.5 h-2.5 rounded-full bg-[#818cf8]"></div>Data</span>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-800">
+                            <span className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs mono text-gray-400"><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#818cf8]"></div>Presentation</span>
+                            <span className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs mono text-gray-400"><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#f472b6]"></div>Gateway</span>
+                            <span className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs mono text-gray-400"><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#fb923c]"></div>Services</span>
+                            <span className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs mono text-gray-400"><div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#818cf8]"></div>Data</span>
             </div>
           </div>
 
           {/* Technical Details - Below Diagram */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Architecture Overview */}
-            <div className="space-y-4 p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
-              <div className="flex items-center gap-2">
-                <Cpu size={16} className="text-[#818cf8]" />
-                <h4 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Architecture Overview</h4>
-              </div>
-              <p className="text-sm text-gray-400 leading-relaxed">
+                        <div className="space-y-4 p-3 sm:p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
+                          <div className="flex items-center gap-2">
+                            <Cpu size={16} className="text-[#818cf8]" />
+                            <h4 className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-wider">Architecture Overview</h4>
+                          </div>
+                          <p className="text-xs sm:text-sm text-gray-400 leading-relaxed">
                 High-concurrency IoT & ML pipeline architecture designed for real-time telemetry processing and automated defect detection at scale.
               </p>
               
@@ -163,10 +163,10 @@ export default function SystemArchitectureNode() {
             </div>
             
             {/* Architecture Layers */}
-            <div className="space-y-4 p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
-              <div className="flex items-center gap-2">
-                <Share2 size={14} className="text-[#818cf8]" />
-                <h4 className="text-sm font-bold text-gray-200 uppercase tracking-wider">Layer Breakdown</h4>
+                        <div className="space-y-4 p-3 sm:p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
+                          <div className="flex items-center gap-2">
+                            <Share2 size={14} className="text-[#818cf8]" />
+                            <h4 className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-wider">Layer Breakdown</h4>
               </div>
               <div className="grid grid-cols-1 gap-3">
                 {architectureLayers.map((layer, idx) => {
