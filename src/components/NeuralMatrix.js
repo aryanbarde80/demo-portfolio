@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 
 export default function NeuralMatrix() {
   const [connections, setConnections] = useState([]);
