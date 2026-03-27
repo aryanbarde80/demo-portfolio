@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 export default function MagneticCursor() {
   const [isPointer, setIsPointer] = useState(false);
