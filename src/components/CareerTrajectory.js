@@ -149,7 +149,7 @@ export default function CareerTrajectory() {
           </div>
 
           <div className="relative z-10 w-full overflow-x-auto">
-            <svg viewBox={`0 0 ${graphWidth} ${graphHeight}`} className="w-full min-w-[600px]" style={{ height: '220px' }}>
+            <svg viewBox={`0 0 ${graphWidth} ${graphHeight}`} className="w-full min-w-[480px] sm:min-w-[600px]" style={{ height: 'auto', maxHeight: '220px' }} preserveAspectRatio="xMidYMid meet">
               <defs>
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#818cf8" />

@@ -276,22 +276,26 @@ a:focus-visible {
 @media (max-width: 640px) {
   body { font-size: 14px; }
   .glass-panel { backdrop-filter: blur(12px); border-radius: var(--radius-md); }
+  .scanlines-overlay { display: none; }
+  .noise-overlay { display: none; }
 }
 
 @media (max-width: 480px) {
   body { font-size: 13px; }
   .glass-panel {
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(8px);
     border-radius: var(--radius-sm);
   }
   .bg-orb {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
+    filter: blur(40px);
   }
 }
 
 @media (max-width: 360px) {
   body { font-size: 12px; }
+  .bg-orb { display: none; }
 }
 
 /* Reduced motion preferences */
@@ -303,5 +307,22 @@ a:focus-visible {
     scroll-behavior: auto !important;
   }
   .scanlines-overlay,
+  .noise-overlay,
   .bg-orb { display: none; }
+}
+
+/* GPU acceleration for animated elements */
+.glass-panel,
+.animate-pulse-slow,
+.glitch-anim {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Touch-friendly tap targets on mobile */
+@media (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
 }

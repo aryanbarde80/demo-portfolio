@@ -91,7 +91,7 @@ export default function DiagnosticLog() {
         setConnectionStatus(statuses[Math.floor(Math.random() * statuses.length)]);
       }
       
-    }, 2800);
+    }, 5000);
 
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
