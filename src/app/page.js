@@ -125,27 +125,44 @@ export default function Home() {
             
             {/* Analytics & Timeline - Side by Side */}
             <section aria-label="Analytics and Timeline" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-              <div id="analytics">
+              <div id="analytics" className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
                   <AnalyticsDashboard />
                 </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="pulse" />
+                  </Suspense>
+                </div>
               </div>
-              <div id="timeline">
+              <div id="timeline" className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
                   <SystemMonitorNode />
                 </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="rings" />
+                  </Suspense>
+                </div>
               </div>
             </section>
 
             <Suspense fallback={null}><SectionDivider variant="circuit" /></Suspense>
 
             {/* Knowledge & Diagnostics - Side by Side */}
-            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5 items-start">
-              <Suspense fallback={<SectionFallback />}>
-                <OSWindow title="Knowledge Graph" icon={<Book size={14}/>}>
-                  <KnowledgeGraph />
-                </OSWindow>
-              </Suspense>
+            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Suspense fallback={<SectionFallback />}>
+                  <OSWindow title="Knowledge Graph" icon={<Book size={14}/>}>
+                    <KnowledgeGraph />
+                  </OSWindow>
+                </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="grid" />
+                  </Suspense>
+                </div>
+              </div>
               <div className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
                   <OSWindow title="Diagnostic Reports" icon={<Terminal size={14}/>}>
@@ -236,10 +253,15 @@ export default function Home() {
 
             {/* Skills & Education - Side by Side */}
             <section aria-label="Skills and Education" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-              <div id="skills-section">
+              <div id="skills-section" className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
                   <SkillsGrid />
                 </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="helix" />
+                  </Suspense>
+                </div>
               </div>
               <div className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
@@ -267,18 +289,32 @@ export default function Home() {
                   </Suspense>
                 </div>
               </div>
-              <Suspense fallback={<SectionFallback />}>
-                <ReferenceVault />
-              </Suspense>
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Suspense fallback={<SectionFallback />}>
+                  <ReferenceVault />
+                </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="grid" />
+                  </Suspense>
+                </div>
+              </div>
             </section>
 
             <Suspense fallback={null}><SectionDivider variant="pulse" /></Suspense>
 
             {/* Certifications & Coursework - Side by Side */}
-            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5 items-start">
-              <Suspense fallback={<SectionFallback />}>
-                <CertificationsNode />
-              </Suspense>
+            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Suspense fallback={<SectionFallback />}>
+                  <CertificationsNode />
+                </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="rings" />
+                  </Suspense>
+                </div>
+              </div>
               <div className="flex flex-col gap-3 sm:gap-4">
                 <Suspense fallback={<SectionFallback />}>
                   <CourseworkGrid />
@@ -295,12 +331,26 @@ export default function Home() {
 
             {/* Writing & Leadership - Side by Side */}
             <section aria-label="Technical Writing and Leadership" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
-              <Suspense fallback={<SectionFallback />}>
-                <TechnicalWritingNode />
-              </Suspense>
-              <Suspense fallback={<SectionFallback />}>
-                <LeadershipNode />
-              </Suspense>
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Suspense fallback={<SectionFallback />}>
+                  <TechnicalWritingNode />
+                </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="pulse" />
+                  </Suspense>
+                </div>
+              </div>
+              <div className="flex flex-col gap-3 sm:gap-4">
+                <Suspense fallback={<SectionFallback />}>
+                  <LeadershipNode />
+                </Suspense>
+                <div className="hidden lg:block flex-1 min-h-[140px] glass-panel rounded-2xl overflow-hidden">
+                  <Suspense fallback={null}>
+                    <OrbitalFiller variant="helix" />
+                  </Suspense>
+                </div>
+              </div>
             </section>
             
             <Suspense fallback={null}><SectionDivider variant="waveform" /></Suspense>
