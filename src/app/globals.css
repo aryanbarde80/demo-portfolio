@@ -99,7 +99,7 @@ h1, h2, h3, h4, .mono {
   top: 30%; left: 50%;
   width: 900px; height: 900px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.05) 20%, rgba(244,114,182,0.04) 40%, transparent 60%);
+  background: radial-gradient(circle, rgba(99,102,241,0.06) 0%, rgba(244,114,182,0.03) 30%, transparent 60%);
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 0;

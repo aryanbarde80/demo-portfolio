@@ -29,18 +29,8 @@ export default function TechCanvas({ commandState = 'stable' }) {
     };
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
 
-    // Dense twinkling starfield
-    const stars = Array.from({ length: 180 }, (_, i) => ({
-      x: (Math.sin(i * 13.37 + 7.1) * 0.5 + 0.5),
-      y: (Math.cos(i * 9.73 + 2.9) * 0.5 + 0.5),
-      size: 0.3 + (i % 5) * 0.4,
-      twinkleSpeed: 0.5 + (i % 7) * 0.3,
-      twinklePhase: i * 1.7,
-      brightness: 0.3 + (i % 3) * 0.25,
-    }));
-
     // Particles floating upward
-    const particles = Array.from({ length: 60 }, (_, i) => ({
+    const particles = Array.from({ length: 50 }, (_, i) => ({
       x: (Math.sin(i * 7.13 + 3.7) * 0.5 + 0.5),
       y: (Math.cos(i * 4.91 + 1.3) * 0.5 + 0.5),
       size: 1 + (i % 3) * 0.8,
@@ -49,22 +39,6 @@ export default function TechCanvas({ commandState = 'stable' }) {
       opacity: 0.2 + (i % 4) * 0.1,
       color: i % 3 === 0 ? [129, 140, 248] : i % 3 === 1 ? [244, 114, 182] : [251, 146, 60],
     }));
-
-    // Shooting stars
-    const shootingStars = [];
-    const spawnShootingStar = () => {
-      shootingStars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height * 0.4,
-        length: 80 + Math.random() * 120,
-        speed: 6 + Math.random() * 8,
-        angle: (Math.PI / 6) + Math.random() * (Math.PI / 6),
-        opacity: 0.7 + Math.random() * 0.3,
-        life: 0,
-        maxLife: 40 + Math.random() * 30,
-        color: Math.random() > 0.5 ? [165, 180, 252] : [244, 180, 220],
-      });
-    };
 
     // Floating code symbols
     const codeSymbols = [
@@ -79,172 +53,6 @@ export default function TechCanvas({ commandState = 'stable' }) {
       { char: '&&', x: 0.65, y: 0.35, size: 15, speed: 0.25 },
       { char: '||', x: 0.3, y: 0.45, size: 13, speed: 0.32 },
     ];
-
-    // Floating geometric shapes (hexagons, triangles, diamonds)
-    const geoShapes = Array.from({ length: 12 }, (_, i) => ({
-      x: (Math.sin(i * 5.17 + 1.3) * 0.5 + 0.5),
-      y: (Math.cos(i * 3.91 + 4.7) * 0.5 + 0.5),
-      size: 15 + (i % 4) * 10,
-      rotation: i * 0.5,
-      rotSpeed: 0.2 + (i % 3) * 0.15,
-      floatSpeed: 0.3 + (i % 5) * 0.1,
-      type: i % 3, // 0=hexagon, 1=triangle, 2=diamond
-      opacity: 0.04 + (i % 3) * 0.02,
-      color: i % 3 === 0 ? [129, 140, 248] : i % 3 === 1 ? [244, 114, 182] : [99, 200, 220],
-    }));
-
-    // Draw twinkling starfield
-    const drawStarfield = () => {
-      stars.forEach((s) => {
-        const sx = s.x * canvas.width;
-        const sy = s.y * canvas.height;
-        const twinkle = 0.3 + Math.abs(Math.sin(time * s.twinkleSpeed + s.twinklePhase)) * 0.7;
-        const finalOpacity = s.brightness * twinkle;
-        const finalSize = s.size * (0.8 + twinkle * 0.4);
-
-        // Star glow
-        const gradient = ctx.createRadialGradient(sx, sy, 0, sx, sy, finalSize * 3);
-        gradient.addColorStop(0, `rgba(200, 210, 255, ${finalOpacity * 0.6})`);
-        gradient.addColorStop(0.5, `rgba(165, 180, 252, ${finalOpacity * 0.2})`);
-        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        ctx.fillStyle = gradient;
-        ctx.fillRect(sx - finalSize * 3, sy - finalSize * 3, finalSize * 6, finalSize * 6);
-
-        // Star core
-        ctx.beginPath();
-        ctx.arc(sx, sy, finalSize, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(220, 225, 255, ${finalOpacity})`;
-        ctx.fill();
-      });
-    };
-
-    // Draw shooting stars
-    const drawShootingStars = () => {
-      for (let i = shootingStars.length - 1; i >= 0; i--) {
-        const s = shootingStars[i];
-        s.life++;
-        if (s.life > s.maxLife) {
-          shootingStars.splice(i, 1);
-          continue;
-        }
-
-        const progress = s.life / s.maxLife;
-        const fadeIn = Math.min(progress * 5, 1);
-        const fadeOut = 1 - Math.pow(progress, 2);
-        const alpha = s.opacity * fadeIn * fadeOut;
-
-        const headX = s.x + Math.cos(s.angle) * s.speed * s.life;
-        const headY = s.y + Math.sin(s.angle) * s.speed * s.life;
-        const tailX = headX - Math.cos(s.angle) * s.length * fadeOut;
-        const tailY = headY - Math.sin(s.angle) * s.length * fadeOut;
-
-        const gradient = ctx.createLinearGradient(tailX, tailY, headX, headY);
-        gradient.addColorStop(0, `rgba(${s.color.join(',')}, 0)`);
-        gradient.addColorStop(0.7, `rgba(${s.color.join(',')}, ${alpha * 0.5})`);
-        gradient.addColorStop(1, `rgba(255, 255, 255, ${alpha})`);
-
-        ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
-        ctx.lineTo(headX, headY);
-        ctx.strokeStyle = gradient;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        // Bright head glow
-        const headGlow = ctx.createRadialGradient(headX, headY, 0, headX, headY, 6);
-        headGlow.addColorStop(0, `rgba(255, 255, 255, ${alpha * 0.8})`);
-        headGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        ctx.fillStyle = headGlow;
-        ctx.fillRect(headX - 6, headY - 6, 12, 12);
-      }
-
-      // Randomly spawn new shooting stars
-      if (Math.random() < 0.008) {
-        spawnShootingStar();
-      }
-    };
-
-    // Draw aurora / nebula waves
-    const drawAurora = () => {
-      const bands = [
-        { yOffset: 0.15, color: [99, 102, 241], amplitude: 80, frequency: 0.003, thickness: 200, intensity: 0.035 },
-        { yOffset: 0.25, color: [139, 92, 246], amplitude: 60, frequency: 0.004, thickness: 160, intensity: 0.025 },
-        { yOffset: 0.75, color: [244, 114, 182], amplitude: 70, frequency: 0.0035, thickness: 180, intensity: 0.02 },
-        { yOffset: 0.85, color: [52, 211, 153], amplitude: 50, frequency: 0.005, thickness: 140, intensity: 0.018 },
-      ];
-
-      bands.forEach((band, idx) => {
-        const baseY = band.yOffset * canvas.height;
-        const waveShift = time * 0.4 + idx * 1.5;
-        const breathe = 1 + Math.sin(time * 0.3 + idx * 2) * 0.3;
-
-        for (let x = 0; x < canvas.width; x += 4) {
-          const wave = Math.sin(x * band.frequency + waveShift) * band.amplitude * breathe
-            + Math.sin(x * band.frequency * 2.3 + waveShift * 1.7) * band.amplitude * 0.3;
-          const y = baseY + wave;
-          const localIntensity = band.intensity * (0.7 + Math.sin(x * 0.005 + time * 0.5) * 0.3);
-
-          const gradient = ctx.createRadialGradient(x, y, 0, x, y, band.thickness * breathe);
-          gradient.addColorStop(0, `rgba(${band.color.join(',')}, ${localIntensity})`);
-          gradient.addColorStop(0.5, `rgba(${band.color.join(',')}, ${localIntensity * 0.3})`);
-          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-          ctx.fillStyle = gradient;
-          ctx.fillRect(x - band.thickness, y - band.thickness, band.thickness * 2, band.thickness * 2);
-        }
-      });
-    };
-
-    // Draw floating geometric shapes
-    const drawGeoShapes = () => {
-      geoShapes.forEach((shape, i) => {
-        const x = shape.x * canvas.width + Math.sin(time * shape.floatSpeed + i * 2) * 40;
-        const y = shape.y * canvas.height + Math.cos(time * shape.floatSpeed * 0.7 + i * 3) * 30;
-        const rot = shape.rotation + time * shape.rotSpeed;
-        const pulse = shape.opacity + Math.sin(time * 0.8 + i) * 0.015;
-
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(rot);
-        ctx.strokeStyle = `rgba(${shape.color.join(',')}, ${pulse})`;
-        ctx.lineWidth = 1;
-
-        if (shape.type === 0) {
-          // Hexagon
-          ctx.beginPath();
-          for (let j = 0; j < 6; j++) {
-            const angle = (Math.PI / 3) * j;
-            const hx = Math.cos(angle) * shape.size;
-            const hy = Math.sin(angle) * shape.size;
-            if (j === 0) ctx.moveTo(hx, hy);
-            else ctx.lineTo(hx, hy);
-          }
-          ctx.closePath();
-          ctx.stroke();
-        } else if (shape.type === 1) {
-          // Triangle
-          ctx.beginPath();
-          for (let j = 0; j < 3; j++) {
-            const angle = (Math.PI * 2 / 3) * j - Math.PI / 2;
-            const tx = Math.cos(angle) * shape.size;
-            const ty = Math.sin(angle) * shape.size;
-            if (j === 0) ctx.moveTo(tx, ty);
-            else ctx.lineTo(tx, ty);
-          }
-          ctx.closePath();
-          ctx.stroke();
-        } else {
-          // Diamond
-          ctx.beginPath();
-          ctx.moveTo(0, -shape.size);
-          ctx.lineTo(shape.size * 0.6, 0);
-          ctx.lineTo(0, shape.size);
-          ctx.lineTo(-shape.size * 0.6, 0);
-          ctx.closePath();
-          ctx.stroke();
-        }
-        ctx.restore();
-      });
-    };
 
     // Draw animated dot grid with wave effect
     const drawGrid = () => {
@@ -396,15 +204,11 @@ export default function TechCanvas({ commandState = 'stable' }) {
       time += 0.016;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      drawAurora();
       drawOrbs();
-      drawStarfield();
       drawGrid();
       drawNeuralLines();
       drawParticles();
-      drawShootingStars();
       drawCodeSymbols();
-      drawGeoShapes();
 
       animationId = requestAnimationFrame(animate);
     };
