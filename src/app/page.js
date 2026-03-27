@@ -22,6 +22,8 @@ import AchievementsNode from "@/components/AchievementsNode";
 import SystemArchitectureNode from "@/components/SystemArchitectureNode";
 import CareerTrajectory from "@/components/CareerTrajectory";
 import RecruiterHUD from "@/components/RecruiterHUD";
+import HackathonWins from "@/components/HackathonWins";
+import PerformanceBenchmarks from "@/components/PerformanceBenchmarks";
 import BootSequence from "@/components/BootSequence";
 import SystemHUD from "@/components/SystemHUD";
 import DivineAudio from "@/components/DivineAudio";
@@ -113,6 +115,16 @@ export default function Home() {
             {/* Impact Metrics - Full Width */}
             <div>
               <ImpactMetrics />
+            </div>
+
+            {/* Performance Benchmarks - Full Width */}
+            <div>
+              <PerformanceBenchmarks />
+            </div>
+
+            {/* Hackathon Wins - Full Width */}
+            <div>
+              <HackathonWins />
             </div>
 
             {/* Experience - Full Width */}
