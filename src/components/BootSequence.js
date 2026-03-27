@@ -21,8 +21,10 @@ export default function BootSequence({ onComplete }) {
     let currentLog = 0;
     const interval = setInterval(() => {
       if (currentLog < bootSequence.length) {
+        const entry = bootSequence[currentLog];
+        if (!entry) { clearInterval(interval); return; }
         const timestamp = new Date().toISOString().split('T')[1].slice(0, 8);
-        setLogs(prev => [...prev, { text: bootSequence[currentLog].text, status: bootSequence[currentLog].status, time: timestamp }]);
+        setLogs(prev => [...prev, { text: entry.text, status: entry.status, time: timestamp }]);
         setProgress(Math.round(((currentLog + 1) / bootSequence.length) * 100));
         currentLog++;
       } else {

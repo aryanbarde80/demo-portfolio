@@ -161,7 +161,7 @@ export default function StickyNav() {
 
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-28 right-4 sm:bottom-20 sm:right-6 z-50 p-2.5 bg-[#0a0a0f]/90 backdrop-blur-md border border-[#818cf8]/15 rounded-xl text-[#818cf8] hover:bg-[#818cf8]/15 hover:border-[#818cf8]/30 transition-all duration-300 shadow-[0_0_15px_rgba(129,140,248,0.1)] ${
+        className={`fixed hidden sm:flex items-center justify-center bottom-20 right-6 z-50 p-2.5 bg-[#0a0a0f]/90 backdrop-blur-md border border-[#818cf8]/15 rounded-xl text-[#818cf8] hover:bg-[#818cf8]/15 hover:border-[#818cf8]/30 transition-all duration-300 shadow-[0_0_15px_rgba(129,140,248,0.1)] ${
           showBackToTop ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'
         }`}
         aria-label="Back to top"
