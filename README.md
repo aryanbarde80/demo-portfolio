@@ -1,4 +1,4 @@
-# 🌌 ARYAN BARDE // AI-OS PORTFOLIO
+# 🌌 ARYAN BARDE // AI-OS PORTFOLIO 
 
 > **"Discipline and Consistency is all what is needed!"**
 
