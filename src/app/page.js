@@ -128,7 +128,7 @@ export default function Home() {
             </section>
 
             {/* Knowledge & Diagnostics - Side by Side */}
-            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5 items-start">
               <Suspense fallback={<SectionFallback />}>
                 <OSWindow title="Knowledge Graph" icon={<Book size={14}/>}>
                   <KnowledgeGraph />
@@ -222,7 +222,7 @@ export default function Home() {
             </section>
 
             {/* Certifications & Coursework - Side by Side */}
-            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
+            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5 items-start">
               <Suspense fallback={<SectionFallback />}>
                 <CertificationsNode />
               </Suspense>
@@ -264,19 +264,22 @@ export default function Home() {
           </div>
           
           {/* Footer */}
-          <footer className="mt-6 sm:mt-8 text-center border-t border-[#818cf8]/10 pt-4 pb-3 space-y-2" role="contentinfo">
-            <div className="flex justify-center items-center gap-3 text-xs mono text-[#6b6b80]">
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                All systems operational
-              </span>
+          <footer className="mt-6 sm:mt-8 text-center pt-4 pb-3 space-y-2 relative" role="contentinfo">
+            <div className="absolute inset-0 bg-[#030712]/80 backdrop-blur-sm rounded-lg border border-[#818cf8]/10"></div>
+            <div className="relative z-10 py-3 px-4">
+              <div className="flex justify-center items-center gap-3 text-xs mono text-[#a1a1b5] mb-2">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                  All systems operational
+                </span>
+              </div>
+              <p className="text-[11px] text-[#a1a1b5] mono tracking-wide">
+                &copy; {new Date().getFullYear()} Aryan Barde &middot; Crafted with discipline &amp; consistency
+              </p>
+              <p className="text-[9px] text-[#6b6b80] mono mt-1">
+                Built with Next.js &middot; Three.js &middot; GSAP &middot; Tailwind CSS
+              </p>
             </div>
-            <p className="text-[11px] text-[#6b6b80] mono tracking-wide">
-              &copy; {new Date().getFullYear()} Aryan Barde &middot; Crafted with discipline &amp; consistency
-            </p>
-            <p className="text-[9px] text-[#6b6b80]/50 mono">
-              Built with Next.js &middot; Three.js &middot; GSAP &middot; Tailwind CSS
-            </p>
           </footer>
         </div>
       </main>
