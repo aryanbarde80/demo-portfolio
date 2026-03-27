@@ -41,6 +41,7 @@ const DiagnosticLog = lazy(() => import("@/components/DiagnosticLog"));
 const KnowledgeGraph = lazy(() => import("@/components/KnowledgeGraph"));
 const SectionDivider = lazy(() => import("@/components/SectionDivider"));
 const AmbientParticles = lazy(() => import("@/components/AmbientParticles"));
+const SideDecorations = lazy(() => import("@/components/SideDecorations"));
 
 function SectionFallback() {
   return (
@@ -98,6 +99,11 @@ export default function Home() {
       {booted && (
         <Suspense fallback={null}>
           <AmbientParticles />
+        </Suspense>
+      )}
+      {booted && (
+        <Suspense fallback={null}>
+          <SideDecorations />
         </Suspense>
       )}
       
