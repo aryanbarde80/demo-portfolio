@@ -1,9 +1,9 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import OSWindow from './OSWindow';
-import { ExternalLink, Github, Code, Cpu, Globe, Server, Database, Bot, Smartphone, Zap, Eye, GitBranch, Star, Layers } from 'lucide-react';
+import { ExternalLink, Github, Code, Globe, Database, Bot, Smartphone, Zap, Eye, GitBranch, Star, Layers, Cpu } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
