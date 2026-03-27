@@ -113,41 +113,63 @@ export default function DiagnosticLog() {
   ];
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col overflow-hidden">
       
-      {/* Header with System Stats */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-1.5 p-2 border-b border-[#818cf8]/20 bg-black/30">
+      {/* Header */}
+      <div className="flex justify-between items-center p-2 border-b border-[#818cf8]/20 bg-black/30">
         <div className="flex items-center gap-2">
-          <Activity size={14} className="text-[#818cf8] animate-pulse" />
-          <span className="text-[10px] sm:text-[11px] mono font-bold text-[#818cf8] uppercase tracking-wider">
-            System Diagnostics
+          <Activity size={12} className="text-[#818cf8] animate-pulse" />
+          <span className="text-[9px] sm:text-[10px] mono font-bold text-[#818cf8] uppercase tracking-wider">
+            Diagnostics
           </span>
-          <div className="h-4 w-px bg-[#818cf8]/30 mx-1"></div>
-          <span className="text-[8px] sm:text-[9px] mono text-green-500 flex items-center gap-1">
+          <span className="text-[7px] sm:text-[8px] mono text-green-500 flex items-center gap-1">
             <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
             LIVE
           </span>
         </div>
-        
-        {/* Quick Stats */}
-        <div className="flex gap-3 text-[8px] sm:text-[9px] mono">
-          {systemStats.map((stat, idx) => {
+        <div className="flex gap-2 text-[7px] sm:text-[8px] mono">
+          {systemStats.slice(0, 2).map((stat, idx) => {
             const IconComp = stat.icon;
             return (
-              <div key={idx} className="flex items-center gap-1.5">
-                <IconComp size={10} style={{ color: stat.color }} />
-                <span className="text-gray-400">{stat.label}:</span>
+              <div key={idx} className="flex items-center gap-1">
+                <IconComp size={9} style={{ color: stat.color }} />
+                <span className="text-gray-500">{stat.label}:</span>
                 <span className="text-white font-bold">{stat.value}</span>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* System Health Bars */}
+      <div className="grid grid-cols-4 gap-1.5 px-2 py-1.5 border-b border-[#818cf8]/10 bg-black/10">
+        {systemStats.map((stat, idx) => {
+          const IconComp = stat.icon;
+          return (
+            <div key={idx} className="flex flex-col gap-0.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[7px] mono text-gray-500">{stat.label}</span>
+                <IconComp size={8} style={{ color: stat.color }} />
+              </div>
+              <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full rounded-full transition-all duration-1000"
+                  style={{ 
+                    width: stat.label === 'UPTIME' ? '99.9%' : stat.label === 'PERFORMANCE' ? `${performanceScore}%` : '85%',
+                    backgroundColor: stat.color,
+                    boxShadow: `0 0 6px ${stat.color}60`
+                  }}
+                ></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
       
       {/* Logs Container */}
       <div 
         ref={logContainerRef}
-        className="flex-1 p-2 space-y-0.5 overflow-y-auto max-h-[250px] min-h-[120px] custom-scrollbar"
+        className="flex-1 p-2 space-y-0.5 overflow-y-auto max-h-[200px] custom-scrollbar"
       >
         {logs.map((log, i) => {
           const isLatest = i === 0;
@@ -177,15 +199,16 @@ export default function DiagnosticLog() {
         })}
       </div>
       
-      {/* Footer - System Info */}
-      <div className="p-1.5 border-t border-[#818cf8]/10 bg-black/20 flex justify-between items-center text-[8px] sm:text-[9px] mono text-gray-600">
+      {/* Footer */}
+      <div className="px-2 py-1 border-t border-[#818cf8]/10 bg-black/20 flex justify-between items-center text-[7px] sm:text-[8px] mono text-gray-600">
         <div className="flex items-center gap-2">
-            <span>Logs: {logs.length}</span>
-            <span>v9.1.4</span>
+          <span className="flex items-center gap-1">
+            <div className="w-1 h-1 rounded-full bg-green-500"></div>
+            {logs.length} entries
+          </span>
+          <span>v9.1.4</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="tabular-nums">Active</span>
-        </div>
+        <span className="text-[#818cf8]/50">{connectionStatus}</span>
       </div>
 
       {/* Custom Scrollbar Styles */}

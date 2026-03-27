@@ -50,7 +50,7 @@ export default function OSWindow({ title, children, width = "max-w-4xl", icon = 
         transition={{ duration: 0.3, ease: 'easeInOut' }}
         className="overflow-hidden"
       >
-        <div className="p-3 sm:p-4 md:p-6 lg:p-8 relative leading-relaxed font-sans text-sm">
+        <div className="p-3 sm:p-4 md:p-5 relative leading-relaxed font-sans text-sm">
           {children}
         </div>
       </motion.div>
