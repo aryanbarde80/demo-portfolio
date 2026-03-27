@@ -103,10 +103,10 @@ export default function StickyNav() {
               <a 
                 href="/Aryan_Barde_Resume.pdf" 
                 download 
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#818cf8]/20 to-[#6366f1]/20 text-[#a5b4fc] hover:from-[#818cf8]/30 hover:to-[#6366f1]/30 rounded-lg text-[10px] mono font-medium transition-all duration-300 border border-[#818cf8]/20"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#818cf8]/20 to-[#6366f1]/20 text-[#a5b4fc] hover:from-[#818cf8]/30 hover:to-[#6366f1]/30 rounded-lg text-[10px] mono font-medium transition-all duration-300 border border-[#818cf8]/20"
               >
                 <Download size={10} />
-                <span className="hidden sm:inline">Resume</span>
+                <span>Resume</span>
               </a>
 
               {/* Mobile hamburger */}
@@ -161,7 +161,7 @@ export default function StickyNav() {
 
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-20 right-4 sm:right-6 z-50 p-2.5 bg-[#0a0a0f]/90 backdrop-blur-md border border-[#818cf8]/15 rounded-xl text-[#818cf8] hover:bg-[#818cf8]/15 hover:border-[#818cf8]/30 transition-all duration-300 shadow-[0_0_15px_rgba(129,140,248,0.1)] ${
+        className={`fixed bottom-28 right-4 sm:bottom-20 sm:right-6 z-50 p-2.5 bg-[#0a0a0f]/90 backdrop-blur-md border border-[#818cf8]/15 rounded-xl text-[#818cf8] hover:bg-[#818cf8]/15 hover:border-[#818cf8]/30 transition-all duration-300 shadow-[0_0_15px_rgba(129,140,248,0.1)] ${
           showBackToTop ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0 pointer-events-none'
         }`}
         aria-label="Back to top"

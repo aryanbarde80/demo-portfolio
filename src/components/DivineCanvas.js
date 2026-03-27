@@ -1,274 +1,136 @@
 "use client";
-import { useRef, useEffect, Suspense, useState, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Stars, useTexture } from '@react-three/drei';
-import * as THREE from 'three';
-import { motion } from 'framer-motion';
-import gsap from 'gsap';
-
-// Tech Avatar Model
-function AvatarModel({ mousePosition, isInteracting, commandState }) {
-  const group = useRef();
-  const avatarRef = useRef();
-  const [animationState, setAnimationState] = useState('far'); // far, walking, standing, coding
-  const [textureLoaded, setTextureLoaded] = useState(false);
-
-  // Load textures with fallback
-  const spriteTexture = useTexture('/aryan-avatar.png', 
-    () => setTextureLoaded(true),
-    () => console.warn('Avatar texture not found, using fallback')
-  );
-  
-  // Create a canvas-generated texture as fallback
-  const fallbackTexture = useMemo(() => {
-    if (typeof window === 'undefined') return null;
-    const canvas = document.createElement('canvas');
-    canvas.width = 128;
-    canvas.height = 128;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.fillStyle = '#818cf8';
-      ctx.fillRect(0, 0, 128, 128);
-      ctx.fillStyle = '#030712';
-      ctx.font = 'bold 40px monospace';
-      ctx.fillText('AB', 40, 80);
-    }
-    const texture = new THREE.CanvasTexture(canvas);
-    return texture;
-  }, []);
-
-  useEffect(() => {
-    // Sequence: Far -> Walking -> Standing -> Coding Gesture
-    const tl = gsap.timeline({ delay: 1 });
-    tl.to(group.current.position, { z: 5, duration: 3, ease: "power2.inOut", onStart: () => setAnimationState('walking') })
-      .to(group.current.position, { z: 2, duration: 1.5, ease: "power3.out", onComplete: () => setAnimationState('standing') })
-      .to({}, { duration: 0.5, onComplete: () => setAnimationState('coding') });
-  }, []);
-
-  useFrame((state) => {
-    if (!group.current) return;
-    
-    // Smooth Mouse Follow
-    const targetX = (mousePosition.current.x * Math.PI) / 10;
-    const targetY = (mousePosition.current.y * Math.PI) / 10;
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, targetX, 0.05);
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, targetY, 0.05);
-
-    // Walking Bobbing
-    if (animationState === 'walking') {
-      group.current.position.y = -1 + Math.sin(state.clock.elapsedTime * 8) * 0.15;
-      group.current.rotation.z = Math.sin(state.clock.elapsedTime * 4) * 0.05;
-    } else if (animationState === 'coding') {
-      group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, -0.8, 0.1);
-    } else {
-      group.current.position.y = THREE.MathUtils.lerp(group.current.position.y, -1, 0.05);
-    }
-  });
-
-  const finalTexture = textureLoaded ? spriteTexture : fallbackTexture;
-
-  return (
-    <group ref={group} position={[0, -5, -20]} scale={2}>
-      <group ref={avatarRef}>
-        {finalTexture && (
-          <sprite scale={[1.5, 1.5, 1]}>
-            <spriteMaterial map={finalTexture} transparent opacity={1} />
-          </sprite>
-        )}
-        
-        {/* Coding Gesture Overlay - No external texture needed */}
-        {animationState === 'coding' && (
-          <motion.group 
-            initial={{ scale: 0, opacity: 0, y: 0.5 }}
-            animate={{ scale: 1, opacity: 1, y: 0.8 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            {/* Tech Light Effect */}
-            <pointLight position={[0.4, 0.8, 0.2]} color="#818cf8" intensity={3} distance={2} />
-            
-            {/* Code Particles - Procedural */}
-            <ParticleSystem count={30} position={[0.5, 0.7, 0.3]} />
-          </motion.group>
-        )}
-      </group>
-
-      {/* Tech Platform with Holographic Effect */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.8, 0]}>
-        <ringGeometry args={[0.5, 0.8, 32]} />
-        <meshBasicMaterial color="#818cf8" transparent opacity={0.2} />
-      </mesh>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.82, 0]}>
-        <ringGeometry args={[0.4, 0.6, 32]} />
-        <meshBasicMaterial color="#f472b6" transparent opacity={0.1} />
-      </mesh>
-    </group>
-  );
-}
-
-// Particle System for Coding Effect
-function ParticleSystem({ count = 30, position = [0, 0, 0] }) {
-  const particles = useRef([]);
-  const groupRef = useRef();
-
-  // Pre-compute stable random positions using a seeded approach
-  const positions = useMemo(() => {
-    const pos = [];
-    for (let i = 0; i < count; i++) {
-      // Use deterministic pseudo-random based on index
-      const seed1 = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
-      const seed2 = Math.sin(i * 78.233 + 12.9898) * 43758.5453;
-      const seed3 = Math.sin(i * 45.164 + 93.9898) * 43758.5453;
-      pos.push([
-        (seed1 - Math.floor(seed1) - 0.5) * 0.6,
-        (seed2 - Math.floor(seed2) - 0.5) * 0.6,
-        (seed3 - Math.floor(seed3) - 0.5) * 0.4,
-      ]);
-    }
-    return pos;
-  }, [count]);
-
-  useFrame((state) => {
-    particles.current.forEach((particle, i) => {
-      if (particle) {
-        particle.position.x += Math.sin(state.clock.elapsedTime * 5 + i) * 0.008;
-        particle.position.y += Math.cos(state.clock.elapsedTime * 5 + i) * 0.008;
-        particle.material.opacity = 0.5 + Math.sin(state.clock.elapsedTime * 8 + i) * 0.3;
-      }
-    });
-  });
-
-  return (
-    <group ref={groupRef} position={position}>
-      {positions.map((pos, i) => (
-        <mesh key={i} ref={el => particles.current[i] = el} position={pos}>
-          <sphereGeometry args={[0.012, 4, 4]} />
-          <meshBasicMaterial color={i % 2 === 0 ? "#818cf8" : "#f472b6"} transparent opacity={0.6} />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-// Tech Mandala - Abstract geometric pattern
-function TechMandala() {
-  const meshRef = useRef();
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.z = state.clock.elapsedTime * 0.05;
-      meshRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
-    }
-  });
-
-  return (
-    <group ref={meshRef} position={[0, 0, -2]} scale={2.5}>
-      {/* Outer Rings */}
-      <mesh>
-        <ringGeometry args={[1, 1.02, 64]} />
-        <meshBasicMaterial color="#818cf8" transparent opacity={0.08} />
-      </mesh>
-      <mesh scale={0.85}>
-        <ringGeometry args={[1, 1.01, 32]} />
-        <meshBasicMaterial color="#fb923c" transparent opacity={0.12} />
-      </mesh>
-      <mesh scale={0.7}>
-        <ringGeometry args={[1, 1.01, 16]} />
-        <meshBasicMaterial color="#f472b6" transparent opacity={0.1} />
-      </mesh>
-      
-      {/* Hexagon Grid Pattern */}
-      {[0, 1, 2, 3, 4, 5].map(i => (
-        <mesh key={i} rotation={[0, 0, (i * Math.PI) / 3]}>
-          <ringGeometry args={[0.3, 0.7, 6]} />
-          <meshBasicMaterial color="#818cf8" transparent opacity={0.05} wireframe />
-        </mesh>
-      ))}
-      
-      {/* Central Core - Tech Node */}
-      <mesh>
-        <sphereGeometry args={[0.03, 16, 16]} />
-        <meshBasicMaterial color="#818cf8" />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[0.05, 8, 8]} />
-        <meshBasicMaterial color="#fb923c" transparent opacity={0.5} />
-      </mesh>
-    </group>
-  );
-}
-
-function CursorLight({ mousePosition }) {
-  const lightRef = useRef();
-  const { viewport } = useThree();
-
-  useFrame(() => {
-    if (lightRef.current) {
-      const x = (mousePosition.current.x * viewport.width) / 2;
-      const y = (mousePosition.current.y * viewport.height) / 2;
-      lightRef.current.position.set(x, y, 2);
-    }
-  });
-
-  return <pointLight ref={lightRef} color="#818cf8" intensity={2.5} distance={5} />;
-}
+import { useEffect, useRef } from 'react';
 
 export default function TechCanvas({ commandState = 'stable' }) {
-  const mousePosition = useRef({ x: 0, y: 0 });
-  const [isInteracting, setIsInteracting] = useState(false);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
-    let timeout;
-    const handleMouseMove = (e) => {
-      mousePosition.current = {
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: -(e.clientY / window.innerHeight) * 2 + 1,
-      };
-      setIsInteracting(true);
-      clearTimeout(timeout);
-      timeout = setTimeout(() => setIsInteracting(false), 2000);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationId;
+    let time = 0;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // Deterministic dot grid
+    const drawGrid = () => {
+      const spacing = 60;
+      const cols = Math.ceil(canvas.width / spacing) + 1;
+      const rows = Math.ceil(canvas.height / spacing) + 1;
+
+      for (let i = 0; i < cols; i++) {
+        for (let j = 0; j < rows; j++) {
+          const x = i * spacing;
+          const y = j * spacing;
+          const distFromCenter = Math.sqrt(
+            Math.pow(x - canvas.width / 2, 2) + Math.pow(y - canvas.height / 2, 2)
+          );
+          const maxDist = Math.sqrt(Math.pow(canvas.width / 2, 2) + Math.pow(canvas.height / 2, 2));
+          const fade = 1 - distFromCenter / maxDist;
+          const pulse = 0.3 + Math.sin(time * 0.5 + i * 0.3 + j * 0.3) * 0.15;
+
+          ctx.beginPath();
+          ctx.arc(x, y, 1.2, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(129, 140, 248, ${fade * pulse})`;
+          ctx.fill();
+        }
+      }
     };
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    // Floating code bracket shapes
+    const brackets = Array.from({ length: 8 }, (_, i) => ({
+      x: (Math.sin(i * 5.1 + 2.3) * 0.5 + 0.5) * 100,
+      y: (Math.cos(i * 3.7 + 1.1) * 0.5 + 0.5) * 100,
+      size: 12 + (i % 4) * 6,
+      speed: 0.2 + (i % 3) * 0.15,
+      char: ['</', '{ }', '/>', '[ ]', '( )', '# ', '=> ', '::'][i],
+      color: i % 2 === 0 ? 'rgba(129, 140, 248,' : 'rgba(244, 114, 182,',
+    }));
+
+    // Connecting lines between brackets
+    const drawConnections = () => {
+      for (let i = 0; i < brackets.length - 1; i++) {
+        const a = brackets[i];
+        const b = brackets[i + 1];
+        const ax = (a.x / 100) * canvas.width;
+        const ay = (a.y / 100) * canvas.height + Math.sin(time * a.speed) * 30;
+        const bx = (b.x / 100) * canvas.width;
+        const by = (b.y / 100) * canvas.height + Math.sin(time * b.speed) * 30;
+
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = 'rgba(129, 140, 248, 0.04)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    };
+
+    const drawBrackets = () => {
+      brackets.forEach((b) => {
+        const x = (b.x / 100) * canvas.width;
+        const y = (b.y / 100) * canvas.height + Math.sin(time * b.speed) * 30;
+        const opacity = 0.06 + Math.sin(time * 0.8 + b.x) * 0.03;
+
+        ctx.font = `${b.size}px 'JetBrains Mono', monospace`;
+        ctx.fillStyle = `${b.color} ${opacity})`;
+        ctx.fillText(b.char, x, y);
+      });
+    };
+
+    // Subtle gradient orbs
+    const drawOrbs = () => {
+      const orbs = [
+        { x: 0.2, y: 0.3, r: 200, color: [99, 102, 241] },
+        { x: 0.8, y: 0.7, r: 180, color: [244, 114, 182] },
+        { x: 0.5, y: 0.5, r: 250, color: [129, 140, 248] },
+      ];
+
+      orbs.forEach((orb, i) => {
+        const x = orb.x * canvas.width + Math.sin(time * 0.3 + i) * 40;
+        const y = orb.y * canvas.height + Math.cos(time * 0.2 + i) * 30;
+        const gradient = ctx.createRadialGradient(x, y, 0, x, y, orb.r);
+        gradient.addColorStop(0, `rgba(${orb.color.join(',')}, 0.04)`);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      });
+    };
+
+    const animate = () => {
+      time += 0.016;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      drawOrbs();
+      drawGrid();
+      drawConnections();
+      drawBrackets();
+
+      animationId = requestAnimationFrame(animate);
+    };
+
+    animate();
+
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      clearTimeout(timeout);
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full z-0 pointer-events-none opacity-70" aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-        <color attach="background" args={['#030712']} />
-        
-        {/* Enhanced Stars */}
-        <Stars 
-          radius={100} 
-          depth={50} 
-          count={typeof window !== 'undefined' && window.innerWidth < 768 ? 1500 : 2500} 
-          factor={4} 
-          saturation={0.4} 
-          fade 
-          speed={0.8} 
-        />
-        
-        <Suspense fallback={null}>
-          <AvatarModel 
-            mousePosition={mousePosition} 
-            isInteracting={isInteracting} 
-            commandState={commandState} 
-          />
-          <TechMandala />
-        </Suspense>
-
-        {/* Tech Grid Overlay */}
-        <mesh position={[0, 0, 1]}>
-          <planeGeometry args={[20, 20]} />
-          <meshBasicMaterial transparent opacity={0.01} color="#818cf8" />
-        </mesh>
-        
-        {/* Dynamic Cursor Light */}
-        <CursorLight mousePosition={mousePosition} />
-      </Canvas>
+    <div className="fixed inset-0 w-full h-full z-0 pointer-events-none" aria-hidden="true">
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full opacity-60"
+      />
     </div>
   );
 }
