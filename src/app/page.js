@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import TerminalHero from "@/components/TerminalHero";
 import SkillsGrid from "@/components/SkillsGrid";
 import ExperienceList from "@/components/ExperienceList";
@@ -138,9 +138,18 @@ export default function Home() {
           </div>
           
           {/* Footer */}
-          <footer className="mt-20 text-center border-t border-[#818cf8]/10 pt-8 pb-4">
-            <p className="text-xs text-[#6b6b80] mono tracking-wide">
-              &copy; 2026 Aryan Barde &middot; All systems operational
+          <footer className="mt-20 text-center border-t border-[#818cf8]/10 pt-8 pb-4 space-y-3">
+            <div className="flex justify-center items-center gap-3 text-xs mono text-[#6b6b80]">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                All systems operational
+              </span>
+            </div>
+            <p className="text-[11px] text-[#6b6b80] mono tracking-wide">
+              &copy; {new Date().getFullYear()} Aryan Barde &middot; Crafted with discipline &amp; consistency
+            </p>
+            <p className="text-[9px] text-[#6b6b80]/50 mono">
+              Built with Next.js &middot; Three.js &middot; GSAP &middot; Tailwind CSS
             </p>
           </footer>
         </div>
