@@ -84,7 +84,7 @@ export default function GitHubStatsNode() {
 
   return (
     <OSWindow title="GitHub" icon={<Github size={16} className="text-[#818cf8]" />} width="max-w-5xl">
-      <div className="space-y-6">
+      <div className="space-y-4">
         
         {/* Data Source Indicator */}
         {!isLive && (

@@ -30,7 +30,7 @@ export default function TerminalHero() {
   }, []);
 
   return (
-    <div className="glass-panel w-full max-w-4xl mx-auto neon-border relative overflow-hidden group mb-10">
+    <div className="glass-panel w-full max-w-4xl mx-auto neon-border relative overflow-hidden group mb-4 sm:mb-6">
       {/* Window Bar */}
       <div className="flex border-b border-[#818cf8]/15 p-2.5 px-4 items-center gap-3 bg-[#0a0a0f]/80">
         <div className="flex gap-1.5">

@@ -40,9 +40,9 @@ export default function LeadershipNode() {
 
   return (
     <OSWindow title="COMMAND_DECK/LEADERSHIP.LOG" icon={<Flag size={16} className="text-[#818cf8] animate-pulse" />}>
-      <div className="space-y-6">
+            <div className="space-y-4">
         
-        {/* Header */}
+              {/* Header */}
         <div className="flex justify-between items-center pb-2 border-b border-[#818cf8]/20">
           <div className="flex items-center gap-2">
             <Users size={12} className="text-[#fb923c]" />
@@ -54,8 +54,8 @@ export default function LeadershipNode() {
         </div>
 
         {/* Leadership Roles */}
-        <div className="space-y-5">
-          {leadership.map((item, idx) => {
+                <div className="space-y-3">
+                  {leadership.map((item, idx) => {
             const IconComponent = item.icon;
             return (
               <div key={idx} className="group relative">
@@ -105,7 +105,7 @@ export default function LeadershipNode() {
         </div>
 
         {/* Professional Affiliations Section */}
-        <div className="mt-6 pt-4 border-t border-[#818cf8]/20">
+        <div className="mt-4 pt-3 border-t border-[#818cf8]/20">
           <h4 className="flex items-center gap-2 text-[#818cf8] mono text-[10px] sm:text-[11px] mb-4 font-bold uppercase tracking-wider">
             <Globe size={14} /> PROFESSIONAL_AFFILIATIONS
           </h4>

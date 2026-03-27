@@ -35,7 +35,7 @@ export default function SystemArchitectureNode() {
 
   return (
     <OSWindow title="System Architecture" icon={<Share2 size={16} className="text-[#818cf8]" />} width="max-w-7xl">
-      <div className="space-y-8">
+      <div className="space-y-4 sm:space-y-5">
         
         {/* Header */}
         <div className="flex justify-between items-center pb-3 border-b border-[#818cf8]/20">
@@ -49,10 +49,10 @@ export default function SystemArchitectureNode() {
         </div>
 
         {/* Main Content - Stacked */}
-        <div className="space-y-8">
+                <div className="space-y-4 sm:space-y-5">
           
-          {/* Diagram - Full Width */}
-          <div className="relative border border-gray-800 bg-gradient-to-br from-[#030712] to-[#0a0f1a] rounded-xl p-3 sm:p-6 md:p-8 overflow-hidden">
+                  {/* Diagram - Full Width */}
+                  <div className="relative border border-gray-800 bg-gradient-to-br from-[#030712] to-[#0a0f1a] rounded-xl p-3 sm:p-4 md:p-6 overflow-hidden">
             <div className="absolute top-3 right-3 flex items-center gap-2 z-10">
               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
               <span className="text-[10px] mono text-gray-400">Live Synced</span>
@@ -125,9 +125,9 @@ export default function SystemArchitectureNode() {
           </div>
 
           {/* Technical Details - Below Diagram */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Architecture Overview */}
-                        <div className="space-y-4 p-3 sm:p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {/* Architecture Overview */}
+                                  <div className="space-y-3 p-3 sm:p-4 border border-gray-800 rounded-xl bg-[#030712]/40">
                           <div className="flex items-center gap-2">
                             <Cpu size={16} className="text-[#818cf8]" />
                             <h4 className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-wider">Architecture Overview</h4>
@@ -163,9 +163,9 @@ export default function SystemArchitectureNode() {
             </div>
             
             {/* Architecture Layers */}
-                        <div className="space-y-4 p-3 sm:p-5 border border-gray-800 rounded-xl bg-[#030712]/40">
-                          <div className="flex items-center gap-2">
-                            <Share2 size={14} className="text-[#818cf8]" />
+                                                <div className="space-y-3 p-3 sm:p-4 border border-gray-800 rounded-xl bg-[#030712]/40">
+                                                  <div className="flex items-center gap-2">
+                                                    <Share2 size={14} className="text-[#818cf8]" />
                             <h4 className="text-xs sm:text-sm font-bold text-gray-200 uppercase tracking-wider">Layer Breakdown</h4>
               </div>
               <div className="grid grid-cols-1 gap-3">

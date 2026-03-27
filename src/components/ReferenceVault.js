@@ -22,7 +22,7 @@ export default function ReferenceVault() {
 
   return (
     <OSWindow title="SECURE/CREDENTIAL_VAULT" icon={<ShieldCheck size={16} className="text-[#818cf8] animate-pulse" />}>
-      <div className="space-y-5">
+      <div className="space-y-4">
         
         {/* Security Header with Fingerprint */}
         <div className="relative overflow-hidden p-4 border border-[#818cf8]/30 bg-gradient-to-r from-[#818cf8]/5 to-transparent rounded-xl">

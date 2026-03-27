@@ -37,9 +37,9 @@ export default function OpenSourceNode() {
 
   return (
     <OSWindow title="CONTRIB/OPEN_SOURCE.GIT" icon={<GitPullRequest size={16} className="text-[#818cf8] animate-pulse" />}>
-      <div className="space-y-5">
+            <div className="space-y-4">
         
-        {/* Header with Stats */}
+              {/* Header with Stats */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
           <div className="flex items-center gap-2">
             <Github size={12} className="text-[#818cf8]" />
@@ -126,8 +126,8 @@ export default function OpenSourceNode() {
         </div>
 
         {/* Contribution Summary */}
-        <div className="mt-4 pt-3 border-t border-[#818cf8]/20">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="mt-3 pt-2 border-t border-[#818cf8]/20">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             <div className="p-2 text-center border border-gray-800 rounded-lg hover:border-[#818cf8]/30 transition-all">
               <GitPullRequest size={14} className="text-[#818cf8] mx-auto mb-1" />
               <p className="text-xs font-bold text-white">{stats.totalPRs}</p>

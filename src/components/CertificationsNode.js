@@ -66,7 +66,7 @@ export default function CertificationsNode() {
 
   return (
     <OSWindow title="Certifications" icon={<ShieldCheck size={16} className="text-[#818cf8]" />}>
-      <div className="space-y-5">
+      <div className="space-y-4">
         
         {/* Header with Counter */}
         <div className="flex justify-between items-center pb-3 border-b border-[#818cf8]/20">
@@ -80,7 +80,7 @@ export default function CertificationsNode() {
         </div>
 
         {/* Certification Groups */}
-        <div className="space-y-5">
+        <div className="space-y-3">
           {certGroups.map((group, idx) => {
             const IconComponent = group.icon;
             return (

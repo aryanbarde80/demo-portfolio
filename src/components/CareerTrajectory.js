@@ -116,7 +116,7 @@ export default function CareerTrajectory() {
 
   return (
     <OSWindow title="CAREER_TRAJECTORY.SYS" icon={<TrendingUp size={16} className="text-[#818cf8]" />} width="max-w-7xl">
-      <div className="space-y-5">
+      <div className="space-y-4">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
           <div className="flex items-center gap-2">

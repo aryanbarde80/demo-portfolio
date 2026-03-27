@@ -50,7 +50,7 @@ export default function TechnicalWritingNode() {
 
   return (
     <OSWindow title="PUBLISH/TECH_BLOGS.BIN" icon={<BookOpen size={16} className="text-[#818cf8] animate-pulse" />}>
-      <div className="space-y-5">
+      <div className="space-y-4">
         
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-2 pb-2 border-b border-[#818cf8]/20">

@@ -71,7 +71,7 @@ export default function ImpactMetrics() {
 
   return (
     <OSWindow title="ANALYTICS/IMPACT_METRICS.SYS" icon={<BarChart3 size={16} className="text-[#818cf8] animate-pulse" />} width="max-w-5xl">
-      <div className="space-y-5">
+      <div className="space-y-4">
         
         {/* Header with Stats */}
                 <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">

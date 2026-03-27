@@ -183,7 +183,7 @@ export default function ProjectsShowcase() {
 
   return (
     <OSWindow title="Projects" icon={<Layers size={16} className="text-[#818cf8]" />} width="max-w-6xl">
-      <div className="space-y-5">
+      <div className="space-y-4">
         {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
           <div className="flex items-center gap-2">

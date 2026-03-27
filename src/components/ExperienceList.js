@@ -60,8 +60,8 @@ export default function ExperienceList() {
 
   return (
     <OSWindow title="Work Experience" icon={<Network size={18} className="text-[#818cf8]" />} width="max-w-7xl">
-      <div className="space-y-6">
-        {/* Header */}
+            <div className="space-y-4">
+              {/* Header */}
         <div className="flex flex-wrap justify-between items-center gap-3 pb-3 border-b border-[#818cf8]/20">
           <div className="flex items-center gap-2">
             <Briefcase size={14} className="text-[#818cf8]" />
@@ -73,11 +73,11 @@ export default function ExperienceList() {
         </div>
 
         {/* Experience Cards - Full Width Stacked */}
-        <div className="space-y-5">
-          {experiences.map((exp, idx) => (
+                <div className="space-y-4">
+                  {experiences.map((exp, idx) => (
             <div
               key={idx}
-              className="group relative p-4 sm:p-6 md:p-8 border border-gray-800 hover:border-[#818cf8]/30 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#12121a]/80 to-[#030712]/40 transition-all duration-300 overflow-hidden"
+              className="group relative p-4 sm:p-5 md:p-6 border border-gray-800 hover:border-[#818cf8]/30 rounded-xl sm:rounded-2xl bg-gradient-to-r from-[#12121a]/80 to-[#030712]/40 transition-all duration-300 overflow-hidden"
             >
               {/* Accent Line */}
               <div

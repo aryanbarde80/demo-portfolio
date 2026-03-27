@@ -31,10 +31,10 @@ export default function BioMatrix() {
 
   return (
     <OSWindow title="Profile" icon={<User size={16} className="text-[#818cf8]" />} width="max-w-4xl">
-      <div className="space-y-6">
+            <div className="space-y-4">
         
-        {/* Row 1: Main Bio - Responsive Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Row 1: Main Bio - Responsive Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           
           {/* Left: Bio Summary - Spans 2 columns on desktop */}
           <div className="lg:col-span-2 space-y-4">
@@ -123,7 +123,7 @@ export default function BioMatrix() {
         </div>
 
         {/* Row 2: Leadership Highlights - New Section from CV */}
-        <div className="border-t border-[#818cf8]/20 pt-4 mt-2">
+        <div className="border-t border-[#818cf8]/20 pt-3 mt-1">
           <h4 className="text-[10px] sm:text-[11px] mono text-[#fb923c] uppercase tracking-widest flex items-center gap-2 mb-4">
             <Users size={12} />
             Leadership & Impact

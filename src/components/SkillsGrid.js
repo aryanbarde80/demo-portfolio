@@ -69,7 +69,7 @@ export default function SkillsGrid() {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {skillsConfig.map((group, idx) => {
             const IconComponent = group.icon;
             return (

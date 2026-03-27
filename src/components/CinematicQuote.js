@@ -78,7 +78,7 @@ export default function CinematicQuote() {
   return (
     <div 
       ref={containerRef} 
-      className="w-full max-w-4xl mx-auto my-6 sm:my-8 py-6 sm:py-10 px-4 sm:px-6 relative overflow-hidden"
+      className="w-full max-w-4xl mx-auto my-3 sm:my-4 py-4 sm:py-6 px-4 sm:px-6 relative overflow-hidden"
     >
       <div className="relative z-10 text-center perspective-[1000px]">
         <div className="flex flex-wrap justify-center items-baseline gap-x-3 sm:gap-x-5 gap-y-2">

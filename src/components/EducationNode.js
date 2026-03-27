@@ -43,7 +43,7 @@ export default function EducationNode() {
 
   return (
     <OSWindow title="Education" icon={<GraduationCap size={16} className="text-[#818cf8]" />}>
-      <div className="space-y-5">
+      <div className="space-y-4">
         
         {/* Header with Stats */}
         <div className="flex justify-between items-center pb-2 border-b border-[#818cf8]/20">

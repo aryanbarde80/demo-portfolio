@@ -94,11 +94,11 @@ export default function Home() {
         </Suspense>
       )}
       
-      <main id="main-content" role="main" className={`min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 py-4 sm:py-6 flex flex-col font-sans relative z-10 pb-24 sm:pb-32 transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
+      <main id="main-content" role="main" className={`min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 py-4 sm:py-6 flex flex-col font-sans relative z-10 pb-12 sm:pb-16 transition-all duration-1000 ${booted ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden absolute inset-0'} ${stabilityMode === 'unstable' ? 'animate-[shake_0.5s_infinite] glitch-filter' : ''}`}>
         <div className="max-w-7xl mx-auto w-full">
 
           {/* Hero Section */}
-          <section id="hero" aria-label="Introduction" className="mt-4 sm:mt-8 md:mt-12">
+          <section id="hero" aria-label="Introduction" className="mt-2 sm:mt-4 md:mt-6">
             <TerminalHero />
           </section>
 
@@ -111,10 +111,10 @@ export default function Home() {
           </section>
           
           {/* Content - Stacked Vertical Layout */}
-          <div className="flex flex-col gap-4 sm:gap-5 md:gap-6 w-full mt-4 sm:mt-6">
+          <div className="flex flex-col gap-3 sm:gap-4 md:gap-5 w-full mt-3 sm:mt-4">
             
             {/* Analytics & Timeline - Side by Side */}
-            <section aria-label="Analytics and Timeline" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Analytics and Timeline" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <div id="analytics">
                 <Suspense fallback={<SectionFallback />}>
                   <AnalyticsDashboard />
@@ -128,7 +128,7 @@ export default function Home() {
             </section>
 
             {/* Knowledge & Diagnostics - Side by Side */}
-            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Knowledge and Diagnostics" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <Suspense fallback={<SectionFallback />}>
                 <OSWindow title="Knowledge Graph" icon={<Book size={14}/>}>
                   <KnowledgeGraph />
@@ -198,7 +198,7 @@ export default function Home() {
             </section>
 
             {/* Skills & Education - Side by Side */}
-            <section aria-label="Skills and Education" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Skills and Education" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <div id="skills-section">
                 <Suspense fallback={<SectionFallback />}>
                   <SkillsGrid />
@@ -212,7 +212,7 @@ export default function Home() {
             </section>
 
             {/* Achievements & References - Side by Side */}
-            <section aria-label="Achievements and References" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Achievements and References" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <Suspense fallback={<SectionFallback />}>
                 <AchievementsNode />
               </Suspense>
@@ -222,7 +222,7 @@ export default function Home() {
             </section>
 
             {/* Certifications & Coursework - Side by Side */}
-            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Certifications and Coursework" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <Suspense fallback={<SectionFallback />}>
                 <CertificationsNode />
               </Suspense>
@@ -232,7 +232,7 @@ export default function Home() {
             </section>
 
             {/* Writing & Leadership - Side by Side */}
-            <section aria-label="Technical Writing and Leadership" className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+            <section aria-label="Technical Writing and Leadership" className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-5">
               <Suspense fallback={<SectionFallback />}>
                 <TechnicalWritingNode />
               </Suspense>
@@ -264,7 +264,7 @@ export default function Home() {
           </div>
           
           {/* Footer */}
-          <footer className="mt-8 sm:mt-12 text-center border-t border-[#818cf8]/10 pt-6 pb-4 space-y-3" role="contentinfo">
+          <footer className="mt-6 sm:mt-8 text-center border-t border-[#818cf8]/10 pt-4 pb-3 space-y-2" role="contentinfo">
             <div className="flex justify-center items-center gap-3 text-xs mono text-[#6b6b80]">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
