@@ -1,15 +1,14 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import OSWindow from './OSWindow';
-import { Activity, Cpu, Zap, Clock, Server, Database, Globe, TrendingUp, BarChart3, Gauge } from 'lucide-react';
+import { Activity, Zap, Database, Globe, TrendingUp, BarChart3, Gauge } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function PerformanceBenchmarks() {
   const containerRef = useRef(null);
-  const [animatedValues, setAnimatedValues] = useState({});
 
   const benchmarks = [
     { label: "API Latency Reduction", value: 40, max: 100, unit: "%", color: "#818cf8", icon: Zap, category: "Ouranos Robotics", desc: "Redis caching + query optimization" },
