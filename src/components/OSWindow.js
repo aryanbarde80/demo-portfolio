@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Maximize2, Minimize2 } from 'lucide-react';
 
@@ -44,9 +44,16 @@ export default function OSWindow({ title, children, width = "max-w-4xl", icon = 
       </div>
 
       {/* Body */}
-      <div className="p-4 sm:p-6 md:p-8 relative leading-relaxed font-sans text-sm">
-        {children}
-      </div>
+      <motion.div
+        initial={false}
+        animate={{ height: isExpanded ? 0 : 'auto', opacity: isExpanded ? 0 : 1 }}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className="overflow-hidden"
+      >
+        <div className="p-4 sm:p-6 md:p-8 relative leading-relaxed font-sans text-sm">
+          {children}
+        </div>
+      </motion.div>
     </motion.div>
   );
 }
